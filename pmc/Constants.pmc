@@ -1,0 +1,9 @@
+#ifndef __GUARD__Constants_pmc
+#define __GUARD__Constants_pmc
+
+
+#define kEncCtsPerDeg (180000 / 360)
+
+
+
+#endif

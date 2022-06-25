@@ -1,0 +1,11 @@
+#ifndef __GUARD__PVariables_pmc
+#define __GUARD__PVariables_pmc
+
+
+#define P_RotarySpeed_DegPerS P800
+
+
+
+
+
+#endif

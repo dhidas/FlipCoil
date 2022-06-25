@@ -1,1 +1,10 @@
+#include "Constants.pmc"
 #include "IVariables.pmc"
+#include "MVariableDefs.pmc"
+#include "MVariables.pmc"
+#include "PVariables.pmc"
+#include "Kinematics.pmc"
+#include "PLC01_Startup.pmc"
+#include "PLC21_RotaryPositionReporting.pmc"
+#include "PROG05_Rotary.pmc"
+

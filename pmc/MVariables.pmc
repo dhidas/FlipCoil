@@ -1,0 +1,9 @@
+#ifndef __GUARD__MVariables_pmc
+#define __GUARD__MVariables_pmc
+
+#define M_HomeComplete_M5 M545
+#define M_HomeComplete_M6 M645
+
+
+
+#endif

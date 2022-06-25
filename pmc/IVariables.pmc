@@ -1,0 +1,98 @@
+#ifndef __GUARD__IVariables_pmc
+#define __GUARD__IVariables_pmc
+
+I4=0      ; Communications Integrity Mode
+I5=3      ; PLC Program Control
+I63=1     ; Needed for pmac epics driver
+
+; Setup all 8 axes as PFM output
+I7003,2,100 = 2290  ; Servo IC 0,1 PFM Clock divider equal to 6
+I7004,2,100 = 13    ; Servo IC 1 PFM Pulse Width Control equal to 13
+I169,8,100  = 2427  ; Output command limit
+
+
+
+; Encoder conversion table
+I8000 = $78000  ; Channel 1 linear enc ($3501)
+I8001 = $78008  ; Channel 2 linear enc
+I8002 = $78010  ; Channel 3 linear enc
+I8003 = $78018  ; Channel 4 linear enc
+I8004 = $78100  ; Channel 5 rotary enc
+I8005 = $78108  ; Channel 6 rotary enc
+I8006 = $78110  ; Channel 7 linear enc (not used)
+I8007 = $78118  ; Channel 8 linear enc (not used)
+I8008 = $C78000 ; incremental encoder #1 ($3509)
+I8009 = $C78008 ; incremental encoder #2 ($350A)
+I8010 = $C78010 ; incremental encoder #3 ($350B)
+I8011 = $C78018 ; incremental encoder #4 ($350C)
+I8012 = $C78100 ; incremental encoder #5 ($350D)
+I8013 = $C78108 ; incremental encoder #6 ($350E)
+I8014 = $C78110 ; incremental encoder #7 ($350F)
+I8015 = $C78118 ; incremental encoder #8 ($3510)
+I8016 = $000000 ; end of ECT
+
+
+; Output mode select for PFM
+I7016,4,10 = 3  ; Servo IC 0, Channels 1-4 Output Mode Select to PFM
+I7116,4,10 = 3  ; Servo IC 1, Channels 5-8 Output Mode Select to PFM
+I7010,4,10 = 8  ; Servo IC 0, Channels 1-4 Encoder Decode, Internal Pulse and Direction
+I7110,4,10 = 8  ; Servo IC 1, Channels 5-8 Encoder Decode, Internal Pulse and Direction
+
+; Command output register
+I102 = $78004   ; Channel 5, PFM
+I202 = $7800C   ; Channel 6, PFM
+I302 = $78014   ; Channel 7, PFM
+I402 = $7801C   ; Channel 8, PFM
+I502 = $78104   ; Channel 5, PFM
+I602 = $7810C   ; Channel 6, PFM
+I702 = $78114   ; Channel 7, PFM
+I802 = $7811C   ; Channel 8, PFM
+
+; Position pointers (from the encoder conversion table)
+I103 = $3509
+I203 = $350A
+I303 = $350B
+I403 = $350C
+I503 = $350D
+I603 = $350E
+I703 = $350F
+I803 = $3510
+; Velocity pointers
+I104 = $3509
+I204 = $350A
+I304 = $350B
+I404 = $350C
+I504 = $350D
+I604 = $350E
+I704 = $350F
+I804 = $3510
+
+; PID gains (for PFM only, empirically determined)
+I130,8,100 = 11190
+I131,8,100 = 0
+I132,8,100 = 15038
+I133,8,100 = 0
+I134,8,100 = 0
+I135,8,100 = 0
+
+I115,8,100 = 100    ; Motor xx Abort/Limit Deceleration Rate
+I116,8,100 = 10     ; Motor xx Maximum Program Velocity
+I117,8,100 = 10     ; Motor xx Maximum Program Acceleration
+I119,8,100 = 1      ; Motor xx Maximum Jog/Home Acceleration
+I122,8,100 = 1      ; Motor xx Jog Speed
+I123,8,100 = 1      ; Motor xx Home Speed and Direction
+I126,8,100 = 0      ; Motor xx Home Offset
+
+
+I100,6,100 = 1  ; Activate motors
+
+; Ignore limit switches for now (testing only)
+I124,8,100 = $20001
+
+
+; Coordinate system variables (IsxNN variables)
+I5550 = 1   ; Enable kinematics
+I5513 = 10  ; segmentation time (needed for lookahead)
+
+
+#endif

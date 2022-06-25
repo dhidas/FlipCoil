@@ -1,0 +1,8 @@
+
+Open PLC 1 Clear
+
+; Use kinematics for rotary motors
+&5 #5->I #6->I
+
+Disable PLC 1
+Close
