@@ -1,21 +1,22 @@
 #include "PVariables.pmc"
 #include "MVariables.pmc"
 
-Open PROG 5 Clear
+Open PROG 3 Clear
 
 LINEAR
 ABS
 TA300
 TS100
 
-FRAX(A)
-F(P_DegPerSecond)
+FRAX(X)
+F(P_MMPerSecondX)
 
 ; Check if motors homed or not
-if (M_HomeComplete_M5 != 1 or M_HomeComplete_M6 != 1)
+if (M_HomeComplete_M1 != 1 or M_HomeComplete_M2 != 1)
   return
 endif
 
-A(Q71) B(Q72)
+X(Q77) U(Q74)
 
 Close
+

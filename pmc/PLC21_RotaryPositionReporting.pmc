@@ -1,7 +1,7 @@
 ; PLC for position reporting in the rotary coordinate system
 
-#define ANGLE   Q87
-#define OFFSET  Q88
+#define ANGLE   Q81
+#define OFFSET  Q82
 
 #define Q_Fwd_Mtr5Tmp_PR Q332
 #define Q_Fwd_Mtr6Tmp_PR Q333
@@ -9,10 +9,10 @@
 Open PLC 21 Clear
 
   ADDRESS&5
-  Q_Fwd_Mtr5Tmp_PR = (M562/(I508*32)) / kEncCtsPerDeg
-  Q_Fwd_Mtr6Tmp_PR = (M662/(I608*32)) / kEncCtsPerDeg
+  Q_Fwd_Mtr5Tmp_PR = (M562/(I508*32)) * P_DegPerStep
+  Q_Fwd_Mtr6Tmp_PR = (M662/(I608*32)) * P_DegPerStep
 
   ANGLE   = (Q_Fwd_Mtr5Tmp_PR + Q_Fwd_Mtr6Tmp_PR) / 2
-  OFFSET  = (Q_Fwd_Mtr5Tmp_PR - Q_Fwd_Mtr6Tmp_PR) / 2
+  OFFSET  = (Q_Fwd_Mtr5Tmp_PR - Q_Fwd_Mtr6Tmp_PR)
 
 Close

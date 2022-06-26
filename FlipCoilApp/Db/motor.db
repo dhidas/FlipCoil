@@ -1,0 +1,18 @@
+record(motor,"$(P)$(M)")
+{
+  field(DESC,"$(DESC)")
+  field(DTYP,"asynMotor")
+  field(OUT,"@asyn($(MOTOR),$(ADDR))")
+  field(MRES, "$(MRES)")
+  field(PREC, "$(PREC)")
+  field(DHLM, "0")
+  field(DLLM, "0")
+  field(NTM,  "NO")
+  field(RTRY,0)
+
+#info(autosaveFields_pass0, "VAL")
+#info(autosaveFields, "VAL")
+info(autosaveFields_pass0, "DVAL DIR DHLM DLLM TWV SREV RRES VBAS VELO VMAX ACCL BDST BVEL BACC RDBD DESC EGU RTRY UEIP URIP DLY RDBL PREC DISA DISP FOFF OFF FRAC OMSL JVEL JAR PCOF ICOF DCOF HVEL NTM NTMF")
+info(autosaveFields, "DIR DHLM DLLM TWV SREV RRES VBAS VELO VMAX ACCL BDST BVEL BACC RDBD DESC EGU RTRY UEIP URIP DLY RDBL PREC DISA DISP FOFF OFF FRAC OMSL JVEL JAR PCOF ICOF DCOF HVEL NTM NTMF")
+}
+

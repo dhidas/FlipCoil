@@ -35,6 +35,12 @@ EPICS_BASE = /usr/lib/epics
 # other than EPICS_BASE:
 #RULES = $(MODULES)/build-rules
 
+# automatic save with restore on boot
+AUTOSAVE=$(EPICS_BASE)
+
+# RecSync support
+RECCASTER=$(EPICS_BASE)
+
 # These lines allow developers to override these RELEASE settings
 # without having to modify this file directly.
 -include $(TOP)/../RELEASE.local

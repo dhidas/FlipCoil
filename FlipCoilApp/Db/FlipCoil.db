@@ -1,8 +1,178 @@
+record(motor, "$(SYS){$(DEV)-Ax:R}-Mtr") {
+  field(DTYP, "asynMotor")
+  field(OUT, "@asyn(PMAC1CS5,0)")
+  field(EGU, "deg")
+  field(DESC, "Rotary")
+  field(MRES, "0.0001")
+  field(RTRY, "0")
+  field(NTM, "NO")
+  field(HLM, "360")
+  field(LLM, "-360")
+  field(DHLM, "360")
+  field(DLLM, "-360")
+  #field(VELO, "100")
+  #field(ACCL, "100000")
+  field(PREC, "2")
+}
+
+record(motor, "$(SYS){$(DEV)-Ax:Ro}-Mtr") {
+  field(DTYP, "asynMotor")
+  field(OUT, "@asyn(PMAC1CS5,1)")
+  field(EGU, "deg")
+  field(DESC, "Rotary")
+  field(MRES, "0.0001")
+  field(RTRY, "0")
+  field(NTM, "NO")
+  field(HLM, "360")
+  field(LLM, "-360")
+  field(DHLM, "360")
+  field(DLLM, "-360")
+  #field(VELO, "100")
+  #field(ACCL, "100000")
+  field(PREC, "2")
+}
+
+
+
+record(ai, "$(SYS){$(DEV)-Ax:R}-CtsPerRev-SP") {
+  field(DESC, "Cts per Rev")
+  field(EGU, "cts")
+  field(VAL,  "180000")
+  field(FLNK, "$(SYS){$(DEV)-Ax:R}-MRES-Calc")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(calcout, "$(SYS){$(DEV)-Ax:R}-MRES-Calc") {
+  field(INPA, "$(SYS){$(DEV)-Ax:R}-CtsPerRev-SP")
+  field(CALC, "360 / A")
+  field(OUT,  "$(SYS){$(DEV)-Ax:R}-MRES PP")
+}
+record(dfanout, "$(SYS){$(DEV)-Ax:R}-MRES") {
+  field(DESC, "MRES resolution rotary motors")
+  field(SELM, "All")
+  field(OUTA, "$(SYS){$(DEV)-Ax:R+}-Mtr.MRES NPP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:R-}-Mtr.MRES NPP")
+  field(OUTC, "$(SYS){$(DEV)-Ax:R}-MRESCS5-SP PP")
+  field(VAL,  "0.002")
+  field(PREC, "5")
+  field(PINI, "YES")
+}
+
+record(ao, "$(SYS){$(DEV)-Ax:R}-MRESCS5-SP") {
+  field(DTYP, "stream")
+  field(DESC, "Deg per step in CS5")
+  field(EGU, "Degree")
+  field(OUT, "@pmac.proto setVar(P801) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:R}-MRESCS5-RB")
+}
+
+record(ai, "$(SYS){$(DEV)-Ax:R}-MRESCS5-RB") {
+  field(DTYP, "stream")
+  field(DESC, "deg/step")
+  field(EGU, "deg/step")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P801) $(PORT)")
+  field(PREC, "5")
+}
+
+record(ao, "$(SYS){$(DEV)-Ax:R}-Velo-SP") {
+  field(DTYP, "stream")
+  field(DESC, "Degrees per second")
+  field(EGU, "deg/s")
+  field(VAL,  "1")
+  field(DRVH, "10")
+  field(DRVL, "0")
+  field(OUT, "@pmac.proto setVar(P800) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:R}-Velo-RB")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+
+record(ai, "$(SYS){$(DEV)-Ax:R}-Velo-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Degrees per second")
+  field(EGU, "deg/s")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P800) $(PORT)")
+  field(PREC, "2")
+}
+
+
+
+record(bi, "$(SYS){$(DEV)-Ax:X+}Homed") {
+  field(DTYP, "stream")
+  field(DESC, "#1 homed")
+  field(SCAN, "1 second")
+  field(INP, "@pmac.proto getIntVar(M145) $(PORT)")
+}
+record(bi, "$(SYS){$(DEV)-Ax:X-}Homed") {
+  field(DTYP, "stream")
+  field(DESC, "#2 homed")
+  field(SCAN, "1 second")
+  field(INP, "@pmac.proto getIntVar(M245) $(PORT)")
+}
+record(bi, "$(SYS){$(DEV)-Ax:Y+}Homed") {
+  field(DTYP, "stream")
+  field(DESC, "#3 homed")
+  field(SCAN, "1 second")
+  field(INP, "@pmac.proto getIntVar(M345) $(PORT)")
+}
+record(bi, "$(SYS){$(DEV)-Ax:Y-}Homed") {
+  field(DTYP, "stream")
+  field(DESC, "#4 homed")
+  field(SCAN, "1 second")
+  field(INP, "@pmac.proto getIntVar(M445) $(PORT)")
+}
+record(bi, "$(SYS){$(DEV)-Ax:R+}Homed") {
+  field(DTYP, "stream")
+  field(DESC, "#5 homed")
+  field(SCAN, "1 second")
+  field(INP, "@pmac.proto getIntVar(M545) $(PORT)")
+}
+record(bi, "$(SYS){$(DEV)-Ax:R-}Homed") {
+  field(DTYP, "stream")
+  field(DESC, "#6 homed")
+  field(SCAN, "1 second")
+  field(INP, "@pmac.proto getIntVar(M645) $(PORT)")
+}
+record(bi, "$(SYS){$(DEV)-Ax:Z+}Homed") {
+  field(DTYP, "stream")
+  field(DESC, "#7 homed")
+  field(SCAN, "1 second")
+  field(INP, "@pmac.proto getIntVar(M745) $(PORT)")
+}
+
+
+
+
+record(ao, "$(SYS){$(DEV)}P100-SP") {
+  field(DTYP, "stream")
+  field(DESC, "P100 setpoint")
+  field(EGU, "cts")
+  field(OUT, "@pmac.proto setVar(P100) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)}P100-RB")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+
 record(ai, "$(SYS){$(DEV)}P100-RB") {
   field(DTYP, "stream")
   field(DESC, "P100 readback")
-  field(SCAN, "1 second")
+  field(SCAN, "Passive")
   field(EGU, "cts")
   field(INP, "@pmac.proto getVar(P100) $(PORT)")
   field(PREC, "2")
+}
+
+
+
+record (waveform, "$(SYS){$(DEV)}WF-RB") {
+  field(SCAN, "1 second")
+  field(DTYP, "stream")
+  field(INP, "@pmacvector.proto get_vector(P620..639) $(PORT)")
+  field(FTVL, "FLOAT")
+  field(NELM, "20")
 }

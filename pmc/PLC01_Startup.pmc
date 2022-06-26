@@ -1,8 +1,16 @@
 
 Open PLC 1 Clear
+Disable PLC  0..31
+Disable PLCC 0..31
 
-; Use kinematics for rotary motors
+; Use kinematics for X, Y, and rotary motors
+&3 #1->I #2->I
 &5 #5->I #6->I
 
+P_DegPerSecond = kDegPerSecondDefault
+P_DegPerStep = kDegPerStepDefault
+P_MMPerSecondX = kMMPerSecondDefault
+
+Enable PLC 21
 Disable PLC 1
 Close
