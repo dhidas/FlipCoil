@@ -1,7 +1,7 @@
 ; PLC for position reporting in the rotary coordinate system
 
-#define XPOS   Q87
-#define XYAW   Q84
+#define XPOS   Q81
+#define XYAW   Q82
 
 #define Q_Fwd_Mtr1Tmp_PR Q328
 #define Q_Fwd_Mtr2Tmp_PR Q329

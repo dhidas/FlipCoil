@@ -91,6 +91,10 @@ I124,8,100 = $20001
 
 
 ; Coordinate system variables (IsxNN variables)
+I5350 = 1   ; Enable kinematics
+I5313 = 10  ; segmentation time (needed for lookahead)
+I5450 = 1   ; Enable kinematics
+I5413 = 10  ; segmentation time (needed for lookahead)
 I5550 = 1   ; Enable kinematics
 I5513 = 10  ; segmentation time (needed for lookahead)
 

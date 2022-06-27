@@ -1,0 +1,37 @@
+#ifndef __GUARD__PLC27_TestTrigger_pmc
+#define __GUARD__PLC27_TestTrigger_pmc
+
+#include "Constants.pmc"
+
+; This PLC is used to test the trigger to the nano-voltmeter
+
+#define ITimer27 I6412
+
+Open PLC 27 Clear
+
+M512 = 0
+M511 = 1
+
+P2700 = 0
+While (P2700 < 100)
+  M512 = 1
+  M511 = 1
+
+  ITimer27 = 1500 * kMilliSecond While (ITimer27 > 0) EndWhile
+
+  M512 = 0
+  M511 = 1
+
+  ITimer27 = 1500 * kMilliSecond While (ITimer27 > 0) EndWhile
+
+  P2700 = P2700 + 1
+EndWhile
+
+Disable PLC 27
+
+Close
+
+
+
+
+#endif

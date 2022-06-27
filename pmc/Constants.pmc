@@ -1,6 +1,9 @@
 #ifndef __GUARD__Constants_pmc
 #define __GUARD__Constants_pmc
 
+#define kMilliSecond      (8388608/I10)         ; Milli-second
+#define kSecond           (1000*kMilliSecond)   ; Second
+
 #define kEncCtsPerMM  1000
 #define kDegPerSecondDefault 1
 #define kDegPerStepDefault (360 / 180000)

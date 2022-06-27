@@ -1,0 +1,11 @@
+#ifndef __GUARD__PLC08_Reserved_pmc
+#define __GUARD__PLC08_Reserved_pmc
+
+; Variables in the P800 range are used elsewhere.
+; Please avoid using this PLC and associated P8xx
+
+Open PLC 8 Clearn
+Disable PLC 8
+Close
+
+#endif

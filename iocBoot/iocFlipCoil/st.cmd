@@ -31,18 +31,18 @@ pmacCreateAxis("PMAC1", 7)
 
 # Create CS (ControllerPort, Addr, CSNumber, CSRef, Prog)
 # Rotary: Coordinate System 5 | PROG 5
-pmacAsynCoordCreate("P0", 0, 2, 0, 2) # X
-pmacAsynCoordCreate("P0", 0, 3, 1, 3) # Y
+pmacAsynCoordCreate("P0", 0, 3, 0, 3) # X
+pmacAsynCoordCreate("P0", 0, 4, 1, 4) # Y
 pmacAsynCoordCreate("P0", 0, 5, 2, 5) # R
 
 # Configure CS (PortName, DriverName, CSRef, NAxes)
-drvAsynMotorConfigure("PMAC1CS2", "pmacAsynCoord", 0, 2)
-drvAsynMotorConfigure("PMAC1CS3", "pmacAsynCoord", 1, 2)
+drvAsynMotorConfigure("PMAC1CS3", "pmacAsynCoord", 0, 2)
+drvAsynMotorConfigure("PMAC1CS4", "pmacAsynCoord", 1, 2)
 drvAsynMotorConfigure("PMAC1CS5", "pmacAsynCoord", 2, 2)
 
 # Set scale factor (CSRef, axis, stepsPerUnit)
-pmacSetCoordStepsPerUnit(0, 0, 1)
-pmacSetCoordStepsPerUnit(0, 1, 1)
+pmacSetCoordStepsPerUnit(0, 0, 1000)
+pmacSetCoordStepsPerUnit(0, 1, 1000)
 pmacSetCoordStepsPerUnit(1, 2, 1)
 pmacSetCoordStepsPerUnit(1, 3, 1)
 pmacSetCoordStepsPerUnit(2, 4, 1)
@@ -59,8 +59,10 @@ pmacSetCoordMovingPollPeriod(2, 100)
 ## Load record instances
 dbLoadRecords("../../db/FlipCoil.db","SYS=$(sys),DEV=$(dev),,PORT=P0")
 
-dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:R+}-Mtr,MOTOR=PMAC1,ADDR=5,DESC=Rotary +z  Mtr, MRES=0.002, PREC=2")
-dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:R-}-Mtr,MOTOR=PMAC1,ADDR=6,DESC=Rotary -z  Mtr, MRES=0.002, PREC=2")
+dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:X+}-Mtr,MOTOR=PMAC1,ADDR=1,DESC=X Mtr at +z, MRES=0.001, PREC=3")
+dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:X-}-Mtr,MOTOR=PMAC1,ADDR=2,DESC=X Mtr at -z, MRES=0.001, PREC=3")
+dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:R+}-Mtr,MOTOR=PMAC1,ADDR=5,DESC=Rotary Mtr at +z, MRES=0.002, PREC=3")
+dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:R-}-Mtr,MOTOR=PMAC1,ADDR=6,DESC=Rotary Mtr at -z, MRES=0.002, PREC=3")
 dbLoadRecords("../../db/asynRecord.db","P=$(sys),R={$(dev)}Asyn,ADDR=1,PORT=P0,IMAX=128,OMAX=128")
 
 cd ../../

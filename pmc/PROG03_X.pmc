@@ -16,7 +16,7 @@ if (M_HomeComplete_M1 != 1 or M_HomeComplete_M2 != 1)
   return
 endif
 
-X(Q77) U(Q74)
+X(Q71) U(Q72)
 
 Close
 

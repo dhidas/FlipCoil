@@ -1,0 +1,37 @@
+#ifndef __GUARD__PLC13_XScan_pmc
+#define __GUARD__PLC13_XScan_pmc
+
+; Scan in X.  We take the start point, move to beyond this for
+; acceleration to constant velocity, and also overshoot for
+; the same reason
+
+
+#define P_XScanStart      P1300
+#define P_XScanStop       P1301
+#define P_XScanNTriggers  P1302
+#define P_XScanX0         P1303
+#define P_XScanXF         P1304
+#define P_XScanDir        P1305
+#define P_XTrigSpacing    P1306
+
+
+Open PLC 13 Clear
+
+P_XTrigSpacing = ABS( (P_XScanStop - P_XScanStart) / (P_XScanNTriggers - 1) )
+
+if (P_XScanStart > P_XScanStop)
+  P_XScanDir = +1
+else
+  P_XScanDir = -1
+endif
+
+P_XScanX0 = P_XScanStart - 0.5 * P_XScanDir * P_MMPerSecondX
+P_XScanXF = P_XScanStop  + 0.5 * P_XScanDir * P_MMPerSecondX
+
+; Get the start point correctly aligned with the trigger leading edge
+
+Disable PLC 13
+Close
+
+
+#endif

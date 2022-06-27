@@ -11,6 +11,7 @@ P_DegPerSecond = kDegPerSecondDefault
 P_DegPerStep = kDegPerStepDefault
 P_MMPerSecondX = kMMPerSecondDefault
 
+Enable PLC 19
 Enable PLC 21
 Disable PLC 1
 Close

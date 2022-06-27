@@ -2,10 +2,9 @@
 #define __GUARD__PVariables_pmc
 
 
-#define P_DegPerSecond  P800
-#define P_DegPerStep    P801
-#define P_MMPerSecondX  P802
-
+#define P_DegPerSecond    P800
+#define P_DegPerStep      P801
+#define P_MMPerSecondX    P802
 
 
 
