@@ -1,0 +1,8 @@
+
+record (waveform, "$(SYS){$(DEV)-Keithley}Fields-RB") {
+  field (SCAN, "Passive")
+  field (DTYP, "stream")
+  field (INP, "@keithley.proto get_fields $(PORT)")
+  field (FTVL, "FLOAT")
+  field (NELM, "1024")
+}

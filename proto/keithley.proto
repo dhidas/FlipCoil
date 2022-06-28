@@ -1,0 +1,11 @@
+OutTerminator = CR LF;
+InTerminator = CR LF;
+Separator = ',';
+
+get_fields {
+  extrainput = ignore;
+  replyTimeout = 1000;
+  out "FETCH?";
+  in "%f";
+}
+

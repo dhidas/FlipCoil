@@ -9,6 +9,7 @@ include $(TOP)/configure/CONFIG
 DB += FlipCoil.db
 
 DB += motor.db
+DB += Keithley2182A.db
 DB_INSTALLS += $(EPICS_BASE)/db/pmacStatus.db
 DB_INSTALLS += $(EPICS_BASE)/db/pmacStatusAxis.db
 DB_INSTALLS += $(EPICS_BASE)/db/pmac_asyn_motor.db
