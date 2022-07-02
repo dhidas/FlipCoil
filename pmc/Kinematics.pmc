@@ -18,11 +18,11 @@ Close
 ; In normal running A = angle and B = 0 (no offset)
 
 &5 Open Forward Clear
-Q1 = (P5 + P6) * P_DegPerStep / 2
-Q2 = (P5 - P6) * P_DegPerStep
+Q1 = (P7 + P8) * P_DegPerStep / 2
+Q2 = (P7 - P8) * P_DegPerStep
 Close
 
 &5 Open Inverse Clear
-P5 = (Q1 + Q2 / 2) / P_DegPerStep
-P6 = (Q1 - Q2 / 2) / P_DegPerStep
+P7 = (Q1 + Q2 / 2) / P_DegPerStep
+P8 = (Q1 - Q2 / 2) / P_DegPerStep
 Close

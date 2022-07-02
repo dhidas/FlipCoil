@@ -6,23 +6,25 @@
 ; This PLC is used to test the trigger to the nano-voltmeter
 
 #define ITimer27 I6412
+#
+M512 = 1
+M511 = 1
 
 Open PLC 27 Clear
 
-M512 = 0
+M512 = 1
 M511 = 1
 
 P2700 = 0
-While (P2700 < 100)
-  M512 = 1
-  M511 = 1
+While (P2700 < 10)
 
-  ITimer27 = 1500 * kMilliSecond While (ITimer27 > 0) EndWhile
-
+  ITimer27 = 800 * kMilliSecond While (ITimer27 > 0) EndWhile
   M512 = 0
   M511 = 1
 
-  ITimer27 = 1500 * kMilliSecond While (ITimer27 > 0) EndWhile
+  ITimer27 = 200 * kMilliSecond While (ITimer27 > 0) EndWhile
+  M512 = 1
+  M511 = 1
 
   P2700 = P2700 + 1
 EndWhile

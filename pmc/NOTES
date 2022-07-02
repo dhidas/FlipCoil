@@ -2,6 +2,9 @@
 #2 - X @ -z
 #3 - Y @ +z
 #4 - Y @ -z
-#5 - Rotary @ +z
-#6 - Rotary @ -z
-#7 - Z & +z
+#5 - None (potentially Z & +z)
+#6 - None
+#7 - Rotary @ +z
+#8 - Rotary @ -z
+
+#7hmz #8hmz &5 #7j/ #8j/ q71=100000  B5R

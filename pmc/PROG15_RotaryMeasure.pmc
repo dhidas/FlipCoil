@@ -1,0 +1,52 @@
+Open PROG 10 Clear
+
+LINEAR
+ABS
+TA400
+TS100
+
+FRAX(A)
+F(P_DegPerSecond)
+
+P_RotaryNotHomed = 0
+P_WrongTriggerState = 0
+
+P_RotaryStartActual = P_RotaryStartPos - P_RotaryTurnDirection * P_DegPerSecond * 0.5
+P_RotaryStopActual  = P_RotaryStopPos  + P_RotaryTurnDirection * P_DegPerSecond * 0.5
+
+
+P_RotaryTurnDirection = 1
+if (P_RotaryStartPos > P_RotaryStopPos)
+  P_RotaryTurnDirection = -1
+endif
+
+
+; Check if motors homed or not
+if (M_HomeComplete_M7 != 1 or M_HomeComplete_M8 != 1)
+  P_RotaryNotHomed = 1
+  return
+endif
+
+if (M_EQU8TriggerVal != 1)
+  P_WrongTriggerState = 1
+  return;
+endif
+
+; Move to starting position
+A(P_RotaryStartActual) B(P_RotaryStartOffset)
+Dwell 100
+
+M_EQU8TriggerSet = 1
+M_EQU8TriggerGo = 1
+M_EQU8TriggerVal
+
+; Have to ensure that falling transition lands on P_RotaryStartPos
+P_TriggerSpacing = ABS(P_RotaryStartPos - P_RotaryStopPos) / P_RotaryNTriggers
+
+; number of whole triggers in 0.5s
+INT( ABS(P_RotaryStartActual - P_RotaryStartPos) / P_TriggerSpacing )
+
+; First trigger must be at:
+M710 = P_TriggerSpacing * I708 * 32
+M708 = I708 * 32 * (P_RotaryStartActual - P_RotaryTurnDirection * P_TriggerSpacing * P_RotaryNTriggers)
+M709 = I708 * 32 * (P_RotaryStartActual - P_RotaryTurnDirection * P_TriggerSpacing * P_RotaryNTriggers + P_TriggerSpacing / 8 - P_TriggerSpacing)

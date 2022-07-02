@@ -12,7 +12,7 @@ FRAX(A)
 F(P_DegPerSecond)
 
 ; Check if motors homed or not
-if (M_HomeComplete_M5 != 1 or M_HomeComplete_M6 != 1)
+if (M_HomeComplete_M7 != 1 or M_HomeComplete_M8 != 1)
   return
 endif
 

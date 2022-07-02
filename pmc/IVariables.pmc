@@ -7,8 +7,8 @@ I63=1     ; Needed for pmac epics driver
 
 ; Setup all 8 axes as PFM output
 I7003,2,100 = 2290  ; Servo IC 0,1 PFM Clock divider equal to 6
-I7004,2,100 = 13    ; Servo IC 1 PFM Pulse Width Control equal to 13
-I169,8,100  = 2427  ; Output command limit
+I7004,2,100 = 3    ; Servo IC 1 PFM Pulse Width Control equal to 3
+I169,8,100  = 100000  ; Output command limit
 
 
 
@@ -79,12 +79,13 @@ I115,8,100 = 100    ; Motor xx Abort/Limit Deceleration Rate
 I116,8,100 = 10     ; Motor xx Maximum Program Velocity
 I117,8,100 = 10     ; Motor xx Maximum Program Acceleration
 I119,8,100 = 1      ; Motor xx Maximum Jog/Home Acceleration
-I122,8,100 = 1      ; Motor xx Jog Speed
+I122,8,100 = 10      ; Motor xx Jog Speed
 I123,8,100 = 1      ; Motor xx Home Speed and Direction
 I126,8,100 = 0      ; Motor xx Home Offset
 
 
-I100,6,100 = 1  ; Activate motors
+I100,4,100 = 1  ; Activate motors
+I700,2,100 = 1  ; Activate motors
 
 ; Ignore limit switches for now (testing only)
 I124,8,100 = $20001
