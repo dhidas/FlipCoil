@@ -1,3 +1,38 @@
+#include "PVariables.pmc"
+#include "MVariables.pmc"
+
+
+; Some definitions
+
+; User inputs
+; P_DegPerSecond                  ; Scan speed (def elsewhere)
+; P_DegPerStep                    ; degree / step or encoder cts, etc (def elsewhere)
+#define P_RotaryNTriggers   P1500 ; Number of triggers
+#define P_RotaryR0          P1501 ; First point in scan
+#define P_RotaryRF          P1502 ; Last point in scan
+#define P_RotaryOffset      P1503 ; Rotary offset for scans (#7 - #8)
+
+; Possibly report back
+#define P_RotaryNotHomed    P1510 ; A motor is not homed
+#define P_WrongTriggerState P1511 ; The initial trigger state is incorrect
+#define P_NTotalTriggers    P1512 ; Total number of triggers including unsed ends
+
+; Used internally
+#define P_RotaryStart       P1520 ; Actual rotary start position
+#define P_RotaryStop        P1521 ; Actual rotary stop position
+#define P_RotaryTrigWidth   P1522 ; Trigger width in degrees
+#define P_RotaryDirection   P1523 ; Direction of scan based off R0 and RF
+#define P_RotaryTOver       P1524 ; Ramp time (must be >= to TA)
+#define P_RotaryDOver       P1525 ; Distance for ramp (Purposly not accounting for accel, in clear)
+#define P_RotaryDelta       P1526 ; Distance between triggers
+#define P_RotaryNOver       P1527 ; Number of extra triggers before R0
+#define P_RotaryFirst       P1528 ; Position of first actual trigger
+#define P_RotaryBehind      P1529 ; Position of trigger up edge behind starting point
+
+; Shorthands
+#define TRIG7LOW  M_PosComp7Set=0 M_PosComp7Write=1
+#define TRIG7HIGH M_PosComp7Set=0 M_PosComp7Write=1
+
 Open PROG 10 Clear
 
 LINEAR
@@ -8,17 +43,27 @@ TS100
 FRAX(A)
 F(P_DegPerSecond)
 
+; Possible errors
 P_RotaryNotHomed = 0
 P_WrongTriggerState = 0
 
-P_RotaryStartActual = P_RotaryStartPos - P_RotaryTurnDirection * P_DegPerSecond * 0.5
-P_RotaryStopActual  = P_RotaryStopPos  + P_RotaryTurnDirection * P_DegPerSecond * 0.5
+P_RotaryTOver = 0.5 ; Default setting for now
 
-
-P_RotaryTurnDirection = 1
-if (P_RotaryStartPos > P_RotaryStopPos)
-  P_RotaryTurnDirection = -1
+; Initial calculations
+P_RotaryDirection = +1
+if (P_RotaryR0 > P_RotaryRF)
+  P_RotaryDirection = -1
 endif
+P_RotaryDOver   = P_RotaryTOver * P_DegPerSecond
+P_RotaryDelta   = ABS((P_RotaryRF - P_RotaryR0) / (P_RotaryNTriggers - 1))
+P_RotaryNOver   = INT(P_RotaryDOver / P_RotaryDelta)
+P_RotaryFirst   = P_RotaryR0 - P_RotaryDirection * P_RotaryNOver * P_RotaryDelta
+P_RotaryBehind  = P_RotaryFirst + P_RotaryDirection * (P_RotaryTrigWidth - P_RotaryDelta)
+P_NTotalTriggers = P_RotaryNTriggers + 2 * P_RotaryNOver
+
+; Calculate actual start and stop positions for motor movement
+P_RotaryStart = P_RotaryR0 - P_RotaryDirection * P_RotaryDOver
+P_RotaryStop  = P_RotaryRF + P_RotaryDirection * P_RotaryDOver
 
 
 ; Check if motors homed or not
@@ -27,26 +72,27 @@ if (M_HomeComplete_M7 != 1 or M_HomeComplete_M8 != 1)
   return
 endif
 
-if (M_EQU8TriggerVal != 1)
+if (M_PosComp7Val != 1)
   P_WrongTriggerState = 1
-  return;
+  return
 endif
 
 ; Move to starting position
-A(P_RotaryStartActual) B(P_RotaryStartOffset)
-Dwell 100
-
-M_EQU8TriggerSet = 1
-M_EQU8TriggerGo = 1
-M_EQU8TriggerVal
-
-; Have to ensure that falling transition lands on P_RotaryStartPos
-P_TriggerSpacing = ABS(P_RotaryStartPos - P_RotaryStopPos) / P_RotaryNTriggers
-
-; number of whole triggers in 0.5s
-INT( ABS(P_RotaryStartActual - P_RotaryStartPos) / P_TriggerSpacing )
+A(P_RotaryStart) B(P_RotaryOffset)
+Dwell 10
 
 ; First trigger must be at:
-M710 = P_TriggerSpacing * I708 * 32
-M708 = I708 * 32 * (P_RotaryStartActual - P_RotaryTurnDirection * P_TriggerSpacing * P_RotaryNTriggers)
-M709 = I708 * 32 * (P_RotaryStartActual - P_RotaryTurnDirection * P_TriggerSpacing * P_RotaryNTriggers + P_TriggerSpacing / 8 - P_TriggerSpacing)
+M_PosComp7Inc = P_RotaryDelta / P_DegPerStep
+M_PosComp7B = P_RotaryFirst / P_DegPerStep
+M_PosComp7A = P_RotaryBehind / P_DegPerStep
+TRIG7HIGH
+
+Dwell 100
+
+; Move to stopping position
+A(P_RotaryStop) B(P_RotaryOffset)
+Dwell 100
+TRIG7HIGH
+
+
+Close

@@ -11,4 +11,4 @@
 #include "PLC27_TestTrigger.pmc"
 #include "PROG03_X.pmc"
 #include "PROG05_Rotary.pmc"
-
+#include "PROG15_RotaryMeasure.pmc"

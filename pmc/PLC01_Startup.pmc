@@ -1,3 +1,4 @@
+#include "PVariables"
 
 Open PLC 1 Clear
 Disable PLC  0..31
@@ -7,9 +8,18 @@ Disable PLCC 0..31
 &3 #1->I #2->I
 &5 #7->I #8->I
 
-P_DegPerSecond = kDegPerSecondDefault
-P_DegPerStep = kDegPerStepDefault
-P_MMPerSecondX = kMMPerSecondDefault
+P_DegPerSecond  = kDegPerSecondDefault
+P_DegPerStep    = kDegPerStepDefault
+P_MMPerSecondX  = kMMPerSecondDefault
+
+; Defaults for PLC15
+P_RotaryNTriggers   = 21
+P_RotaryR0          = -10
+P_Rotary_RF         = +10
+P_RotaryOffset      = 0
+P_RotaryNotHomed    = 0
+P_WrongTriggerState = 0
+
 
 Enable PLC 19
 Enable PLC 21
