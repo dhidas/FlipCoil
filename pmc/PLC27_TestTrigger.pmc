@@ -7,24 +7,24 @@
 
 #define ITimer27 I6412
 #
-M512 = 1
-M511 = 1
+M712 = 1
+M711 = 1
 
 Open PLC 27 Clear
 
-M512 = 1
-M511 = 1
+M712 = 1
+M711 = 1
 
 P2700 = 0
 While (P2700 < 10)
 
   ITimer27 = 800 * kMilliSecond While (ITimer27 > 0) EndWhile
-  M512 = 0
-  M511 = 1
+  M712 = 0
+  M711 = 1
 
   ITimer27 = 200 * kMilliSecond While (ITimer27 > 0) EndWhile
-  M512 = 1
-  M511 = 1
+  M712 = 1
+  M711 = 1
 
   P2700 = P2700 + 1
 EndWhile
