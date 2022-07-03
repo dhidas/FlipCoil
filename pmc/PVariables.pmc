@@ -2,10 +2,21 @@
 #define __GUARD__PVariables_pmc
 
 
-#define P_DegPerSecond    P800
-#define P_DegPerStep      P801
-#define P_MMPerSecondX    P802
+; P8xx (PLC08 vars) used for IO
+#define P_DegPerSecond            P800 ; Move / Scan speed
+#define P_DegPerStep              P801 ; degree / step or encoder cts, etc, defined by hardware
+#define P_MMPerSecondX            P802 ; Move / Scan speed
+#define P_MMPerSecondY            P803 ; Move / Scan speed
+                                  
+#define P_RotaryNTriggers         P810 ; Number of triggers
+#define P_RotaryR0                P811 ; First point in scan
+#define P_RotaryRF                P812 ; Last point in scan
+#define P_RotaryOffset            P813 ; Rotary offset for scans (#7 - #8)
 
+; Possibly report back
+#define P_RotaryNotHomed          P860 ; A motor is not homed
+#define P_RotaryWrongTriggerState P861 ; The initial trigger state is incorrect
+#define P_RotaryNTotalTriggers    P862 ; Total number of triggers including unsed ends
 
 
 #endif

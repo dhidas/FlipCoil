@@ -1,0 +1,8 @@
+; Rotary motor homing routine
+
+Open PLC 11 Clear
+
+CMD"#7HMZ #8HMZ"
+
+Disable PLC 11
+Close
