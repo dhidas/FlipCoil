@@ -112,9 +112,9 @@ record(ao, "$(SYS){$(DEV)-Ax:X}-Velo-SP") {
   field(DTYP, "stream")
   field(DESC, "X velocity")
   field(EGU, "mm/s")
-  field(VAL,  "5")
+  field(VAL,  "2")
   field(DRVH, "10")
-  field(DRVL, "0")
+  field(DRVL, "0.001")
   field(OUT, "@pmac.proto setVar(P802) $(PORT)")
   field(FLNK, "$(SYS){$(DEV)-Ax:X}-Velo-RB")
   field(PINI, "YES")
@@ -134,16 +134,15 @@ record(ao, "$(SYS){$(DEV)-Ax:R}-Velo-SP") {
   field(DTYP, "stream")
   field(DESC, "Degrees per second")
   field(EGU, "deg/s")
-  field(VAL,  "1")
-  field(DRVH, "10")
-  field(DRVL, "0")
+  field(VAL,  "10")
+  field(DRVH, "180")
+  field(DRVL, "0.1")
   field(OUT, "@pmac.proto setVar(P800) $(PORT)")
   field(FLNK, "$(SYS){$(DEV)-Ax:R}-Velo-RB")
   field(PINI, "YES")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
-
 record(ai, "$(SYS){$(DEV)-Ax:R}-Velo-RB") {
   field(DTYP, "stream")
   field(DESC, "Degrees per second")
@@ -153,7 +152,115 @@ record(ai, "$(SYS){$(DEV)-Ax:R}-Velo-RB") {
   field(PREC, "2")
 }
 
+record(ao, "$(SYS){$(DEV)-Ax:R}ScanStart-SP") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Start Position")
+  field(EGU, "deg")
+  field(VAL,  "-180")
+  field(DRVH, "+360")
+  field(DRVL, "-360")
+  field(OUT, "@pmac.proto setVar(P811) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:R}ScanStart-RB")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ai, "$(SYS){$(DEV)-Ax:R}ScanStart-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Start Position")
+  field(EGU, "deg")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P811) $(PORT)")
+  field(PREC, "2")
+}
 
+record(ao, "$(SYS){$(DEV)-Ax:R}ScanStop-SP") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Stop Position")
+  field(EGU, "deg")
+  field(VAL,  "-180")
+  field(DRVH, "+360")
+  field(DRVL, "-360")
+  field(OUT, "@pmac.proto setVar(P812) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:R}ScanStop-RB")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ai, "$(SYS){$(DEV)-Ax:R}ScanStop-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Stop Position")
+  field(EGU, "deg")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P812) $(PORT)")
+  field(PREC, "2")
+}
+
+record(ao, "$(SYS){$(DEV)-Ax:R}ScanNTriggers-SP") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Number of Triggers")
+  field(VAL,  "11")
+  field(DRVH, "1000")
+  field(DRVL, "2")
+  field(OUT, "@pmac.proto setIntVar(P810) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:R}ScanNTriggers-RB")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ai, "$(SYS){$(DEV)-Ax:R}ScanNTriggers-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Number of Triggers")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getIntVar(P810) $(PORT)")
+}
+
+record(ao, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-SP") {
+  field(DTYP, "stream")
+  field(DESC, "Acceleration time")
+  field(VAL,  "1")
+  field(DRVH, "10")
+  field(DRVL, "0.5")
+  field(PREC, "2")
+  field(OUT, "@pmac.proto setVar(P814) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-RB")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ai, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Acceleration time")
+  field(SCAN, "Passive")
+  field(PREC, "2")
+  field(INP, "@pmac.proto getVar(P814) $(PORT)")
+}
+record(calc, "$(SYS){$(DEV)-Ax:R}TriggerRate") {
+  field(SCAN, "Passive")
+  field(EGU,  "Hz")
+  field(PREC, "1")
+  field(INPA, "$(SYS){$(DEV)-Ax:R}-Velo-RB CP")
+  field(INPB, "$(SYS){$(DEV)-Ax:R}ScanStart-RB CP")
+  field(INPC, "$(SYS){$(DEV)-Ax:R}ScanStop-RB CP")
+  field(INPD, "$(SYS){$(DEV)-Ax:R}ScanNTriggers-RB CP")
+  field(CALC, " (D - 1) / (ABS(C - B) / A)")
+}
+record(calc, "$(SYS){$(DEV)-Ax:R}TriggerSpacing") {
+  field(SCAN, "Passive")
+  field(EGU,  "deg")
+  field(PREC, "3")
+  field(INPA, "$(SYS){$(DEV)-Ax:R}ScanStart-RB CP")
+  field(INPB, "$(SYS){$(DEV)-Ax:R}ScanStop-RB CP")
+  field(INPC, "$(SYS){$(DEV)-Ax:R}ScanNTriggers-RB CP")
+  field(CALC, "ABS((B - A)) / (C - 1)")
+}
+record(calc, "$(SYS){$(DEV)-Ax:R}TriggerNExtra") {
+  field(SCAN, "Passive")
+  field(INPA, "$(SYS){$(DEV)-Ax:R}-Velo-RB CP")
+  field(INPB, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-RB CP")
+  field(INPC, "$(SYS){$(DEV)-Ax:R}TriggerSpacing CP")
+  field(CALC, "(A * B / C) & (A * B / C)")
+}
 
 record(bi, "$(SYS){$(DEV)-Ax:X+}Homed") {
   field(DTYP, "stream")
@@ -179,26 +286,38 @@ record(bi, "$(SYS){$(DEV)-Ax:Y-}Homed") {
   field(SCAN, "1 second")
   field(INP, "@pmac.proto getIntVar(M445) $(PORT)")
 }
-record(bi, "$(SYS){$(DEV)-Ax:R+}Homed") {
+record(bi, "$(SYS){$(DEV)-Ax:Z+}Homed") {
   field(DTYP, "stream")
   field(DESC, "#5 homed")
   field(SCAN, "1 second")
   field(INP, "@pmac.proto getIntVar(M545) $(PORT)")
 }
+record(bi, "$(SYS){$(DEV)-Ax:R+}Homed") {
+  field(DTYP, "stream")
+  field(DESC, "#5 homed")
+  field(SCAN, "1 second")
+  field(INP, "@pmac.proto getIntVar(M745) $(PORT)")
+}
 record(bi, "$(SYS){$(DEV)-Ax:R-}Homed") {
   field(DTYP, "stream")
   field(DESC, "#6 homed")
   field(SCAN, "1 second")
-  field(INP, "@pmac.proto getIntVar(M645) $(PORT)")
+  field(INP, "@pmac.proto getIntVar(M845) $(PORT)")
 }
-record(bi, "$(SYS){$(DEV)-Ax:Z+}Homed") {
+
+
+record(bi, "$(SYS){$(DEV)-Ax:R}ScanErrNotHomed") {
   field(DTYP, "stream")
-  field(DESC, "#7 homed")
-  field(SCAN, "1 second")
-  field(INP, "@pmac.proto getIntVar(M745) $(PORT)")
+  field(DESC, "a motor not homed")
+  field(SCAN, "5 second")
+  field(INP, "@pmac.proto getIntVar(P860) $(PORT)")
 }
-
-
+record(bi, "$(SYS){$(DEV)-Ax:R}ScanErrTriggerState") {
+  field(DTYP, "stream")
+  field(DESC, "bad initial trigger state")
+  field(SCAN, "5 second")
+  field(INP, "@pmac.proto getIntVar(P861) $(PORT)")
+}
 
 
 record(ao, "$(SYS){$(DEV)-Ax:X}ScanStart-SP") {
@@ -271,7 +390,29 @@ record(stringout, "$(SYS){$(DEV)-Ax:X}RunScan") {
   field(OUT, "@pmac.proto sendString() $(PORT)")
 }
 
+record(stringout, "$(SYS){$(DEV)-Ax:R}RunScan") {
+  field(DESC, "Run the R scan")
+  field(DTYP, "stream")
+  field(PROC, 1)
+  field(VAL, "&5B15R")
+  field(OUT, "@pmac.proto sendString() $(PORT)")
+}
+record(stringout, "$(SYS){$(DEV)-Ax:R}Home") {
+  field(DESC, "Run the R Homing PLC")
+  field(DTYP, "stream")
+  field(PROC, 1)
+  field(VAL, "enaplc11")
+  field(OUT, "@pmac.proto sendString() $(PORT)")
+}
 
+
+record(stringout, "$(SYS){$(DEV)}ClearPErrors") {
+  field(DESC, "Clear P-var error reports")
+  field(DTYP, "stream")
+  field(PROC, 1)
+  field(VAL, "enaplc2")
+  field(OUT, "@pmac.proto sendString() $(PORT)")
+}
 
 
 
