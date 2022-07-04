@@ -5,6 +5,7 @@
 #include "PVariables.pmc"
 #include "Kinematics.pmc"
 #include "PLC01_Startup.pmc"
+#include "PLC02_ClearErrorPVars.pmc"
 #include "PLC08_Reserved.pmc"
 #include "PLC11_HomeRotary.pmc"
 #include "PLC19_XPositionReporting.pmc"

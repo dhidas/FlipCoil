@@ -12,6 +12,7 @@
 #define P_RotaryR0                P811 ; First point in scan
 #define P_RotaryRF                P812 ; Last point in scan
 #define P_RotaryOffset            P813 ; Rotary offset for scans (#7 - #8)
+#define P_RotaryTOver             P814 ; Move time before (and after) measurement
 
 ; Possibly report back
 #define P_RotaryNotHomed          P860 ; A motor is not homed

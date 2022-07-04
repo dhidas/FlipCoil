@@ -1,6 +1,12 @@
 #ifndef __GUARD__Constants_pmc
 #define __GUARD__Constants_pmc
 
+; Shorthands
+#define gTRIG7LOW  M_PosComp7Set=0 M_PosComp7Write=1
+#define gTRIG7HIGH M_PosComp7Set=1 M_PosComp7Write=1
+
+#define kROTARYQUICKSPEED 45  ; deg / s
+
 #define kMilliSecond      (8388608/I10)         ; Milli-second
 #define kSecond           (1000*kMilliSecond)   ; Second
 

@@ -7,39 +7,40 @@
 #define Q_RotaryStop        Q401 ; Actual rotary stop position
 #define Q_RotaryTrigWidth   Q402 ; Trigger width in degrees
 #define Q_RotaryDirection   Q403 ; Direction of scan based off R0 and RF
-#define Q_RotaryTOver       Q404 ; Ramp time (must be >= to TA)
-#define Q_RotaryDOver       Q405 ; Distance for ramp (Purposly not accounting for accel, in clear)
-#define Q_RotaryDelta       Q406 ; Distance between triggers
-#define Q_RotaryNOver       Q407 ; Number of extra triggers before R0
-#define Q_RotaryFirst       Q408 ; Position of first actual trigger
-#define Q_RotaryBehind      Q409 ; Position of trigger up edge behind starting point
+#define Q_RotaryDOver       Q404 ; Distance for ramp (Purposly not accounting for accel, in clear)
+#define Q_RotaryDelta       Q405 ; Distance between triggers
+#define Q_RotaryNOver       Q406 ; Number of extra triggers before R0
+#define Q_RotaryFirst       Q407 ; Position of first actual trigger
+#define Q_RotaryBehind      Q408 ; Position of trigger up edge behind starting point
 
-; Shorthands
-#define TRIG7LOW  M_PosComp7Set=0 M_PosComp7Write=1
-#define TRIG7HIGH M_PosComp7Set=0 M_PosComp7Write=1
 
-Open PROG 10 Clear
+Open PROG 15 Clear
 
 LINEAR
 ABS
-TA400
-TS100
+TA(P_RotaryTOver)
+TS(P_RotaryTOver / 2)
 
 FRAX(A)
-F(P_DegPerSecond)
+F(kROTARYQUICKSPEED)
+
+Q_RotaryTrigWidth = 0.2 / P_DegPerSecond
+
+; Get the trigger compare out of the way
+M_PosComp7Inc = 0
+M_PosComp7A = 100 * 360 / P_DegPerStep
+M_PosComp7B = 100 * 360 / P_DegPerStep
 
 ; Possible errors
 P_RotaryNotHomed = 0
 P_RotaryWrongTriggerState = 0
-
-Q_RotaryTOver = 0.5 ; Default setting for now
 
 ; Initial calculations
 Q_RotaryDirection = +1
 if (P_RotaryR0 > P_RotaryRF)
   Q_RotaryDirection = -1
 endif
-Q_RotaryDOver   = Q_RotaryTOver * P_DegPerSecond
+Q_RotaryDOver   = P_RotaryTOver * P_DegPerSecond
 Q_RotaryDelta   = ABS((P_RotaryRF - P_RotaryR0) / (P_RotaryNTriggers - 1))
 Q_RotaryNOver   = INT(Q_RotaryDOver / Q_RotaryDelta)
 Q_RotaryFirst   = P_RotaryR0 - Q_RotaryDirection * Q_RotaryNOver * Q_RotaryDelta
@@ -64,20 +65,21 @@ endif
 
 ; Move to starting position
 A(Q_RotaryStart) B(P_RotaryOffset)
+F(P_DegPerSecond)
 Dwell 10
 
 ; First trigger must be at:
 M_PosComp7Inc = Q_RotaryDelta / P_DegPerStep
 M_PosComp7B = Q_RotaryFirst / P_DegPerStep
 M_PosComp7A = Q_RotaryBehind / P_DegPerStep
-TRIG7HIGH
+gTRIG7HIGH
 
 Dwell 100
 
 ; Move to stopping position
 A(Q_RotaryStop) B(P_RotaryOffset)
 Dwell 100
-TRIG7HIGH
+gTRIG7HIGH
 
 
 Close

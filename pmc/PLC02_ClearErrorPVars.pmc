@@ -1,0 +1,10 @@
+#include "PVariables.pmc"
+
+Open PLC 2 Clear
+
+P_RotaryNotHomed = 0
+P_RotaryWrongTriggerState = 0
+
+
+Disable PLC 2
+Close
