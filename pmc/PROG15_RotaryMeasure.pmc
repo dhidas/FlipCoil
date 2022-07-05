@@ -46,7 +46,7 @@ Q_RotaryDOver   = P_RotaryTOver * P_DegPerSecond
 Q_RotaryDelta   = ABS((P_RotaryRF - P_RotaryR0) / (P_RotaryNTriggers - 1))
 Q_RotaryNOver   = INT(Q_RotaryDOver / Q_RotaryDelta)
 
-if (ABS(P_RotaryTOver * speed - Q_RotaryDelta * Q_RotaryNOver)) < Q_RotaryTrigWidth / 10)
+if (ABS(P_RotaryTOver * P_DegPerSecond - Q_RotaryDelta * Q_RotaryNOver)) < Q_RotaryTrigWidth / 10)
   Q_RotaryDOver = Q_RotaryDOver + Q_RotaryTrigWidth / 5
   Q410 = Q_RotaryTrigWidth / 5
 endif
@@ -75,8 +75,8 @@ endif
 
 ; Move to starting position
 A(Q_RotaryStart) B(P_RotaryOffset)
-F(P_DegPerSecond)
 Dwell 10
+F(P_DegPerSecond)
 
 ; First trigger must be at:
 M_PosComp7Inc = Q_RotaryDelta / P_DegPerStep
