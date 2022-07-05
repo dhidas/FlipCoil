@@ -1,5 +1,6 @@
 #include "PVariables.pmc"
 #include "MVariables.pmc"
+#include "Constants.pmc"
 
 
 ; Used internally
@@ -13,6 +14,7 @@
 #define Q_RotaryFirst       Q407 ; Position of first actual trigger
 #define Q_RotaryBehind      Q408 ; Position of trigger up edge behind starting point
 
+Q410 = 0
 
 Open PROG 15 Clear
 
@@ -43,6 +45,14 @@ endif
 Q_RotaryDOver   = P_RotaryTOver * P_DegPerSecond
 Q_RotaryDelta   = ABS((P_RotaryRF - P_RotaryR0) / (P_RotaryNTriggers - 1))
 Q_RotaryNOver   = INT(Q_RotaryDOver / Q_RotaryDelta)
+
+if (ABS(P_RotaryTOver * speed - Q_RotaryDelta * Q_RotaryNOver)) < Q_RotaryTrigWidth / 10)
+  Q_RotaryDOver = Q_RotaryDOver + Q_RotaryTrigWidth / 5
+  Q410 = Q_RotaryTrigWidth / 5
+endif
+Q_RotaryDelta   = ABS((P_RotaryRF - P_RotaryR0) / (P_RotaryNTriggers - 1))
+Q_RotaryNOver   = INT(Q_RotaryDOver / Q_RotaryDelta)
+
 Q_RotaryFirst   = P_RotaryR0 - Q_RotaryDirection * Q_RotaryNOver * Q_RotaryDelta
 Q_RotaryBehind  = Q_RotaryFirst + Q_RotaryDirection * (Q_RotaryTrigWidth - Q_RotaryDelta)
 P_RotaryNTotalTriggers = P_RotaryNTriggers + 2 * Q_RotaryNOver
