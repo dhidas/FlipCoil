@@ -26,7 +26,6 @@ TS(P_RotaryTOver / 2)
 FRAX(A)
 F(kROTARYQUICKSPEED)
 
-Q_RotaryTrigWidth = 0.2 / P_DegPerSecond
 
 ; Get the trigger compare out of the way
 M_PosComp7Inc = 0
@@ -45,6 +44,7 @@ endif
 Q_RotaryDOver   = P_RotaryTOver * P_DegPerSecond
 Q_RotaryDelta   = ABS((P_RotaryRF - P_RotaryR0) / (P_RotaryNTriggers - 1))
 Q_RotaryNOver   = INT(Q_RotaryDOver / Q_RotaryDelta)
+Q_RotaryTrigWidth = Q_RotaryDelta / 2
 
 if (ABS(P_RotaryTOver * P_DegPerSecond - Q_RotaryDelta * Q_RotaryNOver) < Q_RotaryTrigWidth / 10)
   Q_RotaryDOver = Q_RotaryDOver + Q_RotaryTrigWidth / 5
