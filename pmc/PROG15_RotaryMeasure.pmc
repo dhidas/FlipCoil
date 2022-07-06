@@ -15,7 +15,7 @@
 #define Q_RotaryBehind      Q408 ; Position of trigger up edge behind starting point
 
 #define Q_DUpdated          Q499 ; Just to test the DOver updated value
-Q410 = 0
+Q_DUpdated = 0
 
 Open PROG 15 Clear
 
@@ -47,11 +47,11 @@ Q_RotaryDelta   = ABS((P_RotaryRF - P_RotaryR0) / (P_RotaryNTriggers - 1))
 Q_RotaryNOver   = INT(Q_RotaryDOver / Q_RotaryDelta)
 Q_RotaryTrigWidth = Q_RotaryDelta / 2
 
+Q498 = P_RotaryTOver * P_DegPerSecond - Q_RotaryDelta * Q_RotaryNOver
 if (ABS(P_RotaryTOver * P_DegPerSecond - Q_RotaryDelta * Q_RotaryNOver) < Q_RotaryTrigWidth / 10)
   Q_RotaryDOver = Q_RotaryDOver + Q_RotaryTrigWidth / 5
   Q_DUpdated = Q_RotaryTrigWidth / 5
 endif
-Q_RotaryDelta   = ABS((P_RotaryRF - P_RotaryR0) / (P_RotaryNTriggers - 1))
 Q_RotaryNOver   = INT(Q_RotaryDOver / Q_RotaryDelta)
 
 Q_RotaryFirst   = P_RotaryR0 - Q_RotaryDirection * Q_RotaryNOver * Q_RotaryDelta

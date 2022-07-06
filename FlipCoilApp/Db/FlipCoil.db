@@ -221,7 +221,7 @@ record(ao, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-SP") {
   field(VAL,  "1")
   field(DRVH, "10")
   field(DRVL, "0.5")
-  field(PREC, "2")
+  field(PREC, "9")
   field(OUT, "@pmac.proto setVar(P814) $(PORT)")
   field(FLNK, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-RB")
   field(PINI, "YES")
@@ -232,7 +232,7 @@ record(ai, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-RB") {
   field(DTYP, "stream")
   field(DESC, "Acceleration time")
   field(SCAN, "Passive")
-  field(PREC, "2")
+  field(PREC, "9")
   field(INP, "@pmac.proto getVar(P814) $(PORT)")
 }
 record(calc, "$(SYS){$(DEV)-Ax:R}TriggerRate") {
@@ -254,13 +254,25 @@ record(calc, "$(SYS){$(DEV)-Ax:R}TriggerSpacing") {
   field(INPC, "$(SYS){$(DEV)-Ax:R}ScanNTriggers-RB CP")
   field(CALC, "ABS((B - A)) / (C - 1)")
 }
-record(calc, "$(SYS){$(DEV)-Ax:R}TriggerNExtra") {
+record(calc, "$(SYS){$(DEV)-Ax:R}TriggerNExtra2") {
   field(SCAN, "Passive")
   field(INPA, "$(SYS){$(DEV)-Ax:R}-Velo-RB CP")
   field(INPB, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-RB CP")
   field(INPC, "$(SYS){$(DEV)-Ax:R}TriggerSpacing CP")
   field(CALC, "(A * B / C) & (A * B / C)")
 }
+record(calc, "$(SYS){$(DEV)-Ax:R}TriggerNExtra") {
+  field(SCAN, "Passive")
+  field(INPA, "$(SYS){$(DEV)-Ax:R}-Velo-RB CP")
+  field(INPB, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-RB CP")
+  field(INPC, "$(SYS){$(DEV)-Ax:R}TriggerSpacing CP")
+  field(CALC,"ABS(B*A-C*FLOOR(B*A/C)) < C/20 ? FLOOR(ABS(A*B/C+1/10)) : FLOOR(ABS(A*B/C))")
+#field(CALC,"ABS(B*A-(A*B/C))<(C/20) ? FLOOR(ABS(A*(B+C/10)/C)) : FLOOR(ABS(A*B/C))")
+#field(CALC,"ABS(B*A-(A*B/C)&(A*B/C)*C)<(C/20)?(A*(B+C/10)/C)&(A*(B+C/10)/C):(A*B/C)&(A*B/C)")
+}
+
+#ABS(B * A - (A * B / C) & (A * B / C) * C) < (C / 20) ? (A * (B+C/10) / C) & (A * (B+C/10) / C) : (A * B / C) & (A * B / C)
+
 
 record(bi, "$(SYS){$(DEV)-Ax:X+}Homed") {
   field(DTYP, "stream")
