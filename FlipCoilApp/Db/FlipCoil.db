@@ -261,6 +261,13 @@ record(calc, "$(SYS){$(DEV)-Ax:R}TriggerNExtra") {
   field(INPC, "$(SYS){$(DEV)-Ax:R}TriggerSpacing CP")
   field(CALC,"ABS(B*A-C*FLOOR(B*A/C)) < C/20 ? FLOOR(ABS(A*B/C+1/10)) : FLOOR(ABS(A*B/C))")
 }
+record(calc, "$(SYS){$(DEV)-Ax:R}TriggerNTotal") {
+  field(SCAN, "Passive")
+  field(INPA, "$(SYS){$(DEV)-Ax:R}ScanNTriggers-RB CP")
+  field(INPB, "$(SYS){$(DEV)-Ax:R}TriggerNExtra CP")
+  field(PINI, "YES")
+  field(CALC,"A+2*B")
+}
 
 
 record(bi, "$(SYS){$(DEV)-Ax:X+}Homed") {
