@@ -1,8 +1,151 @@
+record(ai, "$(SYS){$(DEV)-Keithley}Aperture") {
+  field(EGU,  "s")
+  field(DESC, "Keithley acquire aperture")
+  field(VAL,  "0.0063")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(stringin, "$(SYS){$(DEV)-Keithley}ApertureString") {
+  field(DESC, "Keithley acquire aperture string")
+}
+record(scalcout, "$(SYS){$(DEV)-Keithley}ApertureCalc") {
+  field(EGU,  "s")
+  field(DESC, "Keithley acquire aperture string")
+  field(INPA, "$(SYS){$(DEV)-Keithley}Aperture P")
+  field(CALC, "printf(':SENS:VOLT:APER %f',A)")
+  field(OUT,  "$(SYS){$(DEV)-Keithley}ApertureString")
+}
 
-record (waveform, "$(SYS){$(DEV)-Keithley}Fields-RB") {
+record(waveform, "$(SYS){$(DEV)-Keithley}ScanData-RB") {
+  field (SCAN, "Passive")
+  field (DTYP, "stream")
+  field (INP, "@keithley.proto get_tracedata $(PORT)")
+  field (FTVL, "FLOAT")
+  field (NELM, "1024")
+}
+record(waveform, "$(SYS){$(DEV)-Keithley}Fields-RB") {
   field (SCAN, "Passive")
   field (DTYP, "stream")
   field (INP, "@keithley.proto get_fields $(PORT)")
   field (FTVL, "FLOAT")
   field (NELM, "1024")
+}
+
+
+record(stringout, "$(SYS){$(DEV)-Keithley}Command") {
+  field(DTYP, "stream")
+  field(OUT, "@keithley.proto sendtxt $(PORT)")
+}
+
+record(sseq, "$(SYS){$(DEV)-Keithley}SetupKeithley") {
+  field(DO1, "1")
+  field(DO2, "1")
+  field(DO3, "1")
+  field(LNK1, "$(SYS){$(DEV)-Keithley}SetupKeithleyA.PROC")
+  field(LNK2, "$(SYS){$(DEV)-Keithley}SetupKeithleyB.PROC")
+  field(LNK3, "$(SYS){$(DEV)-Keithley}SetupKeithleyC.PROC")
+}
+
+record(sseq, "$(SYS){$(DEV)-Keithley}SetupKeithleyA") {
+  field(STR1, "*RST")
+  field(STR2, ":SENS:FUNC 'VOLT'")
+  field(STR3, ":SENS:VOLT:DIG 8")
+  field(STR4, ":SENS:CHAN 1")
+  field(STR5, ":SENS:VOLT:DC:RATIO OFF")
+  field(STR6, ":SENS:VOLT:DC:DELTA OFF")
+  field(STR7, ":SYST:AZER:STAT ON")
+  field(STR8, ":SYST:FAZ:STAT ON")
+  field(STR9, ":SENS:VOLT:CHAN1:RANG 1")
+  field(LNK1, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK2, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK3, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK4, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK5, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK6, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK7, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK8, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK9, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(DLY1, "0.05")
+  field(DLY2, "0.05")
+  field(DLY3, "0.05")
+  field(DLY4, "0.05")
+  field(DLY5, "0.05")
+  field(DLY6, "0.05")
+  field(DLY7, "0.05")
+  field(DLY8, "0.05")
+  field(DLY9, "0.05")
+}
+record(sseq, "$(SYS){$(DEV)-Keithley}SetupKeithleyB") {
+  field(STR1, ":SENS:VOLT:LPAS OFF")
+  field(STR2, ":SENS:VOLT:DFIL OFF")
+  field(STR3, "$(SYS){$(DEV)-Keithley}ApertureString")
+  field(STR4, ":TRAC:CLE")
+  field(STR5, ":TRAC:POINTS 1024")
+  field(STR6, ":TRAC:FEED SENS")
+  field(STR7, ":TRAC:FEED:CONT NEXT")
+  field(STR8, ":ABORT")
+  field(STR9, ":TRIG:SOURCE EXTERNAL")
+  field(LNK1, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK2, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK3, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK4, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK5, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK6, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK7, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK8, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK9, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(DLY1, "0.05")
+  field(DLY2, "0.05")
+  field(DLY3, "0.05")
+  field(DLY4, "0.05")
+  field(DLY5, "0.05")
+  field(DLY6, "0.05")
+  field(DLY7, "0.05")
+  field(DLY8, "0.05")
+  field(DLY9, "0.05")
+}
+record(sseq, "$(SYS){$(DEV)-Keithley}SetupKeithleyC") {
+  field(STR1, ":TRIG:DEL:AUTO OFF")
+  field(STR2, ":TRIG:DEL 0")
+  field(STR3, ":SAMPLE:COUNT 1")
+  field(STR4, ":TRIGGER:COUNT 1024")
+  field(STR5, ":INIT:IMM")
+  field(STR6, "")
+  field(STR7, "")
+  field(STR8, "")
+  field(STR9, "")
+  field(LNK1, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK2, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK3, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK4, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK5, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK6, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK7, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK8, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK9, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(DLY1, "0.05")
+  field(DLY2, "0.05")
+  field(DLY3, "0.05")
+  field(DLY4, "0.05")
+  field(DLY5, "0.05")
+  field(DLY6, "0.05")
+  field(DLY7, "0.05")
+  field(DLY8, "0.05")
+  field(DLY9, "0.05")
+}
+
+record(sseq, "$(SYS){$(DEV)-Keithley}OffOn") {
+  field(STR1, ":DISP:ENAB OFF")
+  field(STR2, ":DISP:ENAB ON")
+  field(STR3, ":DISP:ENAB OFF")
+  field(STR4, ":DISP:ENAB ON")
+  field(LNK1, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK2, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK3, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(LNK4, "$(SYS){$(DEV)-Keithley}Command PP")
+  field(DLY1, "1")
+  field(DLY2, "1")
+  field(DLY3, "1")
+  field(DLY4, "1")
 }
