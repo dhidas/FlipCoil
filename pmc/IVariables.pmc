@@ -79,7 +79,7 @@ I115,8,100 = 100    ; Motor xx Abort/Limit Deceleration Rate
 I116,8,100 = 10     ; Motor xx Maximum Program Velocity
 I117,8,100 = 10     ; Motor xx Maximum Program Acceleration
 I119,8,100 = 1      ; Motor xx Maximum Jog/Home Acceleration
-I122,8,100 = 10      ; Motor xx Jog Speed
+I122,8,100 = 10     ; Motor xx Jog Speed
 I123,8,100 = 1      ; Motor xx Home Speed and Direction
 I126,8,100 = 0      ; Motor xx Home Offset
 

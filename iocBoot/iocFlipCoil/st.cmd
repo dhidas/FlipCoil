@@ -35,6 +35,10 @@ pmacCreateAxis("PMAC1", 4)
 pmacCreateAxis("PMAC1", 7)
 pmacCreateAxis("PMAC1", 8)
 
+# pmacDisableLimitsCheck(int card, int axis, int allAxes)
+pmacDisableLimitsCheck(0, 1, 1)
+
+
 # Create CS (ControllerPort, Addr, CSNumber, CSRef, Prog)
 # Rotary: Coordinate System 5 | PROG 5
 pmacAsynCoordCreate("P0", 0, 3, 0, 3) # X
@@ -49,10 +53,10 @@ drvAsynMotorConfigure("PMAC1CS5", "pmacAsynCoord", 2, 2)
 # Set scale factor (CSRef, axis, stepsPerUnit)
 pmacSetCoordStepsPerUnit(0, 0, 1000)
 pmacSetCoordStepsPerUnit(0, 1, 1000)
-pmacSetCoordStepsPerUnit(1, 2, 1)
-pmacSetCoordStepsPerUnit(1, 3, 1)
-pmacSetCoordStepsPerUnit(2, 6, 1)
-pmacSetCoordStepsPerUnit(2, 7, 1)
+pmacSetCoordStepsPerUnit(1, 0, 1000)
+pmacSetCoordStepsPerUnit(1, 1, 1000)
+pmacSetCoordStepsPerUnit(2, 0, 1)
+pmacSetCoordStepsPerUnit(2, 1, 1)
 
 # Set Idle and Moving poll periods (CSRef, PeriodsMilliSeconds)
 pmacSetCoordIdlePollPeriod(0, 500)

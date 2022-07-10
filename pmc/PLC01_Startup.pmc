@@ -6,6 +6,7 @@ Disable PLCC 0..31
 
 ; Use kinematics for X, Y, and rotary motors
 &3 #1->I #2->I
+&4 #3->I #4->I
 &5 #7->I #8->I
 
 P_DegPerSecond  = kDegPerSecondDefault

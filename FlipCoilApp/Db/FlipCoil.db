@@ -26,8 +26,34 @@ record(motor, "$(SYS){$(DEV)-Ax:Xo}-Mtr") {
   field(LLM, "-10")
   field(DHLM, "10")
   field(DLLM, "-10")
-  #field(VELO, "100")
-  #field(ACCL, "100000")
+  field(PREC, "3")
+}
+record(motor, "$(SYS){$(DEV)-Ax:Y}-Mtr") {
+  field(DTYP, "asynMotor")
+  field(OUT, "@asyn(PMAC1CS4,0)")
+  field(EGU, "mm")
+  field(DESC, "Y axis")
+  field(MRES, "0.001")
+  field(RTRY, "0")
+  field(NTM, "NO")
+  field(HLM, "5")
+  field(LLM, "-5")
+  field(DHLM, "5")
+  field(DLLM, "-5")
+  field(PREC, "3")
+}
+record(motor, "$(SYS){$(DEV)-Ax:Yo}-Mtr") {
+  field(DTYP, "asynMotor")
+  field(OUT, "@asyn(PMAC1CS4,1)")
+  field(EGU, "mm")
+  field(DESC, "Y pitch")
+  field(MRES, "0.001")
+  field(RTRY, "0")
+  field(NTM, "NO")
+  field(HLM, "4")
+  field(LLM, "-4")
+  field(DHLM, "4")
+  field(DLLM, "-4")
   field(PREC, "3")
 }
 record(motor, "$(SYS){$(DEV)-Ax:R}-Mtr") {
@@ -108,49 +134,111 @@ record(ai, "$(SYS){$(DEV)-Ax:R}-MRESCS5-RB") {
   field(PREC, "5")
 }
 
+record(ao, "$(SYS){$(DEV)-Ax:X}-Velo") {
+  field(SCAN, "Passive")
+  field(VAL,  "2")
+  field(DRVH, "10")
+  field(DRVL, "0.001")
+  field(PREC, "3")
+  field(PINI, "YES")
+  field(OUT,  "$(SYS){$(DEV)-Ax:X}-Velo-FO PP")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(dfanout, "$(SYS){$(DEV)-Ax:X}-Velo-FO") {
+  field(SCAN, "Passive")
+  field(DESC, "Speed of X motors")
+  field(OUTA, "$(SYS){$(DEV)-Ax:X+}-Mtr.VELO NPP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:X-}-Mtr.VELO NPP")
+  field(OUTC, "$(SYS){$(DEV)-Ax:X}-Velo-SP PP")
+}
 record(ao, "$(SYS){$(DEV)-Ax:X}-Velo-SP") {
   field(DTYP, "stream")
   field(DESC, "X velocity")
   field(EGU, "mm/s")
-  field(VAL,  "2")
-  field(DRVH, "10")
-  field(DRVL, "0.001")
-  field(OUT, "@pmac.proto setVar(P802) $(PORT)")
-  field(FLNK, "$(SYS){$(DEV)-Ax:X}-Velo-RB")
-  field(PINI, "YES")
-  info(autosaveFields_pass0, "VAL")
-  info(autosaveFields, "VAL")
+  field(OUT,  "@pmac.proto setVar(P802) $(PORT)")
+  field(FLNK,  "$(SYS){$(DEV)-Ax:X}-Velo-RB")
 }
-
 record(ai, "$(SYS){$(DEV)-Ax:X}-Velo-RB") {
   field(DTYP, "stream")
   field(DESC, "X velocity")
   field(EGU, "mm/s")
   field(SCAN, "Passive")
   field(INP, "@pmac.proto getVar(P802) $(PORT)")
-  field(PREC, "2")
+  field(PREC, "3")
 }
-record(ao, "$(SYS){$(DEV)-Ax:R}-Velo-SP") {
-  field(DTYP, "stream")
-  field(DESC, "Degrees per second")
-  field(EGU, "deg/s")
-  field(VAL,  "10")
-  field(DRVH, "180")
-  field(DRVL, "0.1")
-  field(OUT, "@pmac.proto setVar(P800) $(PORT)")
-  field(FLNK, "$(SYS){$(DEV)-Ax:R}-Velo-RB")
+
+
+
+record(ao, "$(SYS){$(DEV)-Ax:Y}-Velo") {
+  field(SCAN, "Passive")
+  field(VAL,  "0.1")
+  field(DRVH, "1")
+  field(DRVL, "0.001")
+  field(PREC, "3")
   field(PINI, "YES")
+  field(OUT,  "$(SYS){$(DEV)-Ax:Y}-Velo-FO PP")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
+record(dfanout, "$(SYS){$(DEV)-Ax:Y}-Velo-FO") {
+  field(SCAN, "Passive")
+  field(DESC, "Speed of Y motors")
+  field(OUTA, "$(SYS){$(DEV)-Ax:Y+}-Mtr.VELO NPP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:Y-}-Mtr.VELO NPP")
+  field(OUTC, "$(SYS){$(DEV)-Ax:Y}-Velo-SP PP")
+}
+record(ao, "$(SYS){$(DEV)-Ax:Y}-Velo-SP") {
+  field(DTYP, "stream")
+  field(DESC, "Y velocity")
+  field(EGU, "mm/s")
+  field(OUT,  "@pmac.proto setVar(P803) $(PORT)")
+  field(FLNK,  "$(SYS){$(DEV)-Ax:Y}-Velo-RB")
+}
+record(ai, "$(SYS){$(DEV)-Ax:Y}-Velo-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Y velocity")
+  field(EGU, "mm/s")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P803) $(PORT)")
+  field(PREC, "3")
+}
+
+
+record(ao, "$(SYS){$(DEV)-Ax:R}-Velo") {
+  field(SCAN, "Passive")
+  field(VAL,  "10")
+  field(DRVH, "180")
+  field(DRVL, "0.001")
+  field(PREC, "2")
+  field(PINI, "YES")
+  field(OUT,  "$(SYS){$(DEV)-Ax:R}-Velo-FO PP")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(dfanout, "$(SYS){$(DEV)-Ax:R}-Velo-FO") {
+  field(SCAN, "Passive")
+  field(DESC, "Speed of R motors")
+  field(OUTA, "$(SYS){$(DEV)-Ax:R+}-Mtr.VELO NPP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:R-}-Mtr.VELO NPP")
+  field(OUTC, "$(SYS){$(DEV)-Ax:R}-Velo-SP PP")
+}
+record(ao, "$(SYS){$(DEV)-Ax:R}-Velo-SP") {
+  field(DTYP, "stream")
+  field(DESC, "R velocity")
+  field(EGU, "deg/s")
+  field(OUT,  "@pmac.proto setVar(P800) $(PORT)")
+  field(FLNK,  "$(SYS){$(DEV)-Ax:R}-Velo-RB")
+}
 record(ai, "$(SYS){$(DEV)-Ax:R}-Velo-RB") {
   field(DTYP, "stream")
-  field(DESC, "Degrees per second")
+  field(DESC, "R velocity")
   field(EGU, "deg/s")
   field(SCAN, "Passive")
   field(INP, "@pmac.proto getVar(P800) $(PORT)")
-  field(PREC, "2")
+  field(PREC, "3")
 }
+
 
 record(ao, "$(SYS){$(DEV)-Ax:R}ScanStart-SP") {
   field(DTYP, "stream")
