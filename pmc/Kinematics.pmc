@@ -1,17 +1,33 @@
 
 ; &3 refers to the X coordinate system
-; Q7 is the X position, and Q4 is the relative offset (yaw)
-; In normal running X = x position and U = 0 (no yaw)
-
+; A (Q1) is position, B (Q2) is yaw
+; In normal running A = x position and B = 0 (no yaw)
 &3 Open Forward Clear
-Q7 = (P1 + P2) / kEncCtsPerMM / 2
-Q4 = (P2 - P2) / kEncCtsPerMM
+Q1 = (P1 + P2) / kEncCtsPerMM / 2
+Q2 = (P1 - P2) / kEncCtsPerMM
 Close
 
 &3 Open Inverse Clear
-P1 = (Q7 + Q4 / 2) * kEncCtsPerMM
-P2 = (Q7 - Q4 / 2) * kEncCtsPerMM
+P1 = (Q1 + Q2 / 2) * kEncCtsPerMM
+P2 = (Q1 - Q2 / 2) * kEncCtsPerMM
 Close
+
+
+
+; &4 refers to the X coordinate system
+; A (Q1) is position, B (Q2) is pitch
+; In normal running A = y position and B = 0 (no yaw)
+&4 Open Forward Clear
+Q1 = (P3 + P4) / kEncCtsPerMM / 2
+Q2 = (P3 - P4) / kEncCtsPerMM
+Close
+
+&4 Open Inverse Clear
+P3 = (Q1 + Q2 / 2) * kEncCtsPerMM
+P4 = (Q1 - Q2 / 2) * kEncCtsPerMM
+Close
+
+
 
 ; &5 refers to the rotary coordinate system
 ; Q1 is the angle, and Q2 is the relative offset

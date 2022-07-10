@@ -7,8 +7,8 @@
 
 epicsEnvSet("ENGINEER", "Dean Andrew Hidas is not an engineer. <dhidas@bnl.gov>")
 epicsEnvSet("PMACUTIL", "/usr/share/epics-pmacutil-dev")
-#epicsEnvSet("PMAC1_IP", "192.6.94.121:1025") # Lab
-epicsEnvSet("PMAC1_IP", "10.0.161.26:1025") # Ring
+epicsEnvSet("PMAC1_IP", "192.6.94.121:1025") # Lab
+#epicsEnvSet("PMAC1_IP", "10.0.161.26:1025") # Ring
 epicsEnvSet("sys", "MMF")
 epicsEnvSet("dev", "FC:2")
 epicsEnvSet("STREAM_PROTOCOL_PATH", "/usr/lib/epics/protocol:$(TOP)/proto")
@@ -67,6 +67,8 @@ dbLoadRecords("../../db/FlipCoil.db","SYS=$(sys),DEV=$(dev),,PORT=P0")
 
 dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:X+}-Mtr,MOTOR=PMAC1,ADDR=1,DESC=X Mtr at +z, MRES=0.001, PREC=3")
 dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:X-}-Mtr,MOTOR=PMAC1,ADDR=2,DESC=X Mtr at -z, MRES=0.001, PREC=3")
+dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:Y+}-Mtr,MOTOR=PMAC1,ADDR=3,DESC=Y Mtr at +z, MRES=0.001, PREC=3")
+dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:Y-}-Mtr,MOTOR=PMAC1,ADDR=4,DESC=Y Mtr at -z, MRES=0.001, PREC=3")
 dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:R+}-Mtr,MOTOR=PMAC1,ADDR=7,DESC=Rotary Mtr at +z, MRES=0.002, PREC=3")
 dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:R-}-Mtr,MOTOR=PMAC1,ADDR=8,DESC=Rotary Mtr at -z, MRES=0.002, PREC=3")
 dbLoadRecords("../../db/asynRecord.db","P=$(sys),R={$(dev)}Asyn,ADDR=1,PORT=P0,IMAX=128,OMAX=128")

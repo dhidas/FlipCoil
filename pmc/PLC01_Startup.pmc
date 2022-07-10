@@ -29,6 +29,7 @@ M_PosComp7B = 100 * 360 / P_DegPerStep
 gTRIG7HIGH
 
 Enable PLC 19
+Enable PLC 20
 Enable PLC 21
 Disable PLC 1
 Close

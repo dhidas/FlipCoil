@@ -1,0 +1,18 @@
+; PLC for position reporting in the rotary coordinate system
+
+#define YPOS    Q81
+#define YPITCH  Q82
+
+#define Q_Fwd_Mtr3Tmp_PR Q330
+#define Q_Fwd_Mtr4Tmp_PR Q331
+
+Open PLC 20 Clear
+
+  ADDRESS&4
+  Q_Fwd_Mtr3Tmp_PR = (M362/(I308*32)) / kEncCtsPerMM
+  Q_Fwd_Mtr4Tmp_PR = (M462/(I408*32)) / kEncCtsPerMM
+
+  YPOS    = (Q_Fwd_Mtr3Tmp_PR + Q_Fwd_Mtr4Tmp_PR) / 2
+  YPITCH  = (Q_Fwd_Mtr3Tmp_PR - Q_Fwd_Mtr4Tmp_PR)
+
+Close
