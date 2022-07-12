@@ -67,6 +67,16 @@ I604 = $350E
 I704 = $350F
 I804 = $3510
 
+; Motor following.  Each motor will follow the paired one if Ixx6 is turned on
+I106,8,100=0  ; Turn off all motor following
+I105=I203
+I205=I103
+I305=I403
+I405=I303
+I705=I803
+I805=I703
+
+
 ; PID gains (for PFM only, empirically determined)
 I130,8,100 = 11190
 I131,8,100 = 0

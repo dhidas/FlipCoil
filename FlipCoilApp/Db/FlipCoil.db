@@ -381,7 +381,7 @@ record(ao, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-SP") {
   field(VAL,  "1")
   field(DRVH, "10")
   field(DRVL, "0.5")
-  field(PREC, "9")
+  field(PREC, "3")
   field(OUT, "@pmac.proto setVar(P814) $(PORT)")
   field(FLNK, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-RB")
   field(PINI, "YES")
@@ -392,7 +392,7 @@ record(ai, "$(SYS){$(DEV)-Ax:R}ScanAccelTime-RB") {
   field(DTYP, "stream")
   field(DESC, "Acceleration time")
   field(SCAN, "Passive")
-  field(PREC, "9")
+  field(PREC, "3")
   field(INP, "@pmac.proto getVar(P814) $(PORT)")
 }
 record(calc, "$(SYS){$(DEV)-Ax:R}TriggerRate") {
@@ -604,7 +604,18 @@ record(ai, "$(SYS){$(DEV)}P100-RB") {
   field(PREC, "2")
 }
 
+record(ai, "$(SYS){$(DEV)}CoilWidth") {
+  field(DESC, "Width of coil")
+  field(EGU, "mm")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
 
+record(ai, "$(SYS){$(DEV)}CoilNTurns") {
+  field(DESC, "Width of coil")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
 
 record (waveform, "$(SYS){$(DEV)}WF-RB") {
   field(SCAN, "1 second")
@@ -612,4 +623,87 @@ record (waveform, "$(SYS){$(DEV)}WF-RB") {
   field(INP, "@pmacvector.proto get_vector(P620..639) $(PORT)")
   field(FTVL, "FLOAT")
   field(NELM, "20")
+  field(PINI, "YES")
 }
+
+record(stringin, "$(SYS){$(DEV)}RScanComments") {
+  field(SCAN, "Passive")
+  field(DESC, "Comment to include in data file")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(stringin, "$(SYS){$(DEV)}ROutDir") {
+  field(SCAN, "Passive")
+  field(DESC, "Directory to store data")
+  field(FLNK, "$(SYS){$(DEV)}RFilePath-CALC")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+
+record(stringin, "$(SYS){$(DEV)}RFileName") {
+  field(SCAN, "Passive")
+  field(DESC, "Filename for scan data")
+  field(PINI, "YES")
+  field(FLNK, "$(SYS){$(DEV)}RFilePath-CALC")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(scalcout, "$(SYS){$(DEV)}RFilePath-CALC") {
+  field(SCAN, "Passive")
+  field(INAA, "$(SYS){$(DEV)}ROutDir")
+  field(INBB, "$(SYS){$(DEV)}RFileName")
+  field(CALC, "AA+'/'+BB")
+  field(OUT,  "$(SYS){$(DEV)}RFilePath PP")
+}
+record(stringin, "$(SYS){$(DEV)}RFilePath") {
+  field(SCAN, "Passive")
+  field(DESC, "Full path of output file")
+}
+
+record(aSub, "$(SYS){$(DEV)}RScanSave") {
+    field(SNAM, "rscansave")
+
+    field(INPA, "$(SYS){$(DEV)}RFilePath")
+    field(FTA,  "STRING")
+
+    field(INPB, "$(SYS){$(DEV)}WF-RB")
+    field(FTB,  "DOUBLE")
+
+    field(INPC, "$(SYS){$(DEV)-Ax:R}ScanStart-RB")
+    field(FTC,  "DOUBLE")
+
+    field(INPD, "$(SYS){$(DEV)-Ax:R}ScanStop-RB")
+    field(FTD,  "DOUBLE")
+
+    field(INPE, "$(SYS){$(DEV)-Ax:R}ScanNTriggers-RB")
+    field(FTE,  "LONG")
+
+    field(INPF, "$(SYS){$(DEV)-Ax:R}TriggerNExtra")
+    field(FTF,  "LONG")
+
+    field(INPG, "$(SYS){$(DEV)-Ax:R}-Velo-RB")
+    field(FTG,  "DOUBLE")
+
+    field(INPH, "$(SYS){$(DEV)-Ax:X}-Mtr.RBV")
+    field(FTH,  "DOUBLE")
+
+    field(INPI, "$(SYS){$(DEV)-Ax:Xo}-Mtr.RBV")
+    field(FTI,  "DOUBLE")
+
+    field(INPJ, "$(SYS){$(DEV)-Ax:Y}-Mtr.RBV")
+    field(FTJ,  "DOUBLE")
+
+    field(INPK, "$(SYS){$(DEV)-Ax:Yo}-Mtr.RBV")
+    field(FTK,  "DOUBLE")
+
+    field(INPL, "$(SYS){$(DEV)}CoilWidth")
+    field(FTL,  "DOUBLE")
+
+    field(INPM, "$(SYS){$(DEV)}CoilNTurns")
+    field(FTM,  "LONG")
+
+    field(INPU, "$(SYS){$(DEV)}RScanComments")
+    field(FTU,  "STRING")
+}
+

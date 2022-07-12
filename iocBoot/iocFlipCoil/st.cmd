@@ -14,6 +14,8 @@ epicsEnvSet("dev", "FC:2")
 epicsEnvSet("STREAM_PROTOCOL_PATH", "/usr/lib/epics/protocol:$(TOP)/proto")
 epicsEnvSet("LOCATION",$(HOSTNAME))
 
+#epicsEnvSet('EPICS_CA_AUTO_ADDR_LIST', 'NO')
+#epicsEnvSet('EPICS_CA_ADDR_LIST', '192.168.122.255')
 
 
 ## Register all support components
@@ -21,7 +23,7 @@ dbLoadDatabase("../../dbd/FlipCoil.dbd",0,0)
 FlipCoil_registerRecordDeviceDriver(pdbbase) 
 
 # Configure keithley
-#drvAsynIPPortConfigure ("KEITHLEY1", "192.6.94.120:4001")
+drvAsynIPPortConfigure ("KEITHLEY1", "192.6.94.120:4001")
 
 
 pmacAsynIPConfigure("P0", $(PMAC1_IP))
@@ -76,7 +78,7 @@ dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:Y-}-Mtr,MOTOR=PMAC1,ADD
 dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:R+}-Mtr,MOTOR=PMAC1,ADDR=7,DESC=Rotary Mtr at +z, MRES=0.002, PREC=3")
 dbLoadRecords("../../db/motor.db","P=$(sys),M={$(dev)-Ax:R-}-Mtr,MOTOR=PMAC1,ADDR=8,DESC=Rotary Mtr at -z, MRES=0.002, PREC=3")
 dbLoadRecords("../../db/asynRecord.db","P=$(sys),R={$(dev)}Asyn,ADDR=1,PORT=P0,IMAX=128,OMAX=128")
-#dbLoadRecords("../../db/Keithley2182A.db","SYS=$(sys),DEV=$(dev),PORT=KEITHLEY1")
+dbLoadRecords("../../db/Keithley2182A.db","SYS=$(sys),DEV=$(dev),PORT=KEITHLEY1")
 
 cd ../../
 set_savefile_path("as","/save")
