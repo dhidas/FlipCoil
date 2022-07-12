@@ -12,6 +12,9 @@ Disable PLCC 0..31
 P_DegPerSecond  = kDegPerSecondDefault
 P_DegPerStep    = kDegPerStepDefault
 P_MMPerSecondX  = kMMPerSecondDefault
+P_MMPerStepX = kMMPerStepDefault
+P_MMPerStepY = kMMPerStepDefault
+
 
 ; Defaults for PLC15
 P_RotaryNTriggers   = 21

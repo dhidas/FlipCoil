@@ -92,8 +92,82 @@ record(motor, "$(SYS){$(DEV)-Ax:Ro}-Mtr") {
 
 
 
-record(ai, "$(SYS){$(DEV)-Ax:R}-CtsPerRev-SP") {
-  field(DESC, "Cts per Rev")
+record(ai, "$(SYS){$(DEV)-Ax:X}-StepsPerUnit-SP") {
+  field(DESC, "Steps per mm")
+  field(EGU,  "step/mm")
+  field(VAL,  "1000")
+  field(FLNK, "$(SYS){$(DEV)-Ax:X}-MRES-Calc")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(calcout, "$(SYS){$(DEV)-Ax:X}-MRES-Calc") {
+  field(INPA, "$(SYS){$(DEV)-Ax:X}-StepsPerUnit-SP")
+  field(CALC, "1 / A")
+  field(OUT,  "$(SYS){$(DEV)-Ax:X}-MRES PP")
+}
+record(dfanout, "$(SYS){$(DEV)-Ax:X}-MRES") {
+  field(DESC, "MRES resolution X motors")
+  field(SELM, "All")
+  field(OUTA, "$(SYS){$(DEV)-Ax:X+}-Mtr.MRES NPP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:X-}-Mtr.MRES NPP")
+  field(OUTC, "$(SYS){$(DEV)-Ax:X}-MRES-SP PP")
+}
+record(ao, "$(SYS){$(DEV)-Ax:X}-MRES-SP") {
+  field(DTYP, "stream")
+  field(DESC, "mm per step in X")
+  field(EGU, "mm")
+  field(OUT, "@pmac.proto setVar(P804) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:X}-MRES-RB")
+}
+record(ai, "$(SYS){$(DEV)-Ax:X}-MRES-RB") {
+  field(DTYP, "stream")
+  field(DESC, "mm/step")
+  field(EGU, "mm/step")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P804) $(PORT)")
+  field(PREC, "5")
+}
+
+record(ai, "$(SYS){$(DEV)-Ax:Y}-StepsPerUnit-SP") {
+  field(DESC, "Steps per mm")
+  field(EGU,  "step/mm")
+  field(VAL,  "1000")
+  field(FLNK, "$(SYS){$(DEV)-Ax:Y}-MRES-Calc")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(calcout, "$(SYS){$(DEV)-Ax:Y}-MRES-Calc") {
+  field(INPA, "$(SYS){$(DEV)-Ax:Y}-StepsPerUnit-SP")
+  field(CALC, "1 / A")
+  field(OUT,  "$(SYS){$(DEV)-Ax:Y}-MRES PP")
+}
+record(dfanout, "$(SYS){$(DEV)-Ax:Y}-MRES") {
+  field(DESC, "MRES resolution Y motors")
+  field(SELM, "All")
+  field(OUTA, "$(SYS){$(DEV)-Ax:Y+}-Mtr.MRES NPP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:Y-}-Mtr.MRES NPP")
+  field(OUTC, "$(SYS){$(DEV)-Ax:Y}-MRES-SP PP")
+}
+record(ao, "$(SYS){$(DEV)-Ax:Y}-MRES-SP") {
+  field(DTYP, "stream")
+  field(DESC, "mm per step in Y")
+  field(EGU, "mm")
+  field(OUT, "@pmac.proto setVar(P805) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:Y}-MRES-RB")
+}
+record(ai, "$(SYS){$(DEV)-Ax:Y}-MRES-RB") {
+  field(DTYP, "stream")
+  field(DESC, "mm/step")
+  field(EGU, "mm/step")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P805) $(PORT)")
+  field(PREC, "5")
+}
+
+record(ai, "$(SYS){$(DEV)-Ax:R}-StepsPerUnit-SP") {
+  field(DESC, "Steps per Rev")
   field(EGU, "cts")
   field(VAL,  "180000")
   field(FLNK, "$(SYS){$(DEV)-Ax:R}-MRES-Calc")
@@ -102,7 +176,7 @@ record(ai, "$(SYS){$(DEV)-Ax:R}-CtsPerRev-SP") {
   info(autosaveFields, "VAL")
 }
 record(calcout, "$(SYS){$(DEV)-Ax:R}-MRES-Calc") {
-  field(INPA, "$(SYS){$(DEV)-Ax:R}-CtsPerRev-SP")
+  field(INPA, "$(SYS){$(DEV)-Ax:R}-StepsPerUnit-SP")
   field(CALC, "360 / A")
   field(OUT,  "$(SYS){$(DEV)-Ax:R}-MRES PP")
 }
@@ -111,24 +185,22 @@ record(dfanout, "$(SYS){$(DEV)-Ax:R}-MRES") {
   field(SELM, "All")
   field(OUTA, "$(SYS){$(DEV)-Ax:R+}-Mtr.MRES NPP")
   field(OUTB, "$(SYS){$(DEV)-Ax:R-}-Mtr.MRES NPP")
-  field(OUTC, "$(SYS){$(DEV)-Ax:R}-MRESCS5-SP PP")
+  field(OUTC, "$(SYS){$(DEV)-Ax:R}-MRES-SP PP")
   field(VAL,  "0.002")
   field(PREC, "5")
   field(PINI, "YES")
 }
-
-record(ao, "$(SYS){$(DEV)-Ax:R}-MRESCS5-SP") {
+record(ao, "$(SYS){$(DEV)-Ax:R}-MRES-SP") {
   field(DTYP, "stream")
-  field(DESC, "Deg per step in CS5")
-  field(EGU, "Degree")
+  field(DESC, "Deg per step in R")
+  field(EGU, "Deg/stp")
   field(OUT, "@pmac.proto setVar(P801) $(PORT)")
-  field(FLNK, "$(SYS){$(DEV)-Ax:R}-MRESCS5-RB")
+  field(FLNK, "$(SYS){$(DEV)-Ax:R}-MRES-RB")
 }
-
-record(ai, "$(SYS){$(DEV)-Ax:R}-MRESCS5-RB") {
+record(ai, "$(SYS){$(DEV)-Ax:R}-MRES-RB") {
   field(DTYP, "stream")
   field(DESC, "deg/step")
-  field(EGU, "deg/step")
+  field(EGU, "deg/stp")
   field(SCAN, "Passive")
   field(INP, "@pmac.proto getVar(P801) $(PORT)")
   field(PREC, "5")

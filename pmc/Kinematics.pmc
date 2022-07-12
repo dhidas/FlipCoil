@@ -3,13 +3,13 @@
 ; A (Q1) is position, B (Q2) is yaw
 ; In normal running A = x position and B = 0 (no yaw)
 &3 Open Forward Clear
-Q1 = (P1 + P2) / kEncCtsPerMM / 2
-Q2 = (P1 - P2) / kEncCtsPerMM
+Q1 = (P1 + P2) * P_MMPerStepX / 2
+Q2 = (P1 - P2) * P_MMPerStepX
 Close
 
 &3 Open Inverse Clear
-P1 = (Q1 + Q2 / 2) * kEncCtsPerMM
-P2 = (Q1 - Q2 / 2) * kEncCtsPerMM
+P1 = (Q1 + Q2 / 2) / P_MMPerStepX
+P2 = (Q1 - Q2 / 2) / P_MMPerStepX
 Close
 
 
@@ -18,13 +18,13 @@ Close
 ; A (Q1) is position, B (Q2) is pitch
 ; In normal running A = y position and B = 0 (no yaw)
 &4 Open Forward Clear
-Q1 = (P3 + P4) / kEncCtsPerMM / 2
-Q2 = (P3 - P4) / kEncCtsPerMM
+Q1 = (P3 + P4) * P_MMPerStepY / 2
+Q2 = (P3 - P4) * P_MMPerStepY
 Close
 
 &4 Open Inverse Clear
-P3 = (Q1 + Q2 / 2) * kEncCtsPerMM
-P4 = (Q1 - Q2 / 2) * kEncCtsPerMM
+P3 = (Q1 + Q2 / 2) / P_MMPerStepY
+P4 = (Q1 - Q2 / 2) / P_MMPerStepY
 Close
 
 

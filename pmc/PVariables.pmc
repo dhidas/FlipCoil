@@ -4,9 +4,11 @@
 
 ; P8xx (PLC08 vars) used for IO
 #define P_DegPerSecond            P800 ; Move / Scan speed
-#define P_DegPerStep              P801 ; degree / step or encoder cts, etc, defined by hardware
+#define P_DegPerStep              P801 ; degree / step
 #define P_MMPerSecondX            P802 ; Move / Scan speed
 #define P_MMPerSecondY            P803 ; Move / Scan speed
+#define P_MMPerStepX              P804 ; mm / step
+#define P_MMPerStepY              P805 ; mm / step
                                   
 #define P_RotaryNTriggers         P810 ; Number of triggers
 #define P_RotaryR0                P811 ; First point in scan

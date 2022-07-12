@@ -12,12 +12,10 @@ PROD_IOC = FlipCoil
 # FlipCoil.dbd will be created and installed
 DBD += FlipCoil.dbd
 
-# FlipCoil.dbd will be made up from these files:
-FlipCoil_DBD += base.dbd
-
 # Include dbd files from all support applications:
 FlipCoil_DBD += base.dbd
 FlipCoil_DBD += asyn.dbd
+FlipCoil_DBD += write_waveform.dbd
 FlipCoil_DBD += motorSupport.dbd
 FlipCoil_DBD += drvAsynIPPort.dbd
 #FlipCoil_DBD += drvAsynSerialPort.dbd
@@ -49,6 +47,7 @@ FlipCoil_LIBS += reccaster
 
 # FlipCoil_registerRecordDeviceDriver.cpp derives from FlipCoil.dbd
 FlipCoil_SRCS += FlipCoil_registerRecordDeviceDriver.cpp
+FlipCoil_SRCS += write_waveform.cc
 
 # Build the main IOC entry point on workstation OSs.
 FlipCoil_SRCS_DEFAULT += FlipCoilMain.cpp
