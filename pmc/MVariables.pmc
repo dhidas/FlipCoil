@@ -1,6 +1,25 @@
 #ifndef __GUARD__MVariables_pmc
 #define __GUARD__MVariables_pmc
 
+
+#define M_DesiredVZero_M1 M133
+#define M_DesiredVZero_M2 M233
+#define M_DesiredVZero_M3 M333
+#define M_DesiredVZero_M4 M433
+#define M_DesiredVZero_M5 M533
+#define M_DesiredVZero_M6 M633
+#define M_DesiredVZero_M7 M733
+#define M_DesiredVZero_M8 M833
+
+#define M_BGInPosition_M1 M140
+#define M_BGInPosition_M2 M240
+#define M_BGInPosition_M3 M340
+#define M_BGInPosition_M4 M440
+#define M_BGInPosition_M5 M540
+#define M_BGInPosition_M6 M640
+#define M_BGInPosition_M7 M740
+#define M_BGInPosition_M8 M840
+
 #define M_HomeComplete_M1 M145
 #define M_HomeComplete_M2 M245
 #define M_HomeComplete_M3 M345

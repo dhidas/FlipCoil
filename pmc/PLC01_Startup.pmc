@@ -16,6 +16,12 @@ P_MMPerStepX = kMMPerStepDefault
 P_MMPerStepY = kMMPerStepDefault
 
 
+; PLC 9, 10, 11
+P_HomingX = 0
+P_HomingY = 0
+P_HomingR = 0
+
+
 ; Defaults for PLC15
 P_RotaryNTriggers   = 21
 P_RotaryR0          = -10

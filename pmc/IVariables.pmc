@@ -67,6 +67,12 @@ I604 = $350E
 I704 = $350F
 I804 = $3510
 
+; Home bit capture control (capture on high or low: I7mn2)
+#I7012,2,10 = 1  ; Motors 1 and 2 Capture (index or flag select)
+#I7032,2,10 = 1  ; Motors 3 and 4 Capture (index or flag select)
+#I7132,2,10 = 1  ; Motors 6 and 7 Capture (index or flag select)
+
+
 ; Motor following.  Each motor will follow the paired one if Ixx6 is turned on
 I106,8,100=0  ; Turn off all motor following
 I105=I203
@@ -89,6 +95,8 @@ I115,8,100 = 100    ; Motor xx Abort/Limit Deceleration Rate
 I116,8,100 = 10     ; Motor xx Maximum Program Velocity
 I117,8,100 = 10     ; Motor xx Maximum Program Acceleration
 I119,8,100 = 1      ; Motor xx Maximum Jog/Home Acceleration
+I120,8,100 = 0      ; Set to zero to use Ixx21 s-curve time
+I121,8,100 = 200    ; s-curve time in ms
 I122,8,100 = 10     ; Motor xx Jog Speed
 I123,8,100 = 1      ; Motor xx Home Speed and Direction
 I126,8,100 = 0      ; Motor xx Home Offset

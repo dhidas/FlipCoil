@@ -1,0 +1,61 @@
+#include "PVariables.pmc"
+#include "MVariables.pmc"
+
+#define I_Timer09 I5512
+
+#define WAIT200 I_Timer09 = 200 * kMilliSecond while (I_Timer09 > 0) endwhile
+
+; The homing procedure here is to home one motor at a time with the non-homing
+; motor following it.  First we send it to a limit, then we ask it to home
+; from there.
+
+Open PLC 9 Clear
+
+; if another homing is running ignore request to home this axis
+if (P_HomingY = 1 or P_HomingR = 1)
+  Disable PLC 9
+  WAIT200
+endif
+
+; Begin homing
+P_HomingX = 1
+
+; Reset X homes to "not homed" status
+M_HomeComplete_M1 = 0
+M_HomeComplete_M2 = 0
+
+; Have the upstream follow the downstream for downstream homing first
+I106=0
+I206=1
+
+; Jog until we can jog no more, assuming we hit the limit switch
+CMD"#1j+"
+WAIT200
+while (M_DesiredVZero_M1 = 0 or M_BGInPosition_M1 = 0) endwhile
+WAIT200
+CMD"#1hm"
+WAIT200
+while (M_DesiredVZero_M1 = 0 or M_BGInPosition_M1 = 0 or M_HomeComplete_M1 = 0) endwhile
+WAIT200
+
+
+; Have the downstream follow the upstream for upstream homing second
+I106=1
+I206=0
+
+; Jog until we can jog no more, assuming we hit the limit switch
+CMD"#2j+"
+WAIT200
+while (M_DesiredVZero_M2 = 0 or M_BGInPosition_M2 = 0) endwhile
+WAIT200
+CMD"#2hm"
+WAIT200
+while (M_DesiredVZero_M2 = 0 or M_BGInPosition_M2 = 0 or M_HomeComplete_M2 = 0) endwhile
+
+P_HomingX = 0
+
+Disable PLC 9
+Close
+
+; Don't use my timer outside of this PLC, dangerous
+#undef WAIT200

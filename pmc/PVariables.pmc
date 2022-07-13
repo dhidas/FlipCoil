@@ -22,4 +22,9 @@
 #define P_RotaryNTotalTriggers    P862 ; Total number of triggers including unsed ends
 
 
+#define P_HomingX   P900   ; Is X homing being performed?
+#define P_HomingY   P1000  ; Is Y homing being performed?
+#define P_HomingR   P1100  ; Is R homing being performed?
+
+
 #endif
