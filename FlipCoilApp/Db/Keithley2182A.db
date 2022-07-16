@@ -161,6 +161,259 @@ record(sseq, "$(SYS){$(DEV)-Keithley}OffOn") {
   field(DLY4, "1")
 }
 
+
+record(lsi, "$(SYS){$(DEV)-Keithley}IDN") {
+  field(DESC, "Keithley ID")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getLSI(*IDN?) $(PORT)")
+  field(PINI, "YES")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}RST") {
+  field(DESC, "Keithley Reset")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto cmd(*RST) $(PORT)")
+}
+
+
+
+
+record(ao, "$(SYS){$(DEV)-Keithley}SENS:VOLT:APER") {
+  field(DESC, "collection aperture")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setVar(:SENS:VOLT:APER) $(PORT)")
+  field(EGU,  "s")
+  field(PREC, "6")
+  field(VAL,  "0.01667")
+  field(DRVL, "0.0001667")
+  field(DRVH, "1")
+  field(PINI, "YES")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:APER-RBV")
+}
+record(ai, "$(SYS){$(DEV)-Keithley}SENS:VOLT:APER-RBV") {
+  field(DESC, "collection aperture")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getVar(:SENS:VOLT:APER) $(PORT)")
+  field(EGU,  "s")
+  field(PREC, "6")
+  field(PINI, "YES")
+}
+
+
+
+record(mbbo, "$(SYS){$(DEV)-Keithley}SENS:CHAN") {
+  field(DESC, "channel")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setChan() $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "1")
+  field(ONVL, "1")
+  field(ONST, "2")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:CHAN-RBV")
+  field(PINI, "YES")
+}
+record(mbbi, "$(SYS){$(DEV)-Keithley}SENS:CHAN-RBV") {
+  field(DESC, "channel")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getChan() $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "1")
+  field(ONVL, "1")
+  field(ONST, "2")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}TRIG:DEL:AUTO") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setIntVar(:TRIG:DEL:AUTO) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}TRIG:DEL:AUTO-RBV")
+  field(PINI, "YES")
+}
+record(bi, "$(SYS){$(DEV)-Keithley}TRIG:DEL:AUTO-RBV") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getIntVar(:TRIG:DEL:AUTO) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}DISP:ENAB") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setIntVar(:DISP:ENAB) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}DISP:ENAB-RBV")
+  field(PINI, "YES")
+}
+record(bi, "$(SYS){$(DEV)-Keithley}DISP:ENAB-RBV") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getIntVar(:DISP:ENAB) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DFIL") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setIntVar(:SENS:VOLT:DFIL) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DFIL-RBV")
+  field(PINI, "YES")
+}
+record(bi, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DFIL-RBV") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getIntVar(:SENS:VOLT:DFIL) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}SENS:VOLT:LPAS") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setIntVar(:SENS:VOLT:LPAS) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:LPAS-RBV")
+  field(PINI, "YES")
+}
+record(bi, "$(SYS){$(DEV)-Keithley}SENS:VOLT:LPAS-RBV") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getIntVar(:SENS:VOLT:LPAS) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}SYST:FAZ:STAT") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setIntVar(:SYST:FAZ:STAT) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}SYST:FAZ:STAT-RBV")
+  field(PINI, "YES")
+}
+record(bi, "$(SYS){$(DEV)-Keithley}SYST:FAZ:STAT-RBV") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getIntVar(:SYST:FAZ:STAT) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}SYST:AZER:STAT") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setIntVar(:SYST:AZER:STAT) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}SYST:AZER:STAT-RBV")
+  field(PINI, "YES")
+}
+record(bi, "$(SYS){$(DEV)-Keithley}SYST:AZER:STAT-RBV") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getIntVar(:SYST:AZER:STAT) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:DELTA") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setIntVar(:SENS:VOLT:DC:DELTA) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:DELTA-RBV")
+  field(PINI, "YES")
+}
+record(bi, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:DELTA-RBV") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getIntVar(:SENS:VOLT:DC:DELTA) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:RATIO") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setIntVar(:SENS:VOLT:DC:RATIO) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:RATIO-RBV")
+  field(PINI, "YES")
+}
+record(bi, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:RATIO-RBV") {
+  field(DESC, "volt dc ratio")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getIntVar(:SENS:VOLT:DC:RATIO) $(PORT)")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+}
+
+
+
+record(mbbo, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DIG") {
+  field(DESC, "Sens volt digits")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setDig $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "8")
+  field(ONVL, "1")
+  field(ONST, "7")
+  field(TWVL, "2")
+  field(TWST, "6")
+  field(THVL, "3")
+  field(THST, "5")
+  field(FRVL, "4")
+  field(FRST, "4")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DIG-RBV")
+}
+record(mbbi, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DIG-RBV") {
+  field(DESC, "Sens volt digits")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getDig $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "8")
+  field(ONVL, "1")
+  field(ONST, "7")
+  field(TWVL, "2")
+  field(TWST, "6")
+  field(THVL, "3")
+  field(THST, "5")
+  field(FRVL, "4")
+  field(FRST, "4")
+  field(PINI, "YES")
+}
+
+record(mbbo, "$(SYS){$(DEV)-Keithley}SENS:FUNC") {
+  field(DESC, "Sens function")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setFunc $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "VOLT:DC")
+  field(ONVL, "1")
+  field(ONST, "TEMP")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:FUNC-RBV")
+}
+record(mbbi, "$(SYS){$(DEV)-Keithley}SENS:FUNC-RBV") {
+  field(DESC, "Sens function")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getFunc $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "VOLT:DC")
+  field(ONVL, "1")
+  field(ONST, "TEMP")
+  field(PINI, "YES")
+}
+
 record(mbbo, "$(SYS){$(DEV)-Keithley}CHAN1:RANG") {
   field(DESC, "Volt range for ch 1")
   field(DTYP, "stream")
@@ -191,5 +444,6 @@ record(mbbi, "$(SYS){$(DEV)-Keithley}CHAN1:RANG-RBV") {
   field(THST, "10 V")
   field(FRVL, "4")
   field(FRST, "100 V")
+  field(PINI, "YES")
 }
 

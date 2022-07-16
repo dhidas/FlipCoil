@@ -1,6 +1,7 @@
 OutTerminator = CR LF;
 InTerminator = CR LF;
 
+replyTimeout = 3000;
 get_fields {
   Separator = ',';
   extrainput = ignore;
@@ -25,6 +26,96 @@ sendtxt {
 disp {
   out ":DISP:ENAB %s";
   in  ":DISP:ENAB?";
+}
+
+
+
+
+cmd {
+  out "\$1";
+}
+
+
+setVar {
+  out "\$1 %f";
+  @init {
+    out "\$1?";
+    in  "%f";
+  }
+}
+getVar {
+  out "\$1?";
+  in  "%f";
+}
+
+setIntVar {
+  out "\$1 %d";
+  @init {
+    out "\$1?";
+    in  "%d";
+  }
+}
+getIntVar {
+  out "\$1?";
+  in  "%d";
+}
+
+
+#setOffOn {
+#  out "\$1 %{OFF|ON}";
+#  @init {
+#    out "\$1?";
+#    in "%{0|1}";
+#  }
+#}
+#getOffOn {
+#  out "\$1??";
+#  in "%{0|1}";
+#}
+
+
+
+getLSI {
+  out "\$1";
+  in  "%#s";
+  ExtraInput = Ignore;
+}
+
+setDig {
+  out ":SENS:VOLT:DIG %{8|7|6|5|4}";
+  @init {
+    out ":SENS:VOLT:DIG?";
+    in  "%{8|7|6|5|4}"
+  }
+}
+getDig {
+  out ":SENS:VOLT:DIG?";
+  in  "%{8|7|6|5|4}"
+}
+
+
+setChan {
+  out ":SENS:CHAN %{1|2}";
+  @init {
+    out ":SENS:CHAN?";
+    in  "%{1|2}"
+  }
+}
+getChan {
+  out ":SENS:CHAN?";
+  in  "%{1|2}"
+}
+
+setFunc {
+  out ":SENS:FUNC \'%{VOLT:DC|TEMP}\'";
+  @init {
+    out ":SENS:FUNC?";
+    in "%{\"VOLT:DC\"|\"TEMP\"}";
+  }
+}
+getFunc {
+  out ":SENS:FUNC?";
+  in "%{\"VOLT:DC\"|\"TEMP\"}";
 }
 
 
