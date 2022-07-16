@@ -21,3 +21,23 @@ sendtxt {
   out "%s";
 }
 
+
+disp {
+  out ":DISP:ENAB %s";
+  in  ":DISP:ENAB?";
+}
+
+
+
+setRange {
+  out ":SENS:VOLT:CHAN1:RANG %{0.010000|0.100000|1.000000|10.000000|100.000000}";
+  @init {
+    out ":SENS:VOLT:CHAN1:RANG?";
+    in "%{0.010000|0.100000|1.000000|10.000000|100.000000}";
+  }
+}
+getRange {
+  out ":SENS:VOLT:CHAN1:RANG?";
+  in "%{0.010000|0.100000|1.000000|10.000000|100.000000}";
+  ExtraInput = Ignore;
+}

@@ -106,5 +106,19 @@ static long rscansave(aSubRecord *prec) {
   return 0; /* process output links */
 }
 
+
+static long setup_triggers(aSubRecord *prec) {
+
+  try {
+  } catch (...) {
+    return 1;
+  }
+
+  return 0;
+}
+
+
+
 epicsRegisterFunction(rscansave);
+epicsRegisterFunction(setup_triggers);
 

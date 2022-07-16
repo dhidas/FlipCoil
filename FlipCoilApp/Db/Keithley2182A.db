@@ -160,3 +160,36 @@ record(sseq, "$(SYS){$(DEV)-Keithley}OffOn") {
   field(DLY3, "1")
   field(DLY4, "1")
 }
+
+record(mbbo, "$(SYS){$(DEV)-Keithley}CHAN1:RANG") {
+  field(DESC, "Volt range for ch 1")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setRange $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "0.01 V")
+  field(ONVL, "1")
+  field(ONST, "0.1 V")
+  field(TWVL, "2")
+  field(TWST, "1 V")
+  field(THVL, "3")
+  field(THST, "10 V")
+  field(FRVL, "4")
+  field(FRST, "100 V")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}CHAN1:RANG-RBV")
+}
+record(mbbi, "$(SYS){$(DEV)-Keithley}CHAN1:RANG-RBV") {
+  field(DESC, "Volt range for ch 1")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto getRange $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "0.01 V")
+  field(ONVL, "1")
+  field(ONST, "0.1 V")
+  field(TWVL, "2")
+  field(TWST, "1 V")
+  field(THVL, "3")
+  field(THST, "10 V")
+  field(FRVL, "4")
+  field(FRST, "100 V")
+}
+
