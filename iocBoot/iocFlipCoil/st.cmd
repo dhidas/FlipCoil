@@ -68,6 +68,11 @@ pmacSetCoordMovingPollPeriod(1, 100)
 pmacSetCoordIdlePollPeriod(2, 500)
 pmacSetCoordMovingPollPeriod(2, 100)
 
+
+asynSetTraceIOMask("KEITHLEY1",-1,0x2) 
+asynSetTraceMask("KEITHLEY1",-1,0x9) 
+
+
 ## Load record instances
 dbLoadRecords("../../db/FlipCoil.db","SYS=$(sys),DEV=$(dev),,PORT=P0")
 

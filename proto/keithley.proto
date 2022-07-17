@@ -1,7 +1,7 @@
 OutTerminator = CR LF;
 InTerminator = CR LF;
+ReplyTimeout = 60000;
 
-replyTimeout = 3000;
 get_fields {
   Separator = ',';
   extrainput = ignore;
@@ -85,12 +85,63 @@ setDig {
   out ":SENS:VOLT:DIG %{8|7|6|5|4}";
   @init {
     out ":SENS:VOLT:DIG?";
-    in  "%{8|7|6|5|4}"
+    in  "%{8|7|6|5|4}";
   }
 }
 getDig {
   out ":SENS:VOLT:DIG?";
-  in  "%{8|7|6|5|4}"
+  in  "%{8|7|6|5|4}";
+}
+
+
+fetchTraceData {
+  ReplyTimeout = 60000;
+  Separator = ',';
+  ExtraInput = Ignore;
+  out ":TRAC:DATA?";
+  in "%f";
+}
+
+setTrigSrc {
+  out ":TRIG:SOURCE %{IMM|EXT}";
+  @init {
+    out ":TRIG:SOURCE?";
+    in  "%{IMM|EXT}";
+  }
+}
+getTrigSrc {
+  out ":TRIG:SOURCE?";
+  in  "%{IMM|EXT}";
+}
+
+
+setFeedCon {
+  extrainput = ignore;
+  out ":TRAC:FEED:CONT %{NEXT|NEVER}";
+  @init {
+    out ":TRAC:FEED:CONT?";
+    in  "%{NEXT|NEV}";
+  }
+}
+getFeedCon {
+  extrainput = ignore;
+  out ":TRAC:FEED:CONT?";
+  in  "%{NEXT|NEV}";
+}
+
+
+setFeed {
+  extrainput = ignore;
+  out ":TRAC:FEED %{NONE|SENS|CALC}";
+  @init {
+    out ":TRAC:FEED?";
+    in  "%{NONE|SENS|CALC}";
+  }
+}
+getFeed {
+  extrainput = ignore;
+  out ":TRAC:FEED?";
+  in  "%{NONE|SENS|CALC}";
 }
 
 

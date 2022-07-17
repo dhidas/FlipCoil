@@ -1,170 +1,187 @@
-record(ai, "$(SYS){$(DEV)-Keithley}Aperture") {
+
+
+
+
+
+
+record(waveform, "$(SYS){$(DEV)-Keithley}TRAC:DATA") {
+  field(DESC, "Trace data")
+  field(DTYP, "stream")
+  field(INP,  "@keithley.proto fetchTraceData $(PORT)")
+  field(EGU,  "V")
+  field(PREC, "9")
+  field(FTVL, "DOUBLE")
+  field("NELM", "1024")
+}
+
+record(ao, "$(SYS){$(DEV)-Keithley}TRIG:DEL") {
+  field(DESC, "Trigger delay")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setVar(:TRIG:DEL) $(PORT)")
   field(EGU,  "s")
-  field(DESC, "Keithley acquire aperture")
-  field(VAL,  "0.0063")
+  field(PREC, "3")
+  field(VAL,  "0.1")
+  field(DRVL, "0")
+  field(DRVH, "999999.999")
   field(PINI, "YES")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}TRIG:DEL-RBV")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
-record(stringin, "$(SYS){$(DEV)-Keithley}ApertureString") {
-  field(DESC, "Keithley acquire aperture string")
-}
-record(scalcout, "$(SYS){$(DEV)-Keithley}ApertureCalc") {
-  field(EGU,  "s")
-  field(DESC, "Keithley acquire aperture string")
-  field(INPA, "$(SYS){$(DEV)-Keithley}Aperture CP")
-  field(CALC, "printf(':SENS:VOLT:APER %f',A)")
-  field(PINI, "YES")
-  field(OUT,  "$(SYS){$(DEV)-Keithley}ApertureString")
-}
-
-record(stringin, "$(SYS){$(DEV)-Keithley}PointsString") {
-  field(DESC, "Keithley points string")
-}
-record(scalcout, "$(SYS){$(DEV)-Keithley}PointsCalc") {
-  field(DESC, "Keithley points string")
-  field(INPA, "$(SYS){$(DEV)-Ax:R}TriggerNTotal CP")
-  field(CALC, "printf(':TRAC:POINTS %i',A)")
-  field(PINI, "YES")
-  field(OUT,  "$(SYS){$(DEV)-Keithley}PointsString")
-}
-record(stringin, "$(SYS){$(DEV)-Keithley}CountString") {
-  field(DESC, "Keithley points string")
-}
-record(scalcout, "$(SYS){$(DEV)-Keithley}CountCalc") {
-  field(DESC, "Keithley points string")
-  field(INPA, "$(SYS){$(DEV)-Ax:R}TriggerNTotal CP")
-  field(CALC, "printf(':TRIGGER:COUNT %i',A)")
-  field(PINI, "YES")
-  field(OUT,  "$(SYS){$(DEV)-Keithley}CountString")
-}
-
-record(waveform, "$(SYS){$(DEV)-Keithley}ScanData-RB") {
-  field (SCAN, "Passive")
-  field (DTYP, "stream")
-  field (INP, "@keithley.proto get_tracedata $(PORT)")
-  field (FTVL, "FLOAT")
-  field (NELM, "1024")
-}
-record(waveform, "$(SYS){$(DEV)-Keithley}Fields-RB") {
-  field (SCAN, "Passive")
-  field (DTYP, "stream")
-  field (INP, "@keithley.proto get_fields $(PORT)")
-  field (FTVL, "FLOAT")
-  field (NELM, "1024")
-}
-
-
-record(stringout, "$(SYS){$(DEV)-Keithley}Command") {
-  field(SCAN, "Passive")
+record(ai, "$(SYS){$(DEV)-Keithley}TRIG:DEL-RBV") {
+  field(DESC, "Trigger delay")
   field(DTYP, "stream")
-  field(OUT, "@keithley.proto sendtxt $(PORT)")
+  field(SCAN, "Passive")
+  field(INP,  "@keithley.proto getVar(:TRIG:DEL) $(PORT)")
+  field(EGU,  "s")
+  field(PREC, "3")
 }
 
-record(sseq, "$(SYS){$(DEV)-Keithley}SetupKeithley") {
-  field(LNK1, "$(SYS){$(DEV)-Keithley}SetupKeithleyA CA")
-  field(LNK2, "$(SYS){$(DEV)-Keithley}SetupKeithleyB CA")
-  field(LNK3, "$(SYS){$(DEV)-Keithley}SetupKeithleyC CA")
-  field(WAIT1, "Wait")
-  field(WAIT2, "Wait")
-  field(WAIT3, "Wait")
+
+
+record(ao, "$(SYS){$(DEV)-Keithley}TRAC:POINTS") {
+  field(DESC, "Sample count")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setVar(:TRAC:POINTS) $(PORT)")
+  field(VAL,  "20")
+  field(DRVL, "0")
+  field(DRVH, "1024")
+  field(PINI, "YES")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}TRAC:POINTS-RBV")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ai, "$(SYS){$(DEV)-Keithley}TRAC:POINTS-RBV") {
+  field(DESC, "sample count")
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(INP,  "@keithley.proto getVar(:TRAC:POINTS) $(PORT)")
+  field(PINI, "YES")
 }
 
-record(sseq, "$(SYS){$(DEV)-Keithley}SetupKeithleyA") {
-  field(STR1, "*RST")
-  field(STR2, ":SENS:FUNC 'VOLT'")
-  field(STR3, ":SENS:VOLT:DIG 8")
-  field(STR4, ":SENS:CHAN 1")
-  field(STR5, ":SENS:VOLT:DC:RATIO OFF")
-  field(STR6, ":SENS:VOLT:DC:DELTA OFF")
-  field(STR7, ":SYST:AZER:STAT ON")
-  field(STR8, ":SYST:FAZ:STAT ON")
-  field(STR9, ":SENS:VOLT:CHAN1:RANG 1")
-  field(LNK1, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK2, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK3, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK4, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK5, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK6, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK7, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK8, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK9, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(WAIT1, "Wait")
-  field(WAIT2, "Wait")
-  field(WAIT3, "Wait")
-  field(WAIT4, "Wait")
-  field(WAIT5, "Wait")
-  field(WAIT6, "Wait")
-  field(WAIT7, "Wait")
-  field(WAIT8, "Wait")
-  field(WAIT9, "Wait")
+record(ao, "$(SYS){$(DEV)-Keithley}TRIG:COUNT") {
+  field(DESC, "Sample count")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setVar(:TRIG:COUNT) $(PORT)")
+  field(VAL,  "20")
+  field(DRVL, "0")
+  field(DRVH, "1024")
+  field(PINI, "YES")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}TRIG:COUNT-RBV")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
-record(sseq, "$(SYS){$(DEV)-Keithley}SetupKeithleyB") {
-  field(STR1, ":SENS:VOLT:LPAS OFF")
-  field(STR2, ":SENS:VOLT:DFIL OFF")
-  field(DOL3, "$(SYS){$(DEV)-Keithley}ApertureString CA")
-  field(STR4, ":TRAC:CLE")
-  field(DOL5, "$(SYS){$(DEV)-Keithley}PointsString CA")
-  field(STR6, ":TRAC:FEED SENS")
-  field(STR7, ":TRAC:FEED:CONT NEXT")
-  field(STR8, ":ABORT")
-  field(STR9, ":TRIG:SOURCE EXTERNAL")
-  field(LNK1, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK2, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK3, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK4, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK5, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK6, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK7, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK8, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK9, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(WAIT1, "Wait")
-  field(WAIT2, "Wait")
-  field(WAIT3, "Wait")
-  field(WAIT4, "Wait")
-  field(WAIT5, "Wait")
-  field(WAIT6, "Wait")
-  field(WAIT7, "Wait")
-  field(WAIT8, "Wait")
-  field(WAIT9, "Wait")
-}
-record(sseq, "$(SYS){$(DEV)-Keithley}SetupKeithleyC") {
-  field(STR1, ":TRIG:DEL:AUTO OFF")
-  field(STR2, ":TRIG:DEL 0")
-  field(STR3, ":SAMPLE:COUNT 1")
-  field(DOL4, "$(SYS){$(DEV)-Keithley}CountString CA")
-  field(STR5, ":INIT:IMM")
-  field(LNK1, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK2, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK3, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK4, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(LNK5, "$(SYS){$(DEV)-Keithley}Command CA")
-  field(WAIT1, "Wait")
-  field(WAIT2, "Wait")
-  field(WAIT3, "Wait")
-  field(WAIT4, "Wait")
-  field(WAIT5, "Wait")
+record(ai, "$(SYS){$(DEV)-Keithley}TRIG:COUNT-RBV") {
+  field(DESC, "sample count")
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(INP,  "@keithley.proto getVar(:TRIG:COUNT) $(PORT)")
+  field(PINI, "YES")
 }
 
-record(sseq, "$(SYS){$(DEV)-Keithley}OffOn") {
-  field(STR1, ":DISP:ENAB OFF")
-  field(STR2, ":DISP:ENAB ON")
-  field(STR3, ":DISP:ENAB OFF")
-  field(STR4, ":DISP:ENAB ON")
-  field(LNK1, "$(SYS){$(DEV)-Keithley}Command PP")
-  field(LNK2, "$(SYS){$(DEV)-Keithley}Command PP")
-  field(LNK3, "$(SYS){$(DEV)-Keithley}Command PP")
-  field(LNK4, "$(SYS){$(DEV)-Keithley}Command PP")
-  field(DLY1, "1")
-  field(DLY2, "1")
-  field(DLY3, "1")
-  field(DLY4, "1")
+record(ao, "$(SYS){$(DEV)-Keithley}SAMPLE:COUNT") {
+  field(DESC, "Sample count")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setVar(:SAMPLE:COUNT) $(PORT)")
+  field(VAL,  "1")
+  field(DRVL, "1")
+  field(DRVH, "1024")
+  field(PINI, "YES")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}SAMPLE:COUNT-RBV")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ai, "$(SYS){$(DEV)-Keithley}SAMPLE:COUNT-RBV") {
+  field(DESC, "sample count")
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(INP,  "@keithley.proto getVar(:SAMPLE:COUNT) $(PORT)")
+  field(PINI, "YES")
+}
+
+
+record(mbbo, "$(SYS){$(DEV)-Keithley}TRIG:SOURCE") {
+  field(DESC, "Trigger source")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setTrigSrc $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "IMM")
+  field(ONVL, "1")
+  field(ONST, "EXT")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}TRIG:SOURCE-RBV")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(mbbi, "$(SYS){$(DEV)-Keithley}TRIG:SOURCE-RBV") {
+  field(DESC, "Trigger source")
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(INP,  "@keithley.proto getTrigSrc $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "IMM")
+  field(ONVL, "1")
+  field(ONST, "EXT")
+  field(PINI, "YES")
+}
+
+
+record(mbbo, "$(SYS){$(DEV)-Keithley}TRAC:FEED:CONT") {
+  field(DESC, "Trac feed")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setFeedCon $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "NEXT")
+  field(ONVL, "1")
+  field(ONST, "NEVER")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}TRAC:FEED:CONT-RBV")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(mbbi, "$(SYS){$(DEV)-Keithley}TRAC:FEED:CONT-RBV") {
+  field(DESC, "Trac feed")
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(INP,  "@keithley.proto getFeedCon $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "NEXT")
+  field(ONVL, "1")
+  field(ONST, "NEVER")
+  field(PINI, "YES")
+}
+
+record(mbbo, "$(SYS){$(DEV)-Keithley}TRAC:FEED") {
+  field(DESC, "Trac feed")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setFeed $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "NONE")
+  field(ONVL, "1")
+  field(ONST, "SENS")
+  field(TWVL, "2")
+  field(TWST, "CALC")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}TRAC:FEED-RBV")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(mbbi, "$(SYS){$(DEV)-Keithley}TRAC:FEED-RBV") {
+  field(DESC, "Trac feed")
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(INP,  "@keithley.proto getFeed $(PORT)")
+  field(ZRVL, "0")
+  field(ZRST, "NONE")
+  field(ONVL, "1")
+  field(ONST, "SENS")
+  field(TWVL, "2")
+  field(TWST, "CALC")
+  field(PINI, "YES")
 }
 
 
 record(lsi, "$(SYS){$(DEV)-Keithley}IDN") {
   field(DESC, "Keithley ID")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getLSI(*IDN?) $(PORT)")
   field(PINI, "YES")
 }
@@ -175,6 +192,23 @@ record(bo, "$(SYS){$(DEV)-Keithley}RST") {
   field(OUT,  "@keithley.proto cmd(*RST) $(PORT)")
 }
 
+record(bo, "$(SYS){$(DEV)-Keithley}INIT:IMM") {
+  field(DESC, "Initiate Immediate")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto cmd(:INIT:IMM) $(PORT)")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}ABORT") {
+  field(DESC, "ABORT")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto cmd(:ABOR) $(PORT)")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}TRAC:CLE") {
+  field(DESC, "Trace clear")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto cmd(:TRAC:CLE) $(PORT)")
+}
 
 
 
@@ -189,10 +223,13 @@ record(ao, "$(SYS){$(DEV)-Keithley}SENS:VOLT:APER") {
   field(DRVH, "1")
   field(PINI, "YES")
   field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:APER-RBV")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(ai, "$(SYS){$(DEV)-Keithley}SENS:VOLT:APER-RBV") {
   field(DESC, "collection aperture")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getVar(:SENS:VOLT:APER) $(PORT)")
   field(EGU,  "s")
   field(PREC, "6")
@@ -211,10 +248,13 @@ record(mbbo, "$(SYS){$(DEV)-Keithley}SENS:CHAN") {
   field(ONST, "2")
   field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:CHAN-RBV")
   field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(mbbi, "$(SYS){$(DEV)-Keithley}SENS:CHAN-RBV") {
   field(DESC, "channel")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getChan() $(PORT)")
   field(ZRVL, "0")
   field(ZRST, "1")
@@ -230,10 +270,13 @@ record(bo, "$(SYS){$(DEV)-Keithley}TRIG:DEL:AUTO") {
   field(ONAM, "ON")
   field(FLNK, "$(SYS){$(DEV)-Keithley}TRIG:DEL:AUTO-RBV")
   field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(bi, "$(SYS){$(DEV)-Keithley}TRIG:DEL:AUTO-RBV") {
   field(DESC, "volt dc ratio")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getIntVar(:TRIG:DEL:AUTO) $(PORT)")
   field(ZNAM, "OFF")
   field(ONAM, "ON")
@@ -251,6 +294,7 @@ record(bo, "$(SYS){$(DEV)-Keithley}DISP:ENAB") {
 record(bi, "$(SYS){$(DEV)-Keithley}DISP:ENAB-RBV") {
   field(DESC, "volt dc ratio")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getIntVar(:DISP:ENAB) $(PORT)")
   field(ZNAM, "OFF")
   field(ONAM, "ON")
@@ -264,10 +308,13 @@ record(bo, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DFIL") {
   field(ONAM, "ON")
   field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DFIL-RBV")
   field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(bi, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DFIL-RBV") {
   field(DESC, "volt dc ratio")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getIntVar(:SENS:VOLT:DFIL) $(PORT)")
   field(ZNAM, "OFF")
   field(ONAM, "ON")
@@ -281,10 +328,13 @@ record(bo, "$(SYS){$(DEV)-Keithley}SENS:VOLT:LPAS") {
   field(ONAM, "ON")
   field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:LPAS-RBV")
   field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(bi, "$(SYS){$(DEV)-Keithley}SENS:VOLT:LPAS-RBV") {
   field(DESC, "volt dc ratio")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getIntVar(:SENS:VOLT:LPAS) $(PORT)")
   field(ZNAM, "OFF")
   field(ONAM, "ON")
@@ -298,10 +348,13 @@ record(bo, "$(SYS){$(DEV)-Keithley}SYST:FAZ:STAT") {
   field(ONAM, "ON")
   field(FLNK, "$(SYS){$(DEV)-Keithley}SYST:FAZ:STAT-RBV")
   field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(bi, "$(SYS){$(DEV)-Keithley}SYST:FAZ:STAT-RBV") {
   field(DESC, "volt dc ratio")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getIntVar(:SYST:FAZ:STAT) $(PORT)")
   field(ZNAM, "OFF")
   field(ONAM, "ON")
@@ -315,10 +368,13 @@ record(bo, "$(SYS){$(DEV)-Keithley}SYST:AZER:STAT") {
   field(ONAM, "ON")
   field(FLNK, "$(SYS){$(DEV)-Keithley}SYST:AZER:STAT-RBV")
   field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(bi, "$(SYS){$(DEV)-Keithley}SYST:AZER:STAT-RBV") {
   field(DESC, "volt dc ratio")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getIntVar(:SYST:AZER:STAT) $(PORT)")
   field(ZNAM, "OFF")
   field(ONAM, "ON")
@@ -332,10 +388,13 @@ record(bo, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:DELTA") {
   field(ONAM, "ON")
   field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:DELTA-RBV")
   field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(bi, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:DELTA-RBV") {
   field(DESC, "volt dc ratio")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getIntVar(:SENS:VOLT:DC:DELTA) $(PORT)")
   field(ZNAM, "OFF")
   field(ONAM, "ON")
@@ -349,10 +408,13 @@ record(bo, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:RATIO") {
   field(ONAM, "ON")
   field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:RATIO-RBV")
   field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(bi, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DC:RATIO-RBV") {
   field(DESC, "volt dc ratio")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getIntVar(:SENS:VOLT:DC:RATIO) $(PORT)")
   field(ZNAM, "OFF")
   field(ONAM, "ON")
@@ -375,10 +437,13 @@ record(mbbo, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DIG") {
   field(FRVL, "4")
   field(FRST, "4")
   field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DIG-RBV")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(mbbi, "$(SYS){$(DEV)-Keithley}SENS:VOLT:DIG-RBV") {
   field(DESC, "Sens volt digits")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getDig $(PORT)")
   field(ZRVL, "0")
   field(ZRST, "8")
@@ -402,10 +467,13 @@ record(mbbo, "$(SYS){$(DEV)-Keithley}SENS:FUNC") {
   field(ONVL, "1")
   field(ONST, "TEMP")
   field(FLNK, "$(SYS){$(DEV)-Keithley}SENS:FUNC-RBV")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(mbbi, "$(SYS){$(DEV)-Keithley}SENS:FUNC-RBV") {
   field(DESC, "Sens function")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getFunc $(PORT)")
   field(ZRVL, "0")
   field(ZRST, "VOLT:DC")
@@ -429,10 +497,13 @@ record(mbbo, "$(SYS){$(DEV)-Keithley}CHAN1:RANG") {
   field(FRVL, "4")
   field(FRST, "100 V")
   field(FLNK, "$(SYS){$(DEV)-Keithley}CHAN1:RANG-RBV")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(mbbi, "$(SYS){$(DEV)-Keithley}CHAN1:RANG-RBV") {
   field(DESC, "Volt range for ch 1")
   field(DTYP, "stream")
+  field(SCAN, "Passive")
   field(INP,  "@keithley.proto getRange $(PORT)")
   field(ZRVL, "0")
   field(ZRST, "0.01 V")
