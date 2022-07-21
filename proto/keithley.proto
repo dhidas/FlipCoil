@@ -32,7 +32,8 @@ disp {
 
 
 cmd {
-  out "\$1";
+  out "\$1" CR LF "*OPC?";
+  in "1";
 }
 
 
@@ -103,15 +104,15 @@ fetchTraceData {
 }
 
 setTrigSrc {
-  out ":TRIG:SOURCE %{IMM|EXT}";
+  out ":TRIG:SOURCE %{IMM|TIM|MAN|BUS|EXT}";
   @init {
     out ":TRIG:SOURCE?";
-    in  "%{IMM|EXT}";
+    in  "%{IMM|TIM|MAN|BUS|EXT}";
   }
 }
 getTrigSrc {
   out ":TRIG:SOURCE?";
-  in  "%{IMM|EXT}";
+  in  "%{IMM|TIM|MAN|BUS|EXT}";
 }
 
 

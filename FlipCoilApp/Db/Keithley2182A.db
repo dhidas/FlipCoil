@@ -105,9 +105,15 @@ record(mbbo, "$(SYS){$(DEV)-Keithley}TRIG:SOURCE") {
   field(DTYP, "stream")
   field(OUT,  "@keithley.proto setTrigSrc $(PORT)")
   field(ZRVL, "0")
-  field(ZRST, "IMM")
+  field(ZRST, "IMMEDIATE")
   field(ONVL, "1")
-  field(ONST, "EXT")
+  field(ONST, "TIMER")
+  field(TWVL, "2")
+  field(TWST, "MANUAL")
+  field(THVL, "3")
+  field(THST, "BUS")
+  field(FRVL, "4")
+  field(FRST, "EXTERNAL")
   field(FLNK, "$(SYS){$(DEV)-Keithley}TRIG:SOURCE-RBV")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
@@ -118,9 +124,15 @@ record(mbbi, "$(SYS){$(DEV)-Keithley}TRIG:SOURCE-RBV") {
   field(SCAN, "Passive")
   field(INP,  "@keithley.proto getTrigSrc $(PORT)")
   field(ZRVL, "0")
-  field(ZRST, "IMM")
+  field(ZRST, "IMMEDIATE")
   field(ONVL, "1")
-  field(ONST, "EXT")
+  field(ONST, "TIMER")
+  field(TWVL, "2")
+  field(TWST, "MANUAL")
+  field(THVL, "3")
+  field(THST, "BUS")
+  field(FRVL, "4")
+  field(FRST, "EXTERNAL")
   field(PINI, "YES")
 }
 
@@ -184,6 +196,12 @@ record(lsi, "$(SYS){$(DEV)-Keithley}IDN") {
   field(SCAN, "Passive")
   field(INP,  "@keithley.proto getLSI(*IDN?) $(PORT)")
   field(PINI, "YES")
+}
+
+record(bo, "$(SYS){$(DEV)-Keithley}CLS") {
+  field(DESC, "Keithley Clear")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto cmd(*CLS) $(PORT)")
 }
 
 record(bo, "$(SYS){$(DEV)-Keithley}RST") {
