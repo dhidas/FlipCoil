@@ -29,6 +29,13 @@
 #define M_HomeComplete_M7 M745
 #define M_HomeComplete_M8 M845
 
+#define M_PosComp1A     M108
+#define M_PosComp1B     M109
+#define M_PosComp1Inc   M110
+#define M_PosComp1Write M111
+#define M_PosComp1Set   M112
+#define M_PosComp1Val   M116
+
 #define M_PosComp7A     M708
 #define M_PosComp7B     M709
 #define M_PosComp7Inc   M710

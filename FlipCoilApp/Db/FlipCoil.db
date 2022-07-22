@@ -277,6 +277,58 @@ record(ai, "$(SYS){$(DEV)-Ax:Y}-Velo-RB") {
 }
 
 
+
+
+record(dfanout, "$(SYS){$(DEV)-Ax:X+}-HOMEOFFSET") {
+  field(SCAN, "Passive")
+  field(DESC, "X+ Home offset")
+  field(OUTA, "$(SYS){$(DEV)-Ax:X+}-Mtr.OFF PP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:X+}-HOMEOFF-SP PP")
+}
+record(ao, "$(SYS){$(DEV)-Ax:X+}-HOMEOFF-SP") {
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(DESC, "X+ Home offset")
+  field(EGU, "mm")
+  field(OUT,  "@pmac.proto setVar(P4901) $(PORT)")
+  field(FLNK,  "$(SYS){$(DEV)-Ax:X+}-HOMEOFF-RB")
+}
+record(ai, "$(SYS){$(DEV)-Ax:X+}-HOMEOFF-RB") {
+  field(DTYP, "stream")
+  field(DESC, "X+ Home offset")
+  field(EGU, "mm")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P4901) $(PORT)")
+  field(PREC, "3")
+}
+record(dfanout, "$(SYS){$(DEV)-Ax:X-}-HOMEOFFSET") {
+  field(SCAN, "Passive")
+  field(DESC, "X- Home offset")
+  field(OUTA, "$(SYS){$(DEV)-Ax:X-}-Mtr.OFF PP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:X-}-HOMEOFF-SP PP")
+}
+record(ao, "$(SYS){$(DEV)-Ax:X-}-HOMEOFF-SP") {
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(DESC, "X- Home offset")
+  field(EGU, "mm")
+  field(OUT,  "@pmac.proto setVar(P4902) $(PORT)")
+  field(FLNK,  "$(SYS){$(DEV)-Ax:X-}-HOMEOFF-RB")
+}
+record(ai, "$(SYS){$(DEV)-Ax:X-}-HOMEOFF-RB") {
+  field(DTYP, "stream")
+  field(DESC, "X- Home offset")
+  field(EGU, "mm")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P4902) $(PORT)")
+  field(PREC, "3")
+}
+
+
+
+
+
+
 record(ao, "$(SYS){$(DEV)-Ax:R}-Velo") {
   field(SCAN, "Passive")
   field(VAL,  "10")
@@ -310,6 +362,139 @@ record(ai, "$(SYS){$(DEV)-Ax:R}-Velo-RB") {
   field(INP, "@pmac.proto getVar(P800) $(PORT)")
   field(PREC, "3")
 }
+
+
+
+
+
+record(ao, "$(SYS){$(DEV)-Ax:X}ScanStart-SP") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Start Position")
+  field(EGU, "mm")
+  field(VAL,  "-30")
+  field(DRVH, "+100")
+  field(DRVL, "-100")
+  field(OUT, "@pmac.proto setVar(P821) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:X}ScanStart-RB")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ai, "$(SYS){$(DEV)-Ax:X}ScanStart-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Start Position")
+  field(EGU, "mm")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P821) $(PORT)")
+  field(PREC, "2")
+}
+
+record(ao, "$(SYS){$(DEV)-Ax:X}ScanStop-SP") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Stop Position")
+  field(EGU, "mm")
+  field(VAL,  "+30")
+  field(DRVH, "+100")
+  field(DRVL, "-100")
+  field(OUT, "@pmac.proto setVar(P822) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:X}ScanStop-RB")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ai, "$(SYS){$(DEV)-Ax:X}ScanStop-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Stop Position")
+  field(EGU, "mm")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P822) $(PORT)")
+  field(PREC, "2")
+}
+
+record(ao, "$(SYS){$(DEV)-Ax:X}ScanNTriggers-SP") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Number of Triggers")
+  field(VAL,  "11")
+  field(DRVH, "1000")
+  field(DRVL, "2")
+  field(OUT, "@pmac.proto setIntVar(P820) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:X}ScanNTriggers-RB")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ai, "$(SYS){$(DEV)-Ax:X}ScanNTriggers-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Scan Number of Triggers")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getIntVar(P820) $(PORT)")
+}
+
+record(ao, "$(SYS){$(DEV)-Ax:X}ScanAccelTime-SP") {
+  field(DTYP, "stream")
+  field(DESC, "Acceleration time")
+  field(VAL,  "1")
+  field(DRVH, "10")
+  field(DRVL, "0.5")
+  field(PREC, "3")
+  field(OUT, "@pmac.proto setVar(P824) $(PORT)")
+  field(FLNK, "$(SYS){$(DEV)-Ax:X}ScanAccelTime-RB")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ai, "$(SYS){$(DEV)-Ax:X}ScanAccelTime-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Acceleration time")
+  field(SCAN, "Passive")
+  field(PREC, "3")
+  field(INP, "@pmac.proto getVar(P824) $(PORT)")
+}
+record(calc, "$(SYS){$(DEV)-Ax:X}TriggerRate") {
+  field(SCAN, "Passive")
+  field(EGU,  "Hz")
+  field(PREC, "1")
+  field(INPA, "$(SYS){$(DEV)-Ax:X}-Velo-RB CP")
+  field(INPB, "$(SYS){$(DEV)-Ax:X}ScanStart-RB CP")
+  field(INPC, "$(SYS){$(DEV)-Ax:X}ScanStop-RB CP")
+  field(INPD, "$(SYS){$(DEV)-Ax:X}ScanNTriggers-RB CP")
+  field(CALC, " (D - 1) / (ABS(C - B) / A)")
+}
+record(calc, "$(SYS){$(DEV)-Ax:X}TriggerSpacing") {
+  field(SCAN, "Passive")
+  field(EGU,  "mm")
+  field(PREC, "3")
+  field(INPA, "$(SYS){$(DEV)-Ax:X}ScanStart-RB CP")
+  field(INPB, "$(SYS){$(DEV)-Ax:X}ScanStop-RB CP")
+  field(INPC, "$(SYS){$(DEV)-Ax:X}ScanNTriggers-RB CP")
+  field(CALC, "ABS((B - A)) / (C - 1)")
+}
+record(calc, "$(SYS){$(DEV)-Ax:X}TriggerNExtra") {
+  field(SCAN, "Passive")
+  field(INPA, "$(SYS){$(DEV)-Ax:X}-Velo-RB CP")
+  field(INPB, "$(SYS){$(DEV)-Ax:X}ScanAccelTime-RB CP")
+  field(INPC, "$(SYS){$(DEV)-Ax:X}TriggerSpacing CP")
+  field(CALC,"ABS(B*A-C*FLOOR(B*A/C)) < C/20 ? FLOOR(ABS(A*B/C+1/10)) : FLOOR(ABS(A*B/C))")
+}
+record(calc, "$(SYS){$(DEV)-Ax:X}TriggerNTotal") {
+  field(SCAN, "Passive")
+  field(INPA, "$(SYS){$(DEV)-Ax:X}ScanNTriggers-RB CP")
+  field(INPB, "$(SYS){$(DEV)-Ax:X}TriggerNExtra CP")
+  field(PINI, "YES")
+  field(CALC,"A+2*B")
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 record(ao, "$(SYS){$(DEV)-Ax:R}ScanStart-SP") {
@@ -474,6 +659,19 @@ record(bi, "$(SYS){$(DEV)-Ax:R-}Homed") {
 }
 
 
+record(bi, "$(SYS){$(DEV)-Ax:X}ScanErrNotHomed") {
+  field(DTYP, "stream")
+  field(DESC, "a motor not homed")
+  field(SCAN, "5 second")
+  field(INP, "@pmac.proto getIntVar(P840) $(PORT)")
+}
+record(bi, "$(SYS){$(DEV)-Ax:X}ScanErrTriggerState") {
+  field(DTYP, "stream")
+  field(DESC, "bad initial trigger state")
+  field(SCAN, "5 second")
+  field(INP, "@pmac.proto getIntVar(P841) $(PORT)")
+}
+
 record(bi, "$(SYS){$(DEV)-Ax:R}ScanErrNotHomed") {
   field(DTYP, "stream")
   field(DESC, "a motor not homed")
@@ -625,6 +823,98 @@ record (waveform, "$(SYS){$(DEV)}WF-RB") {
   field(NELM, "20")
   field(PINI, "YES")
 }
+
+
+
+
+record(stringin, "$(SYS){$(DEV)}XScanComments") {
+  field(SCAN, "Passive")
+  field(DESC, "Comment to include in data file")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(stringin, "$(SYS){$(DEV)}XOutDir") {
+  field(SCAN, "Passive")
+  field(DESC, "Directory to store data")
+  field(FLNK, "$(SYS){$(DEV)}XFilePath-CALC")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+
+record(stringin, "$(SYS){$(DEV)}XFileName") {
+  field(SCAN, "Passive")
+  field(DESC, "Filename for scan data")
+  field(PINI, "YES")
+  field(FLNK, "$(SYS){$(DEV)}XFilePath-CALC")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(scalcout, "$(SYS){$(DEV)}XFilePath-CALC") {
+  field(SCAN, "Passive")
+  field(INAA, "$(SYS){$(DEV)}XOutDir")
+  field(INBB, "$(SYS){$(DEV)}XFileName")
+  field(CALC, "AA+'/'+BB")
+  field(OUT,  "$(SYS){$(DEV)}XFilePath PP")
+}
+record(stringin, "$(SYS){$(DEV)}XFilePath") {
+  field(SCAN, "Passive")
+  field(DESC, "Full path of output file")
+}
+
+record(aSub, "$(SYS){$(DEV)}XScanSave") {
+    field(SNAM, "rscansave")
+
+    field(INPA, "$(SYS){$(DEV)}XFilePath")
+    field(FTA,  "STRING")
+
+    field(INPB, "$(SYS){$(DEV)}WF-RB")
+    field(FTB,  "DOUBLE")
+
+    field(INPC, "$(SYS){$(DEV)-Ax:X}ScanStart-RB")
+    field(FTC,  "DOUBLE")
+
+    field(INPD, "$(SYS){$(DEV)-Ax:X}ScanStop-RB")
+    field(FTD,  "DOUBLE")
+
+    field(INPE, "$(SYS){$(DEV)-Ax:X}ScanNTriggers-RB")
+    field(FTE,  "LONG")
+
+    field(INPF, "$(SYS){$(DEV)-Ax:X}TriggerNExtra")
+    field(FTF,  "LONG")
+
+    field(INPG, "$(SYS){$(DEV)-Ax:X}-Velo-RB")
+    field(FTG,  "DOUBLE")
+
+    field(INPH, "$(SYS){$(DEV)-Ax:R}-Mtr.RBV")
+    field(FTH,  "DOUBLE")
+
+    field(INPI, "$(SYS){$(DEV)-Ax:Ro}-Mtr.RBV")
+    field(FTI,  "DOUBLE")
+
+    field(INPJ, "$(SYS){$(DEV)-Ax:Y}-Mtr.RBV")
+    field(FTJ,  "DOUBLE")
+
+    field(INPK, "$(SYS){$(DEV)-Ax:Yo}-Mtr.RBV")
+    field(FTK,  "DOUBLE")
+
+    field(INPL, "$(SYS){$(DEV)}CoilWidth")
+    field(FTL,  "DOUBLE")
+
+    field(INPM, "$(SYS){$(DEV)}CoilNTurns")
+    field(FTM,  "LONG")
+
+    field(INPU, "$(SYS){$(DEV)}XScanComments")
+    field(FTU,  "STRING")
+}
+
+
+
+
+
+
+
+
 
 record(stringin, "$(SYS){$(DEV)}RScanComments") {
   field(SCAN, "Passive")

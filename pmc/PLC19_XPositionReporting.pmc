@@ -9,8 +9,8 @@
 Open PLC 19 Clear
 
   ADDRESS&3
-  Q_Fwd_Mtr1Tmp_PR = (M162/(I108*32)) / kEncCtsPerMM
-  Q_Fwd_Mtr2Tmp_PR = (M262/(I208*32)) / kEncCtsPerMM
+  Q_Fwd_Mtr1Tmp_PR = (M162/(I108*32)) / kEncCtsPerMM + P_OffsetM1
+  Q_Fwd_Mtr2Tmp_PR = (M262/(I208*32)) / kEncCtsPerMM + P_OffsetM2
 
   XPOS  = (Q_Fwd_Mtr1Tmp_PR + Q_Fwd_Mtr2Tmp_PR) / 2
   XYAW  = (Q_Fwd_Mtr1Tmp_PR - Q_Fwd_Mtr2Tmp_PR)

@@ -4,6 +4,7 @@
 
 
 ; Used internally
+#define Q_RotaryOffset      Q72  ; Rotary offset from pmacAsyn setting
 #define Q_RotaryStart       Q400 ; Actual rotary start position
 #define Q_RotaryStop        Q401 ; Actual rotary stop position
 #define Q_RotaryTrigWidth   Q402 ; Trigger width in degrees
@@ -51,8 +52,8 @@ if (ABS(P_RotaryTOver * P_DegPerSecond - Q_RotaryDelta * Q_RotaryNOver) < Q_Rota
 endif
 Q_RotaryNOver   = INT(Q_RotaryDOver / Q_RotaryDelta)
 
-Q_RotaryFirst   = P_RotaryR0 - Q_RotaryDirection * Q_RotaryNOver * Q_RotaryDelta
-Q_RotaryBehind  = Q_RotaryFirst + Q_RotaryDirection * (Q_RotaryTrigWidth - Q_RotaryDelta)
+Q_RotaryFirst   = P_RotaryR0 - Q_RotaryDirection * Q_RotaryNOver * Q_RotaryDelta + Q_RotaryOffset/2
+Q_RotaryBehind  = Q_RotaryFirst + Q_RotaryDirection * (Q_RotaryTrigWidth - Q_RotaryDelta) + Q_RotaryOffset/2
 P_RotaryNTotalTriggers = P_RotaryNTriggers + 2 * Q_RotaryNOver
 
 ; Calculate actual start and stop positions for motor movement
@@ -72,7 +73,7 @@ if (M_PosComp7Val != 1)
 endif
 
 ; Move to starting position
-A(Q_RotaryStart) B(P_RotaryOffset)
+A(Q_RotaryStart) B(Q_RotaryOffset)
 Dwell 10
 F(P_DegPerSecond)
 
@@ -85,7 +86,7 @@ gTRIG7HIGH
 Dwell 100
 
 ; Move to stopping position
-A(Q_RotaryStop) B(P_RotaryOffset)
+A(Q_RotaryStop) B(Q_RotaryOffset)
 Dwell 100
 gTRIG7HIGH
 

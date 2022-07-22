@@ -13,10 +13,19 @@
 #define P_RotaryNTriggers         P810 ; Number of triggers
 #define P_RotaryR0                P811 ; First point in scan
 #define P_RotaryRF                P812 ; Last point in scan
-#define P_RotaryOffset            P813 ; Rotary offset for scans (#7 - #8)
+;#define P_RotaryOffset            P813 ; Rotary offset for scans (#7 - #8)
 #define P_RotaryTOver             P814 ; Move time before (and after) measurement
 
+#define P_XNTriggers              P820 ; Number of triggers
+#define P_XX0                     P821 ; First point in scan
+#define P_XXF                     P822 ; Last point in scan
+;#define P_XOffset                 P823 ; Rotary offset for scans (#7 - #8)
+#define P_XTOver                  P824 ; Move time before (and after) measurement
+
 ; Possibly report back
+#define P_XNotHomed               P840 ; A motor is not homed
+#define P_XWrongTriggerState      P841 ; The initial trigger state is incorrect
+#define P_XNTotalTriggers         P842 ; Total number of triggers including unsed ends
 #define P_RotaryNotHomed          P860 ; A motor is not homed
 #define P_RotaryWrongTriggerState P861 ; The initial trigger state is incorrect
 #define P_RotaryNTotalTriggers    P862 ; Total number of triggers including unsed ends
@@ -25,6 +34,16 @@
 #define P_HomingX   P900   ; Is X homing being performed?
 #define P_HomingY   P1000  ; Is Y homing being performed?
 #define P_HomingR   P1100  ; Is R homing being performed?
+
+#define P_OffsetM1  P4901
+#define P_OffsetM2  P4902
+#define P_OffsetM3  P4903
+#define P_OffsetM4  P4904
+#define P_OffsetM5  P4905
+#define P_OffsetM6  P4906
+#define P_OffsetM7  P4907
+#define P_OffsetM8  P4908
+
 
 
 #endif

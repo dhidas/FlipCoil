@@ -14,6 +14,29 @@ record(waveform, "$(SYS){$(DEV)-Keithley}TRAC:DATA") {
   field("NELM", "1024")
 }
 
+record(ao, "$(SYS){$(DEV)-Keithley}TRIG:TIMER") {
+  field(DESC, "Trigger timer")
+  field(DTYP, "stream")
+  field(OUT,  "@keithley.proto setVar(:TRIG:TIM) $(PORT)")
+  field(EGU,  "s")
+  field(PREC, "3")
+  field(VAL,  "0")
+  field(DRVL, "0")
+  field(DRVH, "999999.999")
+  field(PINI, "YES")
+  field(FLNK, "$(SYS){$(DEV)-Keithley}TRIG:TIMER-RBV")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ai, "$(SYS){$(DEV)-Keithley}TRIG:TIMER-RBV") {
+  field(DESC, "Trigger timer")
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(INP,  "@keithley.proto getVar(:TRIG:TIM) $(PORT)")
+  field(EGU,  "s")
+  field(PREC, "3")
+}
+
 record(ao, "$(SYS){$(DEV)-Keithley}TRIG:DEL") {
   field(DESC, "Trigger delay")
   field(DTYP, "stream")
@@ -37,6 +60,14 @@ record(ai, "$(SYS){$(DEV)-Keithley}TRIG:DEL-RBV") {
   field(PREC, "3")
 }
 
+record(ai, "$(SYS){$(DEV)-Keithley}READ") {
+  field(DESC, "Single reading")
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(INP,  "@keithley.proto getVar(:READ) $(PORT)")
+  field(EGU,  "V")
+  field(PREC, "9")
+}
 
 
 record(ao, "$(SYS){$(DEV)-Keithley}TRAC:POINTS") {
@@ -534,5 +565,31 @@ record(mbbi, "$(SYS){$(DEV)-Keithley}CHAN1:RANG-RBV") {
   field(FRVL, "4")
   field(FRST, "100 V")
   field(PINI, "YES")
+}
+
+
+
+
+record(fanout, "$(SYS){$(DEV)-Keithley}ScanTiming") {
+  field(LNK1, "$(SYS){$(DEV)-Keithley}SENS:FUNC")
+  field(LNK2, "$(SYS){$(DEV)-Keithley}SENS:CHAN")
+  field(LNK3, "$(SYS){$(DEV)-Keithley}CHAN1:RST")
+  field(LNK4, "$(SYS){$(DEV)-Keithley}TRAC:CLE")
+  field(LNK5, "$(SYS){$(DEV)-Keithley}CHAN1:RANG")
+  field(LNK6, "$(SYS){$(DEV)-Keithley}TRAC:POINTS")
+  field(LNK7, "$(SYS){$(DEV)-Keithley}TRAC:FEED")
+  field(LNK8, "$(SYS){$(DEV)-Keithley}TRAC:FEED:CONT")
+  field(LNK9, "$(SYS){$(DEV)-Keithley}ABORT")
+  field(LNKA, "$(SYS){$(DEV)-Keithley}TRIG:SOURCE")
+  field(LNKB, "$(SYS){$(DEV)-Keithley}TRIG:DEL")
+  field(LNKC, "$(SYS){$(DEV)-Keithley}TRIG:DEL:AUTO")
+  field(LNKD, "$(SYS){$(DEV)-Keithley}TRIG:TIMER")
+  field(LNKE, "$(SYS){$(DEV)-Keithley}SAMPLE:COUNT")
+  field(LNKF, "$(SYS){$(DEV)-Keithley}ScanTimingB")
+}
+record(fanout, "$(SYS){$(DEV)-Keithley}ScanTimingB") {
+  field(LNK1, "$(SYS){$(DEV)-Keithley}TRIG:COUNT")
+  field(LNK2, "$(SYS){$(DEV)-Keithley}SENS:VOLT:APER")
+  field(LNK3, "$(SYS){$(DEV)-Keithley}INIT:IMM")
 }
 

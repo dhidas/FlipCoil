@@ -62,16 +62,16 @@
       <keep_wh_ratio>false</keep_wh_ratio>
     </scale_options>
     <scripts />
-    <text>FlipCoilScanR</text>
+    <text>FlipCoilScan $(AXIS)</text>
     <tooltip></tooltip>
     <transparent>true</transparent>
     <vertical_alignment>1</vertical_alignment>
     <visible>true</visible>
     <widget_type>Label</widget_type>
-    <width>195</width>
+    <width>243</width>
     <wrap_words>false</wrap_words>
     <wuid>-4c406b62:1819f90836a:-7f03</wuid>
-    <x>258</x>
+    <x>240</x>
     <y>20</y>
   </widget>
   <widget typeId="org.csstudio.opibuilder.widgets.TextUpdate" version="1.0.0">
@@ -102,7 +102,7 @@
     <name>Text Update_1</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}-Mtr.RBV</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}-Mtr.RBV</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -159,7 +159,7 @@ $(pv_value)</tooltip>
     <name>Text Input_1</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}-Mtr.VAL</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}-Mtr.VAL</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -221,7 +221,7 @@ $(pv_value)</tooltip>
       <color red="0" green="255" blue="0" />
     </on_color>
     <on_label>ON</on_label>
-    <pv_name>$(SYS){$(DEV)-Ax:R}-Mtr.MOVN</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}-Mtr.MOVN</pv_name>
     <pv_value />
     <rules />
     <scale_options>
@@ -266,7 +266,7 @@ $(pv_value)</tooltip>
     <image></image>
     <name>Action Button</name>
     <push_action_index>0</push_action_index>
-    <pv_name>$(SYS){$(DEV)-Ax:R}-Mtr.STOP</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}-Mtr.STOP</pv_name>
     <pv_value />
     <rules />
     <scale_options>
@@ -315,7 +315,7 @@ $(pv_value)</tooltip>
       <keep_wh_ratio>false</keep_wh_ratio>
     </scale_options>
     <scripts />
-    <text>Rotary Position</text>
+    <text>$(AXIS) Position</text>
     <tooltip></tooltip>
     <transparent>true</transparent>
     <vertical_alignment>1</vertical_alignment>
@@ -355,7 +355,7 @@ $(pv_value)</tooltip>
     <name>Text Update_2</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:Ro}-Mtr.RBV</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)o}-Mtr.RBV</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -412,7 +412,7 @@ $(pv_value)</tooltip>
     <name>Text Input_2</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:Ro}-Mtr.VAL</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)o}-Mtr.VAL</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -464,7 +464,7 @@ $(pv_value)</tooltip>
       <keep_wh_ratio>false</keep_wh_ratio>
     </scale_options>
     <scripts />
-    <text>Rotary Offset</text>
+    <text>$(AXIS) Offset</text>
     <tooltip></tooltip>
     <transparent>true</transparent>
     <vertical_alignment>1</vertical_alignment>
@@ -509,7 +509,7 @@ $(pv_value)</tooltip>
     <name>Text Input_4</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}-Velo-SP</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}-Velo-SP</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -561,7 +561,7 @@ $(pv_value)</tooltip>
       <keep_wh_ratio>false</keep_wh_ratio>
     </scale_options>
     <scripts />
-    <text>Rotary Velocity</text>
+    <text>$(AXIS) Velocity</text>
     <tooltip></tooltip>
     <transparent>true</transparent>
     <vertical_alignment>1</vertical_alignment>
@@ -601,7 +601,7 @@ $(pv_value)</tooltip>
     <name>Text Update_4</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}-Velo-RB</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}-Velo-RB</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -653,7 +653,7 @@ $(pv_value)</tooltip>
     <name>Text Update_5</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}ScanStart-RB</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}ScanStart-RB</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -710,7 +710,7 @@ $(pv_value)</tooltip>
     <name>Text Input_5</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}ScanStart-SP</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}ScanStart-SP</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -842,7 +842,7 @@ $(pv_value)</tooltip>
     <name>Text Update_7</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}ScanStop-SP</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}ScanStop-SP</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -899,7 +899,7 @@ $(pv_value)</tooltip>
     <name>Text Input_7</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}ScanStop-SP</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}ScanStop-SP</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -991,7 +991,7 @@ $(pv_value)</tooltip>
     <name>Text Update_8</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}ScanNTriggers-SP</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}ScanNTriggers-SP</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -1048,7 +1048,7 @@ $(pv_value)</tooltip>
     <name>Text Input_8</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}ScanNTriggers-SP</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}ScanNTriggers-SP</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -1203,7 +1203,7 @@ $(pv_value)</tooltip>
     <image></image>
     <name>Action Button_1</name>
     <push_action_index>0</push_action_index>
-    <pv_name>$(SYS){$(DEV)-Ax:R}RunScan.PROC</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}RunScan.PROC</pv_name>
     <pv_value />
     <rules />
     <scale_options>
@@ -1338,7 +1338,7 @@ $(pv_value)</tooltip>
     <name>Text Update_9</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}TriggerRate</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}TriggerRate</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -1430,7 +1430,7 @@ $(pv_value)</tooltip>
     <name>Text Update_10</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}ScanAccelTime-SP</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}ScanAccelTime-SP</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -1487,7 +1487,7 @@ $(pv_value)</tooltip>
     <name>Text Input_9</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}ScanAccelTime-SP</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}ScanAccelTime-SP</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -1579,7 +1579,7 @@ $(pv_value)</tooltip>
     <name>Text Update_11</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}TriggerNExtra</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}TriggerNExtra</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -1671,7 +1671,7 @@ $(pv_value)</tooltip>
     <name>Text Update_12</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)-Ax:R}TriggerSpacing</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}TriggerSpacing</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -1773,7 +1773,7 @@ $(pv_value)</tooltip>
       <color name="Major" red="255" green="0" blue="0" />
     </on_color>
     <on_label>ON</on_label>
-    <pv_name>$(SYS){$(DEV)-Ax:R}ScanErrNotHomed</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}ScanErrNotHomed</pv_name>
     <pv_value />
     <rules />
     <scale_options>
@@ -1871,7 +1871,7 @@ $(pv_value)</tooltip>
       <color name="Major" red="255" green="0" blue="0" />
     </on_color>
     <on_label>ON</on_label>
-    <pv_name>$(SYS){$(DEV)-Ax:R}ScanErrTriggerState</pv_name>
+    <pv_name>$(SYS){$(DEV)-Ax:$(AXIS)}ScanErrTriggerState</pv_name>
     <pv_value />
     <rules />
     <scale_options>
@@ -1964,7 +1964,7 @@ $(pv_value)</tooltip>
     <name>Text Input_10</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)}RFileName</pv_name>
+    <pv_name>$(SYS){$(DEV)}$(AXIS)FileName</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -2061,7 +2061,7 @@ $(pv_value)</tooltip>
     <image></image>
     <name>Action Button_3</name>
     <push_action_index>0</push_action_index>
-    <pv_name>$(SYS){$(DEV)}RScanSave.PROC</pv_name>
+    <pv_name>$(SYS){$(DEV)}$(AXIS)ScanSave.PROC</pv_name>
     <pv_value />
     <rules />
     <scale_options>
@@ -2071,7 +2071,7 @@ $(pv_value)</tooltip>
     </scale_options>
     <scripts />
     <style>0</style>
-    <text>R Scan Save</text>
+    <text>$(AXIS) Scan Save</text>
     <toggle_button>false</toggle_button>
     <tooltip>$(pv_name)
 $(pv_value)</tooltip>
@@ -2309,7 +2309,7 @@ $(pv_value)</tooltip>
     <name>Text Input_13</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)}ROutDir</pv_name>
+    <pv_name>$(SYS){$(DEV)}$(AXIS)OutDir</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -2441,7 +2441,7 @@ $(pv_value)</tooltip>
     <name>Text Update_13</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)}RFilePath</pv_name>
+    <pv_name>$(SYS){$(DEV)}$(AXIS)FilePath</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />
@@ -2492,13 +2492,13 @@ $(pv_value)</tooltip>
     <height>90</height>
     <horizontal_alignment>0</horizontal_alignment>
     <limits_from_pv>false</limits_from_pv>
-    <maximum>Infinity</maximum>
-    <minimum>-Infinity</minimum>
+    <maximum>1.7976931348623157E308</maximum>
+    <minimum>-1.7976931348623157E308</minimum>
     <multiline_input>true</multiline_input>
     <name>Text Input</name>
     <precision>0</precision>
     <precision_from_pv>true</precision_from_pv>
-    <pv_name>$(SYS){$(DEV)}RScanComments</pv_name>
+    <pv_name>$(SYS){$(DEV)}$(AXIS)ScanComments</pv_name>
     <pv_value />
     <rotation_angle>0.0</rotation_angle>
     <rules />

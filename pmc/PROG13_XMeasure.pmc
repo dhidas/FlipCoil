@@ -1,0 +1,93 @@
+#include "PVariables.pmc"
+#include "MVariables.pmc"
+#include "Constants.pmc"
+
+
+; Used internally
+#define Q_XOffset      Q72  ; X offset from pmacAsyn setting
+#define Q_XStart       Q400 ; Actual X start position
+#define Q_XStop        Q401 ; Actual X stop position
+#define Q_XTrigWidth   Q402 ; Trigger width in mm
+#define Q_XDirection   Q403 ; Direction of scan based off X0 and XF
+#define Q_XDOver       Q404 ; Distance for ramp (Purposly not accounting for accel, in clear)
+#define Q_XDelta       Q405 ; Distance between triggers
+#define Q_XNOver       Q406 ; Number of extra triggers before X0
+#define Q_XFirst       Q407 ; Position of first actual trigger
+#define Q_XBehind      Q408 ; Position of trigger up edge behind starting point
+
+
+Open PROG 13 Clear
+
+LINEAR
+ABS
+TA(P_XTOver)
+TS(P_XTOver / 2)
+
+FRAX(A)
+F(kXQUICKSPEED)
+
+
+; Get the trigger compare out of the way
+M_PosComp1Inc = 0
+M_PosComp1A = 1000 / P_MMPerStepX
+M_PosComp1B = 1000 / P_MMPerStepX
+
+; Possible errors
+P_XNotHomed = 0
+P_XWrongTriggerState = 0
+
+; Initial calculations
+Q_XDirection = +1
+if (P_XX0 > P_XXFF)
+  Q_XDirection = -1
+endif
+Q_XDOver   = P_XTOver * P_MMPerSecondX
+Q_XDelta   = ABS((P_XXF - P_XX0) / (P_XNTriggers - 1))
+Q_XNOver   = INT(Q_XDOver / Q_XDelta)
+Q_XTrigWidth = Q_XDelta / 2
+
+if (ABS(P_XTOver * P_MMPerSecondX - Q_XDelta * Q_XNOver) < Q_XTrigWidth / 10)
+  Q_XDOver = Q_XDOver + Q_XTrigWidth / 5
+endif
+Q_XNOver   = INT(Q_XDOver / Q_XDelta)
+
+Q_XFirst   = P_XX0 - Q_XDirection * Q_XNOver * Q_XDelta + Q_XOffset/2
+Q_XBehind  = Q_XFirst + Q_XDirection * (Q_XTrigWidth - Q_XDelta) + Q_XOffset/2
+P_XNTotalTriggers = P_XNTriggers + 2 * Q_XNOver
+
+; Calculate actual start and stop positions for motor movement
+Q_XStart = P_XX0 - Q_XDirection * Q_XDOver
+Q_XStop  = P_XXF + Q_XDirection * Q_XDOver
+
+
+; Check if motors homed or not
+if (M_HomeComplete_M1 != 1 or M_HomeComplete_M2 != 1)
+  P_XNotHomed = 1
+  return
+endif
+
+if (M_PosComp1Val != 1)
+  P_XWrongTriggerState = 1
+  return
+endif
+
+; Move to starting position
+A(Q_XStart) B(Q_XOffset)
+Dwell 10
+F(P_MMPerSecondX)
+
+; First trigger must be at:
+M_PosComp1Inc = Q_XDelta / P_MMPerStepX
+M_PosComp1B = Q_XFirst / P_MMPerStepX
+M_PosComp1A = Q_XBehind / P_MMPerStepX
+gTRIG1HIGH
+
+Dwell 100
+
+; Move to stopping position
+A(Q_XStop) B(Q_XOffset)
+Dwell 100
+gTRIG1HIGH
+
+
+Close

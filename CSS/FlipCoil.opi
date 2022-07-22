@@ -49,10 +49,11 @@
     <foreground_color>
       <color red="192" green="192" blue="192" />
     </foreground_color>
-    <height>640</height>
+    <height>1000</height>
     <horizontal_tabs>true</horizontal_tabs>
     <macros>
       <include_parent_macros>true</include_parent_macros>
+      <AXIS>R</AXIS>
     </macros>
     <minimum_tab_height>10</minimum_tab_height>
     <name>Tabbed Container</name>
@@ -151,7 +152,7 @@
     <tooltip></tooltip>
     <visible>true</visible>
     <widget_type>Tabbed Container</widget_type>
-    <width>800</width>
+    <width>1000</width>
     <wuid>-75978a7d:181e9e45b6e:-21f0</wuid>
     <x>0</x>
     <y>0</y>
@@ -173,7 +174,7 @@
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
-      <height>606</height>
+      <height>966</height>
       <lock_children>false</lock_children>
       <macros>
         <include_parent_macros>true</include_parent_macros>
@@ -189,9 +190,9 @@
       <show_scrollbar>true</show_scrollbar>
       <tooltip></tooltip>
       <transparent>true</transparent>
-      <visible>false</visible>
+      <visible>true</visible>
       <widget_type>Grouping Container</widget_type>
-      <width>798</width>
+      <width>998</width>
       <wuid>-75978a7d:181e9e45b6e:-21ef</wuid>
       <x>1</x>
       <y>1</y>
@@ -213,7 +214,7 @@
           <color red="192" green="192" blue="192" />
         </foreground_color>
         <group_name></group_name>
-        <height>555</height>
+        <height>208</height>
         <macros>
           <include_parent_macros>true</include_parent_macros>
         </macros>
@@ -254,7 +255,7 @@
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
-      <height>606</height>
+      <height>966</height>
       <lock_children>false</lock_children>
       <macros>
         <include_parent_macros>true</include_parent_macros>
@@ -272,10 +273,51 @@
       <transparent>true</transparent>
       <visible>false</visible>
       <widget_type>Grouping Container</widget_type>
-      <width>798</width>
+      <width>998</width>
       <wuid>-75978a7d:181e9e45b6e:-21ee</wuid>
       <x>1</x>
       <y>1</y>
+      <widget typeId="org.csstudio.opibuilder.widgets.linkingContainer" version="1.0.0">
+        <actions hook="false" hook_all="false" />
+        <background_color>
+          <color red="240" green="240" blue="240" />
+        </background_color>
+        <border_color>
+          <color red="0" green="128" blue="255" />
+        </border_color>
+        <border_style>3</border_style>
+        <border_width>1</border_width>
+        <enabled>true</enabled>
+        <font>
+          <opifont.name fontName="Cantarell" height="11" style="0" pixels="false">Default</opifont.name>
+        </font>
+        <foreground_color>
+          <color red="192" green="192" blue="192" />
+        </foreground_color>
+        <group_name></group_name>
+        <height>587</height>
+        <macros>
+          <include_parent_macros>true</include_parent_macros>
+          <AXIS>X</AXIS>
+        </macros>
+        <name>Linking Container</name>
+        <opi_file>FlipCoilScanR.opi</opi_file>
+        <resize_behaviour>1</resize_behaviour>
+        <rules />
+        <scale_options>
+          <width_scalable>true</width_scalable>
+          <height_scalable>true</height_scalable>
+          <keep_wh_ratio>false</keep_wh_ratio>
+        </scale_options>
+        <scripts />
+        <tooltip></tooltip>
+        <visible>true</visible>
+        <widget_type>Linking Container</widget_type>
+        <width>792</width>
+        <wuid>190d611b:1822254061d:-79f7</wuid>
+        <x>0</x>
+        <y>0</y>
+      </widget>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
       <actions hook="false" hook_all="false" />
@@ -295,7 +337,7 @@
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
-      <height>606</height>
+      <height>966</height>
       <lock_children>false</lock_children>
       <macros>
         <include_parent_macros>true</include_parent_macros>
@@ -311,9 +353,9 @@
       <show_scrollbar>true</show_scrollbar>
       <tooltip></tooltip>
       <transparent>true</transparent>
-      <visible>true</visible>
+      <visible>false</visible>
       <widget_type>Grouping Container</widget_type>
-      <width>798</width>
+      <width>998</width>
       <wuid>-75978a7d:181e9e45b6e:-21ed</wuid>
       <x>1</x>
       <y>1</y>
@@ -335,7 +377,7 @@
           <color red="192" green="192" blue="192" />
         </foreground_color>
         <group_name></group_name>
-        <height>367</height>
+        <height>587</height>
         <macros>
           <include_parent_macros>true</include_parent_macros>
         </macros>
@@ -376,7 +418,7 @@
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
-      <height>606</height>
+      <height>966</height>
       <lock_children>false</lock_children>
       <macros>
         <include_parent_macros>true</include_parent_macros>
@@ -394,7 +436,7 @@
       <transparent>true</transparent>
       <visible>false</visible>
       <widget_type>Grouping Container</widget_type>
-      <width>798</width>
+      <width>998</width>
       <wuid>-75978a7d:181e9e45b6e:-21ec</wuid>
       <x>1</x>
       <y>1</y>
@@ -458,7 +500,7 @@
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
-      <height>606</height>
+      <height>966</height>
       <lock_children>false</lock_children>
       <macros>
         <include_parent_macros>true</include_parent_macros>
@@ -476,7 +518,7 @@
       <transparent>true</transparent>
       <visible>false</visible>
       <widget_type>Grouping Container</widget_type>
-      <width>798</width>
+      <width>998</width>
       <wuid>-75978a7d:181e9e45b6e:-21eb</wuid>
       <x>1</x>
       <y>1</y>
@@ -540,7 +582,7 @@
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
-      <height>606</height>
+      <height>966</height>
       <lock_children>false</lock_children>
       <macros>
         <include_parent_macros>true</include_parent_macros>
@@ -558,7 +600,7 @@
       <transparent>true</transparent>
       <visible>false</visible>
       <widget_type>Grouping Container</widget_type>
-      <width>798</width>
+      <width>998</width>
       <wuid>-75978a7d:181e9e45b6e:-21ea</wuid>
       <x>1</x>
       <y>1</y>
@@ -622,7 +664,7 @@
       <foreground_color>
         <color red="192" green="192" blue="192" />
       </foreground_color>
-      <height>606</height>
+      <height>966</height>
       <lock_children>false</lock_children>
       <macros>
         <include_parent_macros>true</include_parent_macros>
@@ -640,7 +682,7 @@
       <transparent>true</transparent>
       <visible>false</visible>
       <widget_type>Grouping Container</widget_type>
-      <width>798</width>
+      <width>998</width>
       <wuid>-75978a7d:181e9e45b6e:-21e1</wuid>
       <x>1</x>
       <y>1</y>
@@ -662,7 +704,7 @@
           <color red="192" green="192" blue="192" />
         </foreground_color>
         <group_name></group_name>
-        <height>589</height>
+        <height>682</height>
         <macros>
           <include_parent_macros>true</include_parent_macros>
         </macros>
@@ -679,7 +721,7 @@
         <tooltip></tooltip>
         <visible>true</visible>
         <widget_type>Linking Container</widget_type>
-        <width>787</width>
+        <width>988</width>
         <wuid>-75978a7d:181e9e45b6e:-1d09</wuid>
         <x>0</x>
         <y>0</y>

@@ -22,11 +22,20 @@ P_HomingY = 0
 P_HomingR = 0
 
 
+; Defaults for PLC13
+P_XNTriggers          = 21
+P_XX0                 = -10
+P_XXF                 = +10
+;P_XOffset             = 0
+P_XTOver              = 0.5
+P_XNotHomed           = 0
+P_XWrongTriggerState  = 0
+
 ; Defaults for PLC15
 P_RotaryNTriggers   = 21
 P_RotaryR0          = -10
 P_RotaryRF          = +10
-P_RotaryOffset      = 0
+;P_RotaryOffset      = 0
 P_RotaryTOver       = 0.5
 P_RotaryNotHomed    = 0
 P_RotaryWrongTriggerState = 0
