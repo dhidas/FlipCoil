@@ -230,6 +230,7 @@ record(ao, "$(SYS){$(DEV)-Ax:X}-Velo-SP") {
   field(EGU, "mm/s")
   field(OUT,  "@pmac.proto setVar(P802) $(PORT)")
   field(FLNK,  "$(SYS){$(DEV)-Ax:X}-Velo-RB")
+  field(PREC, "3")
 }
 record(ai, "$(SYS){$(DEV)-Ax:X}-Velo-RB") {
   field(DTYP, "stream")
@@ -266,6 +267,7 @@ record(ao, "$(SYS){$(DEV)-Ax:Y}-Velo-SP") {
   field(EGU, "mm/s")
   field(OUT,  "@pmac.proto setVar(P803) $(PORT)")
   field(FLNK,  "$(SYS){$(DEV)-Ax:Y}-Velo-RB")
+  field(PREC, "3")
 }
 record(ai, "$(SYS){$(DEV)-Ax:Y}-Velo-RB") {
   field(DTYP, "stream")
@@ -284,6 +286,9 @@ record(dfanout, "$(SYS){$(DEV)-Ax:X+}-HOMEOFFSET") {
   field(DESC, "X+ Home offset")
   field(OUTA, "$(SYS){$(DEV)-Ax:X+}-Mtr.OFF PP")
   field(OUTB, "$(SYS){$(DEV)-Ax:X+}-HOMEOFF-SP PP")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(ao, "$(SYS){$(DEV)-Ax:X+}-HOMEOFF-SP") {
   field(DTYP, "stream")
@@ -306,6 +311,9 @@ record(dfanout, "$(SYS){$(DEV)-Ax:X-}-HOMEOFFSET") {
   field(DESC, "X- Home offset")
   field(OUTA, "$(SYS){$(DEV)-Ax:X-}-Mtr.OFF PP")
   field(OUTB, "$(SYS){$(DEV)-Ax:X-}-HOMEOFF-SP PP")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
 }
 record(ao, "$(SYS){$(DEV)-Ax:X-}-HOMEOFF-SP") {
   field(DTYP, "stream")
@@ -353,6 +361,7 @@ record(ao, "$(SYS){$(DEV)-Ax:R}-Velo-SP") {
   field(EGU, "deg/s")
   field(OUT,  "@pmac.proto setVar(P800) $(PORT)")
   field(FLNK,  "$(SYS){$(DEV)-Ax:R}-Velo-RB")
+  field(PREC, "3")
 }
 record(ai, "$(SYS){$(DEV)-Ax:R}-Velo-RB") {
   field(DTYP, "stream")
@@ -377,6 +386,7 @@ record(ao, "$(SYS){$(DEV)-Ax:X}ScanStart-SP") {
   field(OUT, "@pmac.proto setVar(P821) $(PORT)")
   field(FLNK, "$(SYS){$(DEV)-Ax:X}ScanStart-RB")
   field(PINI, "YES")
+  field(PREC, "3")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
@@ -386,7 +396,7 @@ record(ai, "$(SYS){$(DEV)-Ax:X}ScanStart-RB") {
   field(EGU, "mm")
   field(SCAN, "Passive")
   field(INP, "@pmac.proto getVar(P821) $(PORT)")
-  field(PREC, "2")
+  field(PREC, "3")
 }
 
 record(ao, "$(SYS){$(DEV)-Ax:X}ScanStop-SP") {
@@ -399,6 +409,7 @@ record(ao, "$(SYS){$(DEV)-Ax:X}ScanStop-SP") {
   field(OUT, "@pmac.proto setVar(P822) $(PORT)")
   field(FLNK, "$(SYS){$(DEV)-Ax:X}ScanStop-RB")
   field(PINI, "YES")
+  field(PREC, "3")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
@@ -408,7 +419,7 @@ record(ai, "$(SYS){$(DEV)-Ax:X}ScanStop-RB") {
   field(EGU, "mm")
   field(SCAN, "Passive")
   field(INP, "@pmac.proto getVar(P822) $(PORT)")
-  field(PREC, "2")
+  field(PREC, "3")
 }
 
 record(ao, "$(SYS){$(DEV)-Ax:X}ScanNTriggers-SP") {
@@ -507,6 +518,7 @@ record(ao, "$(SYS){$(DEV)-Ax:R}ScanStart-SP") {
   field(OUT, "@pmac.proto setVar(P811) $(PORT)")
   field(FLNK, "$(SYS){$(DEV)-Ax:R}ScanStart-RB")
   field(PINI, "YES")
+  field(PREC, "3")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
@@ -516,7 +528,7 @@ record(ai, "$(SYS){$(DEV)-Ax:R}ScanStart-RB") {
   field(EGU, "deg")
   field(SCAN, "Passive")
   field(INP, "@pmac.proto getVar(P811) $(PORT)")
-  field(PREC, "2")
+  field(PREC, "3")
 }
 
 record(ao, "$(SYS){$(DEV)-Ax:R}ScanStop-SP") {
@@ -529,6 +541,7 @@ record(ao, "$(SYS){$(DEV)-Ax:R}ScanStop-SP") {
   field(OUT, "@pmac.proto setVar(P812) $(PORT)")
   field(FLNK, "$(SYS){$(DEV)-Ax:R}ScanStop-RB")
   field(PINI, "YES")
+  field(PREC, "3")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
@@ -538,7 +551,7 @@ record(ai, "$(SYS){$(DEV)-Ax:R}ScanStop-RB") {
   field(EGU, "deg")
   field(SCAN, "Passive")
   field(INP, "@pmac.proto getVar(P812) $(PORT)")
-  field(PREC, "2")
+  field(PREC, "3")
 }
 
 record(ao, "$(SYS){$(DEV)-Ax:R}ScanNTriggers-SP") {
@@ -686,73 +699,11 @@ record(bi, "$(SYS){$(DEV)-Ax:R}ScanErrTriggerState") {
 }
 
 
-record(ao, "$(SYS){$(DEV)-Ax:X}ScanStart-SP") {
-  field(DTYP, "stream")
-  field(DESC, "X Scan Start point")
-  field(EGU, "mm")
-  field(VAL,  "-10")
-  field(DRVH, "50")
-  field(DRVL, "-50")
-  field(OUT, "@pmac.proto setVar(P1300) $(PORT)")
-  field(FLNK, "$(SYS){$(DEV)-Ax:X}ScanStart-RB")
-  field(PINI, "YES")
-  info(autosaveFields_pass0, "VAL")
-  info(autosaveFields, "VAL")
-}
-record(ai, "$(SYS){$(DEV)-Ax:X}ScanStart-RB") {
-  field(DTYP, "stream")
-  field(DESC, "X Scan Start point")
-  field(EGU, "mm")
-  field(SCAN, "Passive")
-  field(INP, "@pmac.proto getVar(P1300) $(PORT)")
-  field(PREC, "2")
-}
-
-record(ao, "$(SYS){$(DEV)-Ax:X}ScanStop-SP") {
-  field(DTYP, "stream")
-  field(DESC, "X Scan Stop point")
-  field(EGU, "mm")
-  field(VAL,  "10")
-  field(DRVH, "50")
-  field(DRVL, "-50")
-  field(OUT, "@pmac.proto setVar(P1301) $(PORT)")
-  field(FLNK, "$(SYS){$(DEV)-Ax:X}ScanStop-RB")
-  field(PINI, "YES")
-  info(autosaveFields_pass0, "VAL")
-  info(autosaveFields, "VAL")
-}
-record(ai, "$(SYS){$(DEV)-Ax:X}ScanStop-RB") {
-  field(DTYP, "stream")
-  field(DESC, "X Scan Stop point")
-  field(EGU, "mm")
-  field(SCAN, "Passive")
-  field(INP, "@pmac.proto getVar(P1301) $(PORT)")
-  field(PREC, "2")
-}
-
-record(ao, "$(SYS){$(DEV)-Ax:X}ScanNTriggers-SP") {
-  field(DTYP, "stream")
-  field(DESC, "Number of triggers")
-  field(VAL,  "101")
-  field(DRVH, "1000")
-  field(DRVL, "2")
-  field(OUT, "@pmac.proto setIntVar(P1302) $(PORT)")
-  field(FLNK, "$(SYS){$(DEV)-Ax:X}ScanNTriggers-RB")
-  field(PINI, "YES")
-  info(autosaveFields_pass0, "VAL")
-  info(autosaveFields, "VAL")
-}
-record(ai, "$(SYS){$(DEV)-Ax:X}ScanNTriggers-RB") {
-  field(DTYP, "stream")
-  field(DESC, "Number of triggers")
-  field(SCAN, "Passive")
-  field(INP, "@pmac.proto getIntVar(P1302) $(PORT)")
-}
 record(stringout, "$(SYS){$(DEV)-Ax:X}RunScan") {
   field(DESC, "Run the X scan")
   field(DTYP, "stream")
   field(PROC, 1)
-  field(VAL, "enaplc13")
+  field(VAL, "&3B13R")
   field(OUT, "@pmac.proto sendString() $(PORT)")
 }
 
@@ -805,6 +756,7 @@ record(ai, "$(SYS){$(DEV)}P100-RB") {
 record(ai, "$(SYS){$(DEV)}CoilWidth") {
   field(DESC, "Width of coil")
   field(EGU, "mm")
+  field(PREC, "3")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }

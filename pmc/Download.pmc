@@ -17,4 +17,5 @@
 #include "PROG03_X.pmc"
 #include "PROG04_Y.pmc"
 #include "PROG05_Rotary.pmc"
+#include "PROG13_XMeasure.pmc"
 #include "PROG15_RotaryMeasure.pmc"

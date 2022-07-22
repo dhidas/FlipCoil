@@ -51,7 +51,7 @@ if (ABS(P_XTOver * P_MMPerSecondX - Q_XDelta * Q_XNOver) < Q_XTrigWidth / 10)
 endif
 Q_XNOver   = INT(Q_XDOver / Q_XDelta)
 
-Q_XFirst   = P_XX0 - Q_XDirection * Q_XNOver * Q_XDelta + Q_XOffset/2
+Q_XFirst   = P_XX0 - Q_XDirection * Q_XNOver * Q_XDelta + Q_XOffset/2 + P_OffsetM1
 Q_XBehind  = Q_XFirst + Q_XDirection * (Q_XTrigWidth - Q_XDelta) + Q_XOffset/2
 P_XNTotalTriggers = P_XNTriggers + 2 * Q_XNOver
 

@@ -45,6 +45,7 @@ P_RotaryWrongTriggerState = 0
 M_PosComp7Inc = 0
 M_PosComp7A = 100 * 360 / P_DegPerStep
 M_PosComp7B = 100 * 360 / P_DegPerStep
+gTRIG1HIGH
 gTRIG7HIGH
 
 Enable PLC 19
