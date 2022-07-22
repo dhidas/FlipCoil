@@ -38,7 +38,7 @@ P_XWrongTriggerState = 0
 
 ; Initial calculations
 Q_XDirection = +1
-if (P_XX0 > P_XXFF)
+if (P_XX0 > P_XXF)
   Q_XDirection = -1
 endif
 Q_XDOver   = P_XTOver * P_MMPerSecondX
