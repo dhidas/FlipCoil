@@ -53,7 +53,6 @@
     <horizontal_tabs>true</horizontal_tabs>
     <macros>
       <include_parent_macros>true</include_parent_macros>
-      <AXIS>T</AXIS>
     </macros>
     <minimum_tab_height>10</minimum_tab_height>
     <name>Tabbed Container</name>
@@ -283,7 +282,7 @@
       <show_scrollbar>true</show_scrollbar>
       <tooltip></tooltip>
       <transparent>true</transparent>
-      <visible>false</visible>
+      <visible>true</visible>
       <widget_type>Grouping Container</widget_type>
       <width>998</width>
       <wuid>-75978a7d:181e9e45b6e:-21ee</wuid>
@@ -392,6 +391,7 @@
         <height>676</height>
         <macros>
           <include_parent_macros>true</include_parent_macros>
+          <AXIS>R</AXIS>
         </macros>
         <name>Linking Container</name>
         <opi_file>FlipCoilScanXYR.opi</opi_file>
@@ -446,7 +446,7 @@
       <show_scrollbar>true</show_scrollbar>
       <tooltip></tooltip>
       <transparent>true</transparent>
-      <visible>true</visible>
+      <visible>false</visible>
       <widget_type>Grouping Container</widget_type>
       <width>998</width>
       <wuid>57a42036:1822b46c054:-79c2</wuid>
@@ -470,9 +470,10 @@
           <color red="192" green="192" blue="192" />
         </foreground_color>
         <group_name></group_name>
-        <height>676</height>
+        <height>980</height>
         <macros>
           <include_parent_macros>true</include_parent_macros>
+          <AXIS>T</AXIS>
         </macros>
         <name>Linking Container</name>
         <opi_file>FlipCoilScanT.opi</opi_file>
@@ -487,8 +488,8 @@
         <tooltip></tooltip>
         <visible>true</visible>
         <widget_type>Linking Container</widget_type>
-        <width>798</width>
-        <wuid>57a42036:1822b46c054:-7621</wuid>
+        <width>792</width>
+        <wuid>57a42036:1822b46c054:-3509</wuid>
         <x>0</x>
         <y>0</y>
       </widget>

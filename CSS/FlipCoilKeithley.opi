@@ -538,11 +538,11 @@ $(pv_value)</tooltip>
     <tooltip>$(trace_0_y_pv)
 $(trace_0_y_pv_value)</tooltip>
     <trace_0_anti_alias>true</trace_0_anti_alias>
-    <trace_0_buffer_size>100</trace_0_buffer_size>
-    <trace_0_concatenate_data>true</trace_0_concatenate_data>
+    <trace_0_buffer_size>1024</trace_0_buffer_size>
+    <trace_0_concatenate_data>false</trace_0_concatenate_data>
     <trace_0_line_width>1</trace_0_line_width>
     <trace_0_name>$(trace_0_y_pv)</trace_0_name>
-    <trace_0_plot_mode>0</trace_0_plot_mode>
+    <trace_0_plot_mode>1</trace_0_plot_mode>
     <trace_0_point_size>4</trace_0_point_size>
     <trace_0_point_style>0</trace_0_point_style>
     <trace_0_trace_color>
@@ -6981,7 +6981,7 @@ $(pv_value)</tooltip>
     <widget_type>Action Button</widget_type>
     <width>80</width>
     <wuid>4852fbd6:18225ad8428:-6946</wuid>
-    <x>484</x>
-    <y>578</y>
+    <x>443</x>
+    <y>690</y>
   </widget>
 </display>

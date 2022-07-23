@@ -336,6 +336,64 @@ record(ai, "$(SYS){$(DEV)-Ax:X-}-HOMEOFF-RB") {
 
 
 
+record(dfanout, "$(SYS){$(DEV)-Ax:R+}-HOMEOFFSET") {
+  field(SCAN, "Passive")
+  field(DESC, "R+ Home offset")
+  field(OUTA, "$(SYS){$(DEV)-Ax:R+}-Mtr.OFF PP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:R+}-HOMEOFF-SP PP")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ao, "$(SYS){$(DEV)-Ax:R+}-HOMEOFF-SP") {
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(DESC, "R+ Home offset")
+  field(EGU, "deg")
+  field(OUT,  "@pmac.proto setVar(P4907) $(PORT)")
+  field(FLNK,  "$(SYS){$(DEV)-Ax:R+}-HOMEOFF-RB")
+}
+record(ai, "$(SYS){$(DEV)-Ax:R+}-HOMEOFF-RB") {
+  field(DTYP, "stream")
+  field(DESC, "R+ Home offset")
+  field(EGU, "deg")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P4907) $(PORT)")
+  field(PREC, "3")
+}
+record(dfanout, "$(SYS){$(DEV)-Ax:R-}-HOMEOFFSET") {
+  field(SCAN, "Passive")
+  field(DESC, "R- Home offset")
+  field(OUTA, "$(SYS){$(DEV)-Ax:R-}-Mtr.OFF PP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:R-}-HOMEOFF-SP PP")
+  field(PINI, "YES")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ao, "$(SYS){$(DEV)-Ax:R-}-HOMEOFF-SP") {
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(DESC, "R- Home offset")
+  field(EGU, "deg")
+  field(OUT,  "@pmac.proto setVar(P4908) $(PORT)")
+  field(FLNK,  "$(SYS){$(DEV)-Ax:R-}-HOMEOFF-RB")
+}
+record(ai, "$(SYS){$(DEV)-Ax:R-}-HOMEOFF-RB") {
+  field(DTYP, "stream")
+  field(DESC, "R- Home offset")
+  field(EGU, "deg")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P4908) $(PORT)")
+  field(PREC, "3")
+}
+
+
+
+
+
+
+
+
 
 record(ao, "$(SYS){$(DEV)-Ax:R}-Velo") {
   field(SCAN, "Passive")
@@ -767,6 +825,25 @@ record(ai, "$(SYS){$(DEV)}CoilNTurns") {
   info(autosaveFields, "VAL")
 }
 
+record (waveform, "$(SYS){$(DEV)}WF-X") {
+  field(SCAN, "Passive")
+  field(INP, "$(SYS){$(DEV)-Keithley}TRAC:DATA PP")
+  field(FTVL, "DOUBLE")
+  field(NELM, "1024")
+}
+record (waveform, "$(SYS){$(DEV)}WF-R") {
+  field(SCAN, "Passive")
+  field(INP, "$(SYS){$(DEV)-Keithley}TRAC:DATA PP")
+  field(FTVL, "DOUBLE")
+  field(NELM, "1024")
+}
+record (waveform, "$(SYS){$(DEV)}WF-T") {
+  field(SCAN, "Passive")
+  field(INP, "$(SYS){$(DEV)-Keithley}TRAC:DATA NPP")
+  field(FTVL, "DOUBLE")
+  field(NELM, "1024")
+}
+
 record (waveform, "$(SYS){$(DEV)}WF-RB") {
   field(SCAN, "1 second")
   field(DTYP, "stream")
@@ -775,6 +852,114 @@ record (waveform, "$(SYS){$(DEV)}WF-RB") {
   field(NELM, "20")
   field(PINI, "YES")
 }
+
+
+
+record(lsi, "$(SYS){$(DEV)}TScanComments") {
+  field(SCAN, "Passive")
+  field(DESC, "Comment to include in data file")
+  field(SIZV, "2000")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(lsi, "$(SYS){$(DEV)}TOutDir") {
+  field(SCAN, "Passive")
+  field(DESC, "Directory to store data")
+  field(FLNK, "$(SYS){$(DEV)}TFilePath-CALC")
+  field(PINI, "YES")
+  field(SIZV, "2000")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+
+record(lsi, "$(SYS){$(DEV)}TFileName") {
+  field(SCAN, "Passive")
+  field(DESC, "Filename for scan data")
+  field(PINI, "YES")
+  field(FLNK, "$(SYS){$(DEV)}TFilePath-CALC")
+  field(SIZV, "2000")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(scalcout, "$(SYS){$(DEV)}TFilePath-CALC") {
+  field(SCAN, "Passive")
+  field(INAA, "$(SYS){$(DEV)}TOutDir")
+  field(INBB, "$(SYS){$(DEV)}TFileName")
+  field(CALC, "AA+'/'+BB")
+  field(OUT,  "$(SYS){$(DEV)}TFilePath PP")
+}
+record(lsi, "$(SYS){$(DEV)}TFilePath") {
+  field(SCAN, "Passive")
+  field(DESC, "Full path of output file")
+  field(SIZV, "2000")
+}
+
+record(ai, "$(SYS){$(DEV)}TScanCounter") {
+  field(DESC, "Counter for ++i save")
+  field(SCAN, "1 second")
+  field(VAL,  "0")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+
+record(aSub, "$(SYS){$(DEV)}TScanSave") {
+    field(SNAM, "tscansave")
+
+    field(INPA, "$(SYS){$(DEV)}TFilePath")
+    field(FTA,  "STRING")
+
+    field(INPB, "$(SYS){$(DEV)}WF-T")
+    field(FTB,  "DOUBLE")
+    field(NOB,  "1024")
+
+    field(INPC, "$(SYS){$(DEV)}TScanCounter")
+    field(FTC,  "DOUBLE")
+
+    field(INPD, "$(SYS){$(DEV)-Keithley}TScan-Aper")
+    field(FTD,  "DOUBLE")
+
+    field(INPE, "$(SYS){$(DEV)-Keithley}TScan-N")
+    field(FTE,  "LONG")
+
+    field(INPF, "$(SYS){$(DEV)-Keithley}TScan-TrigTimer")
+    field(FTF,  "DOUBLE")
+
+    field(INPG, "$(SYS){$(DEV)-Keithley}CHAN1:RANG")
+    field(FTG,  "STRING")
+
+    field(INPH, "$(SYS){$(DEV)-Ax:X}-Mtr.RBV")
+    field(FTH,  "DOUBLE")
+
+    field(INPI, "$(SYS){$(DEV)-Ax:Xo}-Mtr.RBV")
+    field(FTI,  "DOUBLE")
+
+    field(INPJ, "$(SYS){$(DEV)-Ax:Y}-Mtr.RBV")
+    field(FTJ,  "DOUBLE")
+
+    field(INPK, "$(SYS){$(DEV)-Ax:Yo}-Mtr.RBV")
+    field(FTK,  "DOUBLE")
+
+    field(INPL, "$(SYS){$(DEV)-Ax:R}-Mtr.RBV")
+    field(FTL,  "DOUBLE")
+
+    field(INPM, "$(SYS){$(DEV)-Ax:Ro}-Mtr.RBV")
+    field(FTM,  "DOUBLE")
+
+    field(INPN, "$(SYS){$(DEV)}CoilWidth")
+    field(FTN,  "DOUBLE")
+
+    field(INPO, "$(SYS){$(DEV)}CoilNTurns")
+    field(FTO,  "LONG")
+
+    field(INPU, "$(SYS){$(DEV)}TScanComments")
+    field(FTU,  "STRING")
+
+    field(OUTA, "$(SYS){$(DEV)}TScanCounter")
+    field(FTVA, "DOUBLE")
+}
+
+
+
 
 
 
@@ -820,8 +1005,9 @@ record(aSub, "$(SYS){$(DEV)}XScanSave") {
     field(INPA, "$(SYS){$(DEV)}XFilePath")
     field(FTA,  "STRING")
 
-    field(INPB, "$(SYS){$(DEV)}WF-RB")
+    field(INPB, "$(SYS){$(DEV)}WF-X")
     field(FTB,  "DOUBLE")
+    field(NOB,  "1024")
 
     field(INPC, "$(SYS){$(DEV)-Ax:X}ScanStart-RB")
     field(FTC,  "DOUBLE")

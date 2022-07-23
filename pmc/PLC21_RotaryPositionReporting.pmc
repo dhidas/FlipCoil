@@ -9,8 +9,8 @@
 Open PLC 21 Clear
 
   ADDRESS&5
-  Q_Fwd_Mtr7Tmp_PR = (M762/(I708*32)) * P_DegPerStep
-  Q_Fwd_Mtr8Tmp_PR = (M862/(I808*32)) * P_DegPerStep
+  Q_Fwd_Mtr7Tmp_PR = (M762/(I708*32)) * P_DegPerStep + P_OffsetM7
+  Q_Fwd_Mtr8Tmp_PR = (M862/(I808*32)) * P_DegPerStep + P_OffsetM8
 
   ANGLE   = (Q_Fwd_Mtr7Tmp_PR + Q_Fwd_Mtr8Tmp_PR) / 2
   OFFSET  = (Q_Fwd_Mtr7Tmp_PR - Q_Fwd_Mtr8Tmp_PR)
