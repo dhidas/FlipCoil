@@ -86,7 +86,7 @@ static long rscansave(aSubRecord *prec) {
 
     double sum = 0;
     double tsum = 0;
-    for (long ib = NExtra; ib < prec->nob - NExtra; ++ib) {
+    for (long ib = NExtra; ib < N + NExtra; ++ib) {
       fo << ((double*) prec->b)[ib] << std::endl;
       if (ib < 10) std::cout << ((double*) prec->b)[ib] << std::endl;
 

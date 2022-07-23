@@ -111,7 +111,7 @@
       <color red="0" green="0" blue="0" />
     </tab_3_foreground_color>
     <tab_3_icon_path></tab_3_icon_path>
-    <tab_3_title>Axis X</tab_3_title>
+    <tab_3_title>Tab 7</tab_3_title>
     <tab_4_background_color>
       <color red="255" green="255" blue="255" />
     </tab_4_background_color>
@@ -123,7 +123,7 @@
       <color red="0" green="0" blue="0" />
     </tab_4_foreground_color>
     <tab_4_icon_path></tab_4_icon_path>
-    <tab_4_title>Axis Y</tab_4_title>
+    <tab_4_title>Axis X</tab_4_title>
     <tab_5_background_color>
       <color red="255" green="255" blue="255" />
     </tab_5_background_color>
@@ -135,7 +135,7 @@
       <color red="0" green="0" blue="0" />
     </tab_5_foreground_color>
     <tab_5_icon_path></tab_5_icon_path>
-    <tab_5_title>Axis R</tab_5_title>
+    <tab_5_title>Axis Y</tab_5_title>
     <tab_6_background_color>
       <color red="255" green="255" blue="255" />
     </tab_6_background_color>
@@ -147,8 +147,20 @@
       <color red="0" green="0" blue="0" />
     </tab_6_foreground_color>
     <tab_6_icon_path></tab_6_icon_path>
-    <tab_6_title>Keithley</tab_6_title>
-    <tab_count>7</tab_count>
+    <tab_6_title>Axis R</tab_6_title>
+    <tab_7_background_color>
+      <color red="255" green="255" blue="255" />
+    </tab_7_background_color>
+    <tab_7_enabled>true</tab_7_enabled>
+    <tab_7_font>
+      <opifont.name fontName="Cantarell" height="11" style="0" pixels="false">Default</opifont.name>
+    </tab_7_font>
+    <tab_7_foreground_color>
+      <color red="0" green="0" blue="0" />
+    </tab_7_foreground_color>
+    <tab_7_icon_path></tab_7_icon_path>
+    <tab_7_title>Keithley</tab_7_title>
+    <tab_count>8</tab_count>
     <tooltip></tooltip>
     <visible>true</visible>
     <widget_type>Tabbed Container</widget_type>
@@ -190,7 +202,7 @@
       <show_scrollbar>true</show_scrollbar>
       <tooltip></tooltip>
       <transparent>true</transparent>
-      <visible>true</visible>
+      <visible>false</visible>
       <widget_type>Grouping Container</widget_type>
       <width>998</width>
       <wuid>-75978a7d:181e9e45b6e:-21ef</wuid>
@@ -271,7 +283,7 @@
       <show_scrollbar>true</show_scrollbar>
       <tooltip></tooltip>
       <transparent>true</transparent>
-      <visible>false</visible>
+      <visible>true</visible>
       <widget_type>Grouping Container</widget_type>
       <width>998</width>
       <wuid>-75978a7d:181e9e45b6e:-21ee</wuid>
@@ -295,13 +307,13 @@
           <color red="192" green="192" blue="192" />
         </foreground_color>
         <group_name></group_name>
-        <height>587</height>
+        <height>676</height>
         <macros>
           <include_parent_macros>true</include_parent_macros>
           <AXIS>X</AXIS>
         </macros>
         <name>Linking Container</name>
-        <opi_file>FlipCoilScanR.opi</opi_file>
+        <opi_file>FlipCoilScanXYR.opi</opi_file>
         <resize_behaviour>1</resize_behaviour>
         <rules />
         <scale_options>
@@ -313,7 +325,7 @@
         <tooltip></tooltip>
         <visible>true</visible>
         <widget_type>Linking Container</widget_type>
-        <width>792</width>
+        <width>798</width>
         <wuid>190d611b:1822254061d:-79f7</wuid>
         <x>0</x>
         <y>0</y>
@@ -377,12 +389,12 @@
           <color red="192" green="192" blue="192" />
         </foreground_color>
         <group_name></group_name>
-        <height>587</height>
+        <height>676</height>
         <macros>
           <include_parent_macros>true</include_parent_macros>
         </macros>
         <name>Linking Container</name>
-        <opi_file>FlipCoilScanR.opi</opi_file>
+        <opi_file>FlipCoilScanXYR.opi</opi_file>
         <resize_behaviour>1</resize_behaviour>
         <rules />
         <scale_options>
@@ -394,11 +406,52 @@
         <tooltip></tooltip>
         <visible>true</visible>
         <widget_type>Linking Container</widget_type>
-        <width>792</width>
+        <width>798</width>
         <wuid>-131dfa1f:181ea622d61:-782d</wuid>
         <x>0</x>
         <y>0</y>
       </widget>
+    </widget>
+    <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
+      <actions hook="false" hook_all="false" />
+      <background_color>
+        <color red="240" green="240" blue="240" />
+      </background_color>
+      <border_color>
+        <color red="0" green="128" blue="255" />
+      </border_color>
+      <border_style>0</border_style>
+      <border_width>1</border_width>
+      <enabled>true</enabled>
+      <fc>false</fc>
+      <font>
+        <opifont.name fontName="Cantarell" height="11" style="0" pixels="false">Default</opifont.name>
+      </font>
+      <foreground_color>
+        <color red="192" green="192" blue="192" />
+      </foreground_color>
+      <height>966</height>
+      <lock_children>false</lock_children>
+      <macros>
+        <include_parent_macros>true</include_parent_macros>
+      </macros>
+      <name>Tab 7</name>
+      <rules />
+      <scale_options>
+        <width_scalable>true</width_scalable>
+        <height_scalable>true</height_scalable>
+        <keep_wh_ratio>false</keep_wh_ratio>
+      </scale_options>
+      <scripts />
+      <show_scrollbar>true</show_scrollbar>
+      <tooltip></tooltip>
+      <transparent>true</transparent>
+      <visible>false</visible>
+      <widget_type>Grouping Container</widget_type>
+      <width>998</width>
+      <wuid>57a42036:1822b46c054:-79c2</wuid>
+      <x>1</x>
+      <y>1</y>
     </widget>
     <widget typeId="org.csstudio.opibuilder.widgets.groupingContainer" version="1.0.0">
       <actions hook="false" hook_all="false" />
@@ -704,7 +757,7 @@
           <color red="192" green="192" blue="192" />
         </foreground_color>
         <group_name></group_name>
-        <height>682</height>
+        <height>1000</height>
         <macros>
           <include_parent_macros>true</include_parent_macros>
         </macros>

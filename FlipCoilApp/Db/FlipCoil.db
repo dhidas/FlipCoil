@@ -909,8 +909,9 @@ record(aSub, "$(SYS){$(DEV)}RScanSave") {
     field(INPA, "$(SYS){$(DEV)}RFilePath")
     field(FTA,  "STRING")
 
-    field(INPB, "$(SYS){$(DEV)}WF-RB")
+    field(INPB, "$(SYS){$(DEV)-Keithley}TRAC:DATA NPP NMS")
     field(FTB,  "DOUBLE")
+    field(NOB,  "1024")
 
     field(INPC, "$(SYS){$(DEV)-Ax:R}ScanStart-RB")
     field(FTC,  "DOUBLE")
