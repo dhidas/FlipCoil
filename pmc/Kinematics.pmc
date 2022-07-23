@@ -5,8 +5,6 @@
 &3 Open Forward Clear
 Q1 = (P1 * P_MMPerStepX + P_OffsetM1 + P2 * P_MMPerStepX + P_OffsetM2) / 2
 Q2 = (P1 * P_MMPerStepX + P_OffsetM1) - (P2 * P_MMPerStepX + P_OffsetM2)
-;Q1 = (P1 + P2) * P_MMPerStepX / 2
-;Q2 = (P1 - P2) * P_MMPerStepX
 Close
 
 &3 Open Inverse Clear
@@ -20,13 +18,13 @@ Close
 ; A (Q1) is position, B (Q2) is pitch
 ; In normal running A = y position and B = 0 (no yaw)
 &4 Open Forward Clear
-Q1 = (P3 + P4) * P_MMPerStepY / 2
-Q2 = (P3 - P4) * P_MMPerStepY
+Q1 = (P3 * P_MMPerStepY + P_OffsetM3 + P4 * P_MMPerStepY + P_OffsetM4) / 2
+Q2 = (P3 * P_MMPerStepY + P_OffsetM3) - (P4 * P_MMPerStepY + P_OffsetM4)
 Close
 
 &4 Open Inverse Clear
-P3 = (Q1 + Q2 / 2) / P_MMPerStepY
-P4 = (Q1 - Q2 / 2) / P_MMPerStepY
+P3 = (Q1 + Q2 / 2) / P_MMPerStepY - P_OffsetM3 / P_MMPerStepY
+P4 = (Q1 - Q2 / 2) / P_MMPerStepY - P_OffsetM4 / P_MMPerStepY
 Close
 
 
@@ -38,13 +36,9 @@ Close
 &5 Open Forward Clear
 Q1 = (P7 * P_DegPerStep + P_OffsetM7 + P8 * P_DegPerStep + P_OffsetM8) / 2
 Q2 = (P7 * P_DegPerStep + P_OffsetM7) - (P8 * P_DegPerStep + P_OffsetM8)
-;Q1 = (P7 + P8) * P_DegPerStep / 2
-;Q2 = (P7 - P8) * P_DegPerStep
 Close
 
 &5 Open Inverse Clear
 P7 = (Q1 + Q2 / 2) / P_DegPerStep - P_OffsetM7 / P_DegPerStep
 P8 = (Q1 - Q2 / 2) / P_DegPerStep - P_OffsetM8 / P_DegPerStep
-;P7 = (Q1 + Q2 / 2) / P_DegPerStep
-;P8 = (Q1 - Q2 / 2) / P_DegPerStep
 Close

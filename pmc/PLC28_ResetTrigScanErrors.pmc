@@ -1,0 +1,15 @@
+#include "Constants.pmc"
+#include "PVariables.pmc"
+
+Open PLC 28 Clear
+
+gTRIG1HIGH
+gTRIG7HIGH
+
+P_XNotHomed = 0
+P_XWrongTriggerState = 0
+P_RotaryNotHomed = 0
+P_RotaryWrongTriggerState = 0
+
+Disable PLC 28
+Close

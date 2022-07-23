@@ -287,6 +287,7 @@ record(dfanout, "$(SYS){$(DEV)-Ax:X+}-HOMEOFFSET") {
   field(OUTA, "$(SYS){$(DEV)-Ax:X+}-Mtr.OFF PP")
   field(OUTB, "$(SYS){$(DEV)-Ax:X+}-HOMEOFF-SP PP")
   field(PINI, "YES")
+  field(PREC, "3")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
@@ -295,6 +296,7 @@ record(ao, "$(SYS){$(DEV)-Ax:X+}-HOMEOFF-SP") {
   field(SCAN, "Passive")
   field(DESC, "X+ Home offset")
   field(EGU, "mm")
+  field(PREC, "3")
   field(OUT,  "@pmac.proto setVar(P4901) $(PORT)")
   field(FLNK,  "$(SYS){$(DEV)-Ax:X+}-HOMEOFF-RB")
 }
@@ -312,6 +314,7 @@ record(dfanout, "$(SYS){$(DEV)-Ax:X-}-HOMEOFFSET") {
   field(OUTA, "$(SYS){$(DEV)-Ax:X-}-Mtr.OFF PP")
   field(OUTB, "$(SYS){$(DEV)-Ax:X-}-HOMEOFF-SP PP")
   field(PINI, "YES")
+  field(PREC, "3")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
@@ -320,6 +323,7 @@ record(ao, "$(SYS){$(DEV)-Ax:X-}-HOMEOFF-SP") {
   field(SCAN, "Passive")
   field(DESC, "X- Home offset")
   field(EGU, "mm")
+  field(PREC, "3")
   field(OUT,  "@pmac.proto setVar(P4902) $(PORT)")
   field(FLNK,  "$(SYS){$(DEV)-Ax:X-}-HOMEOFF-RB")
 }
@@ -336,12 +340,72 @@ record(ai, "$(SYS){$(DEV)-Ax:X-}-HOMEOFF-RB") {
 
 
 
+
+record(dfanout, "$(SYS){$(DEV)-Ax:Y+}-HOMEOFFSET") {
+  field(SCAN, "Passive")
+  field(DESC, "Y+ Home offset")
+  field(OUTA, "$(SYS){$(DEV)-Ax:Y+}-Mtr.OFF PP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:Y+}-HOMEOFF-SP PP")
+  field(PINI, "YES")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ao, "$(SYS){$(DEV)-Ax:Y+}-HOMEOFF-SP") {
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(DESC, "Y+ Home offset")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(OUT,  "@pmac.proto setVar(P4903) $(PORT)")
+  field(FLNK,  "$(SYS){$(DEV)-Ax:Y+}-HOMEOFF-RB")
+}
+record(ai, "$(SYS){$(DEV)-Ax:Y+}-HOMEOFF-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Y+ Home offset")
+  field(EGU, "mm")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P4903) $(PORT)")
+  field(PREC, "3")
+}
+record(dfanout, "$(SYS){$(DEV)-Ax:Y-}-HOMEOFFSET") {
+  field(SCAN, "Passive")
+  field(DESC, "Y- Home offset")
+  field(OUTA, "$(SYS){$(DEV)-Ax:Y-}-Mtr.OFF PP")
+  field(OUTB, "$(SYS){$(DEV)-Ax:Y-}-HOMEOFF-SP PP")
+  field(PINI, "YES")
+  field(PREC, "3")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+record(ao, "$(SYS){$(DEV)-Ax:Y-}-HOMEOFF-SP") {
+  field(DTYP, "stream")
+  field(SCAN, "Passive")
+  field(DESC, "Y- Home offset")
+  field(EGU, "mm")
+  field(PREC, "3")
+  field(OUT,  "@pmac.proto setVar(P4904) $(PORT)")
+  field(FLNK,  "$(SYS){$(DEV)-Ax:Y-}-HOMEOFF-RB")
+}
+record(ai, "$(SYS){$(DEV)-Ax:Y-}-HOMEOFF-RB") {
+  field(DTYP, "stream")
+  field(DESC, "Y- Home offset")
+  field(EGU, "mm")
+  field(SCAN, "Passive")
+  field(INP, "@pmac.proto getVar(P4904) $(PORT)")
+  field(PREC, "3")
+}
+
+
+
+
 record(dfanout, "$(SYS){$(DEV)-Ax:R+}-HOMEOFFSET") {
   field(SCAN, "Passive")
   field(DESC, "R+ Home offset")
   field(OUTA, "$(SYS){$(DEV)-Ax:R+}-Mtr.OFF PP")
   field(OUTB, "$(SYS){$(DEV)-Ax:R+}-HOMEOFF-SP PP")
   field(PINI, "YES")
+  field(PREC, "3")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
@@ -350,6 +414,7 @@ record(ao, "$(SYS){$(DEV)-Ax:R+}-HOMEOFF-SP") {
   field(SCAN, "Passive")
   field(DESC, "R+ Home offset")
   field(EGU, "deg")
+  field(PREC, "3")
   field(OUT,  "@pmac.proto setVar(P4907) $(PORT)")
   field(FLNK,  "$(SYS){$(DEV)-Ax:R+}-HOMEOFF-RB")
 }
@@ -367,6 +432,7 @@ record(dfanout, "$(SYS){$(DEV)-Ax:R-}-HOMEOFFSET") {
   field(OUTA, "$(SYS){$(DEV)-Ax:R-}-Mtr.OFF PP")
   field(OUTB, "$(SYS){$(DEV)-Ax:R-}-HOMEOFF-SP PP")
   field(PINI, "YES")
+  field(PREC, "3")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
@@ -375,6 +441,7 @@ record(ao, "$(SYS){$(DEV)-Ax:R-}-HOMEOFF-SP") {
   field(SCAN, "Passive")
   field(DESC, "R- Home offset")
   field(EGU, "deg")
+  field(PREC, "3")
   field(OUT,  "@pmac.proto setVar(P4908) $(PORT)")
   field(FLNK,  "$(SYS){$(DEV)-Ax:R-}-HOMEOFF-RB")
 }
@@ -781,11 +848,11 @@ record(stringout, "$(SYS){$(DEV)-Ax:R}Home") {
 }
 
 
-record(stringout, "$(SYS){$(DEV)}ClearPErrors") {
-  field(DESC, "Clear P-var error reports")
+record(stringout, "$(SYS){$(DEV)}ClearScanErrors") {
+  field(DESC, "Clear scan error reports")
   field(DTYP, "stream")
   field(PROC, 1)
-  field(VAL, "enaplc2")
+  field(VAL, "enaplc28")
   field(OUT, "@pmac.proto sendString() $(PORT)")
 }
 

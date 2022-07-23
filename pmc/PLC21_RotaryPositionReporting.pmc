@@ -1,5 +1,7 @@
 ; PLC for position reporting in the rotary coordinate system
 
+#include "PVariables.pmc"
+
 #define ANGLE   Q81
 #define OFFSET  Q82
 
