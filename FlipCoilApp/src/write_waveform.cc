@@ -4,12 +4,33 @@
 #include <epicsExport.h>
 #include <epicsString.h>
 
-
+#include <vector>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <ctime>
+
+
+
+std::string get_s_from_wf (unsigned int n, epicsOldString* wf) {
+  std::ostringstream dnamess;
+  for (unsigned int i = 0; i < n; ++i) {
+    std::string s(wf[i], sizeof(epicsOldString));
+    int num;
+    try {
+      num = stoi(s);
+      std::cout << "s " << char(num) << std::endl;
+      dnamess << char(num);
+    } catch (...) {
+      break;
+    }
+  }
+  std::cout << "hello " << dnamess.str() << std::endl;
+  std::string dname = dnamess.str();
+
+  return dname;
+}
 
 static long rscansave(aSubRecord *prec) {
 
@@ -111,9 +132,8 @@ static long rscansave(aSubRecord *prec) {
 
 static long tscansave(aSubRecord *prec) {
 
-  std::cout << "hello dhidas" << std::endl;
-  std::string fff(((epicsOldString*)(prec->a))[0], sizeof(epicsOldString));
-  std::cout << "fff " << fff << std::endl;
+    std::cout << "a" << std::endl;
+
   try {
     // Local time now
     time_t now = time(0);
@@ -128,46 +148,46 @@ static long tscansave(aSubRecord *prec) {
         t->tm_sec
         );
 
+    std::cout << "a" << std::endl;
+    std::string dname = get_s_from_wf(prec->noa, (epicsOldString*) prec->a);
+    std::string fname = get_s_from_wf(prec->nob, (epicsOldString*) prec->b);
 
+    std::cout << "a" << std::endl;
     // B input is data waveform
-    long ib = 0;
-    double *b = (double*) prec->b;
+    long ic = 0;
+    double *c = (double*) prec->c;
 
     // C is counter, D is Rf
-    double const Counter  = ((double*) prec->c)[0];
-    double const Aper     = ((double*) prec->d)[0];
-    long   const N        = ((long*) prec->e)[0];
-    double const TrigTime = ((double*) prec->f)[0];
-    //double const V        = ((double*) prec->g)[0];
-    std::string Range(((epicsOldString*)(prec->g))[0], sizeof(epicsOldString));
-    double const X        = ((double*) prec->h)[0];
-    double const Xo       = ((double*) prec->i)[0];
-    double const Y        = ((double*) prec->j)[0];
-    double const Yo       = ((double*) prec->k)[0];
-    double const R        = ((double*) prec->l)[0];
-    double const Ro       = ((double*) prec->m)[0];
-    double const W        = ((double*) prec->n)[0];
-    long   const NTurns   = ((long*) prec->o)[0];
-    std::string Comments(((epicsOldString*)(prec->u))[0], sizeof(epicsOldString));
+    double const Counter  = ((double*) prec->d)[0];
+    double const Aper     = ((double*) prec->e)[0];
+    long   const N        = ((long*) prec->f)[0];
+    double const TrigTime = ((double*) prec->g)[0];
+    std::string Range(((epicsOldString*)(prec->h))[0], sizeof(epicsOldString));
+    double const X        = ((double*) prec->i)[0];
+    double const Xo       = ((double*) prec->j)[0];
+    double const Y        = ((double*) prec->k)[0];
+    double const Yo       = ((double*) prec->l)[0];
+    double const R        = ((double*) prec->m)[0];
+    double const Ro       = ((double*) prec->n)[0];
+    double const W        = ((double*) prec->o)[0];
+    long   const NTurns   = ((long*) prec->p)[0];
+    std::string Comments = get_s_from_wf(prec->nou, (epicsOldString*) prec->u);
 
+    std::cout << "a" << std::endl;
 
-    // A input is filename
-    std::string filename(((epicsOldString*)(prec->a))[0], sizeof(epicsOldString));
-    if (filename.size() == 0) {
-      return 1;
-    }
-    char filename2[500];
+    char filename2[8000];
     if (Counter >= 0) {
-      sprintf(filename2, "%s_%04d.txt", ((epicsOldString*)(prec->a))[0], (int) Counter);
+      sprintf(filename2, "%s/%s_%04d.txt", dname.c_str(), fname.c_str(), (int) Counter);
     } else {
-      sprintf(filename2, "%s.txt", ((epicsOldString*)(prec->a))[0]);
+      sprintf(filename2, "%s/%s.txt", dname.c_str(), fname.c_str());
     }
     std::ofstream fo(filename2);
 
+    std::cout << "a" << std::endl;
 
     std::cout << "# filename:   " << filename2 << std::endl;
     std::cout << "# Time:       " << ttime << std::endl;
-    std::cout << "# nob:        " << prec->nob << std::endl;
+    std::cout << "# noc:        " << prec->noc << std::endl;
     std::cout << "# Counter:    " << Counter << std::endl;
     std::cout << "# Aperture:   " << Aper << std::endl;
     std::cout << "# NPoints:    " << N << std::endl;
@@ -185,7 +205,7 @@ static long tscansave(aSubRecord *prec) {
 
     fo << "# filename:   " << filename2 << std::endl;
     fo << "# Time:       " << ttime << std::endl;
-    fo << "# nob:        " << prec->nob << std::endl;
+    fo << "# noc:        " << prec->noc << std::endl;
     fo << "# Counter:    " << Counter << std::endl;
     fo << "# Aperture:   " << Aper << std::endl;
     fo << "# NPoints:    " << N << std::endl;
@@ -201,9 +221,9 @@ static long tscansave(aSubRecord *prec) {
     fo << "# NTurns:     " << NTurns << std::endl;
     fo << "# Comments:   " << Comments << std::endl;
 
-    for (long ib = 0; ib < N; ++ib) {
-      fo << b[ib] << std::endl;
-      if (ib < 10) std::cout << (double) b[ib] << std::endl;
+    for (long ic = 0; ic < N; ++ic) {
+      fo << c[ic] << std::endl;
+      if (ic < 10) std::cout << (double) c[ic] << std::endl;
     }
 
     if (Counter >= 0) {

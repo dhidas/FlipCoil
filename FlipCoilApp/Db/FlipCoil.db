@@ -922,43 +922,33 @@ record (waveform, "$(SYS){$(DEV)}WF-RB") {
 
 
 
-record(lsi, "$(SYS){$(DEV)}TScanComments") {
+record(waveform, "$(SYS){$(DEV)}TScanComments") {
   field(SCAN, "Passive")
   field(DESC, "Comment to include in data file")
-  field(SIZV, "2000")
+  field(PINI, "YES")
+  field(NELM, "4000")
+  field(FTVL, "CHAR")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
-record(lsi, "$(SYS){$(DEV)}TOutDir") {
+record(waveform, "$(SYS){$(DEV)}TOutDir") {
   field(SCAN, "Passive")
   field(DESC, "Directory to store data")
-  field(FLNK, "$(SYS){$(DEV)}TFilePath-CALC")
   field(PINI, "YES")
-  field(SIZV, "2000")
+  field(NELM, "2000")
+  field(FTVL, "CHAR")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
 }
 
-record(lsi, "$(SYS){$(DEV)}TFileName") {
+record(waveform, "$(SYS){$(DEV)}TOutPrefix") {
   field(SCAN, "Passive")
-  field(DESC, "Filename for scan data")
+  field(DESC, "File prefix for scan data")
   field(PINI, "YES")
-  field(FLNK, "$(SYS){$(DEV)}TFilePath-CALC")
-  field(SIZV, "2000")
+  field(NELM, "2000")
+  field(FTVL, "CHAR")
   info(autosaveFields_pass0, "VAL")
   info(autosaveFields, "VAL")
-}
-record(scalcout, "$(SYS){$(DEV)}TFilePath-CALC") {
-  field(SCAN, "Passive")
-  field(INAA, "$(SYS){$(DEV)}TOutDir")
-  field(INBB, "$(SYS){$(DEV)}TFileName")
-  field(CALC, "AA+'/'+BB")
-  field(OUT,  "$(SYS){$(DEV)}TFilePath PP")
-}
-record(lsi, "$(SYS){$(DEV)}TFilePath") {
-  field(SCAN, "Passive")
-  field(DESC, "Full path of output file")
-  field(SIZV, "2000")
 }
 
 record(ai, "$(SYS){$(DEV)}TScanCounter") {
@@ -972,54 +962,60 @@ record(ai, "$(SYS){$(DEV)}TScanCounter") {
 record(aSub, "$(SYS){$(DEV)}TScanSave") {
     field(SNAM, "tscansave")
 
-    field(INPA, "$(SYS){$(DEV)}TFilePath")
+    field(INPA, "$(SYS){$(DEV)}TOutDir")
     field(FTA,  "STRING")
+    field(NOA,  "2000")
 
-    field(INPB, "$(SYS){$(DEV)}WF-T")
-    field(FTB,  "DOUBLE")
-    field(NOB,  "1024")
+    field(INPB, "$(SYS){$(DEV)}TOutPrefix")
+    field(FTB,  "STRING")
+    field(NOB,  "2000")
 
-    field(INPC, "$(SYS){$(DEV)}TScanCounter")
+    field(INPC, "$(SYS){$(DEV)}WF-T")
     field(FTC,  "DOUBLE")
+    field(NOC,  "1024")
 
-    field(INPD, "$(SYS){$(DEV)-Keithley}TScan-Aper")
+    field(INPD, "$(SYS){$(DEV)}TScanCounter")
     field(FTD,  "DOUBLE")
 
-    field(INPE, "$(SYS){$(DEV)-Keithley}TScan-N")
-    field(FTE,  "LONG")
+    field(INPE, "$(SYS){$(DEV)-Keithley}TScan-Aper")
+    field(FTE,  "DOUBLE")
 
-    field(INPF, "$(SYS){$(DEV)-Keithley}TScan-TrigTimer")
-    field(FTF,  "DOUBLE")
+    field(INPF, "$(SYS){$(DEV)-Keithley}TScan-N")
+    field(FTF,  "LONG")
 
-    field(INPG, "$(SYS){$(DEV)-Keithley}CHAN1:RANG")
-    field(FTG,  "STRING")
+    field(INPG, "$(SYS){$(DEV)-Keithley}TScan-TrigTimer")
+    field(FTG,  "DOUBLE")
 
-    field(INPH, "$(SYS){$(DEV)-Ax:X}-Mtr.RBV")
-    field(FTH,  "DOUBLE")
+    field(INPH, "$(SYS){$(DEV)-Keithley}CHAN1:RANG")
+    field(FTH,  "STRING")
 
-    field(INPI, "$(SYS){$(DEV)-Ax:Xo}-Mtr.RBV")
+    field(INPI, "$(SYS){$(DEV)-Ax:X}-Mtr.RBV")
     field(FTI,  "DOUBLE")
 
-    field(INPJ, "$(SYS){$(DEV)-Ax:Y}-Mtr.RBV")
+    field(INPJ, "$(SYS){$(DEV)-Ax:Xo}-Mtr.RBV")
     field(FTJ,  "DOUBLE")
 
-    field(INPK, "$(SYS){$(DEV)-Ax:Yo}-Mtr.RBV")
+    field(INPK, "$(SYS){$(DEV)-Ax:Y}-Mtr.RBV")
     field(FTK,  "DOUBLE")
 
-    field(INPL, "$(SYS){$(DEV)-Ax:R}-Mtr.RBV")
+    field(INPL, "$(SYS){$(DEV)-Ax:Yo}-Mtr.RBV")
     field(FTL,  "DOUBLE")
 
-    field(INPM, "$(SYS){$(DEV)-Ax:Ro}-Mtr.RBV")
+    field(INPM, "$(SYS){$(DEV)-Ax:R}-Mtr.RBV")
     field(FTM,  "DOUBLE")
 
-    field(INPN, "$(SYS){$(DEV)}CoilWidth")
+    field(INPN, "$(SYS){$(DEV)-Ax:Ro}-Mtr.RBV")
     field(FTN,  "DOUBLE")
 
-    field(INPO, "$(SYS){$(DEV)}CoilNTurns")
-    field(FTO,  "LONG")
+    field(INPO, "$(SYS){$(DEV)}CoilWidth")
+    field(FTO,  "DOUBLE")
+
+    field(INPP, "$(SYS){$(DEV)}CoilNTurns")
+    field(FTP,  "LONG")
 
     field(INPU, "$(SYS){$(DEV)}TScanComments")
     field(FTU,  "STRING")
+    field(NOU,  "4000")
 
     field(OUTA, "$(SYS){$(DEV)}TScanCounter")
     field(FTVA, "DOUBLE")
