@@ -589,6 +589,28 @@ record(ao, "$(SYS){$(DEV)-Keithley}TScan-Aper") {
   info(autosaveFields, "VAL")
 }
 
+record(ao, "$(SYS){$(DEV)-Keithley}XScan-Aper") {
+  field(DESC, "Aperture for X scan")
+  field(EGU,  "s")
+  field(PREC, "6")
+  field(VAL,  "0.01667")
+  field(DRVL, "0.0001667")
+  field(DRVH, "1")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+
+record(ao, "$(SYS){$(DEV)-Keithley}RScan-Aper") {
+  field(DESC, "Aperture for R scan")
+  field(EGU,  "s")
+  field(PREC, "6")
+  field(VAL,  "0.01667")
+  field(DRVL, "0.0001667")
+  field(DRVH, "1")
+  info(autosaveFields_pass0, "VAL")
+  info(autosaveFields, "VAL")
+}
+
 record(ao, "$(SYS){$(DEV)-Keithley}TScan-TrigTimer") {
   field(DESC, "Time between triggers")
   field(EGU,  "s")
@@ -602,69 +624,3 @@ record(ao, "$(SYS){$(DEV)-Keithley}TScan-TrigTimer") {
 
 
 
-record(sseq, "$(SYS){$(DEV)-Keithley}TScan") {
-  field(LNK1, "$(SYS){$(DEV)-Keithley}SENS:FUNC CA")
-  field(STR1, "VOLT:DC")
-  field(LNK2, "$(SYS){$(DEV)-Keithley}SENS:CHAN CA")
-  field(STR2, "1")
-  field(LNK3, "$(SYS){$(DEV)-Keithley}RST CA")
-  field(LNK4, "$(SYS){$(DEV)-Keithley}TRAC:CLE CA")
-  field(LNK5, "$(SYS){$(DEV)-Keithley}CHAN1:RANG CA")
-  field(LNK6, "$(SYS){$(DEV)-Keithley}TRAC:POINTS CA")
-  field(DOL6, "$(SYS){$(DEV)-Keithley}TScan-N")
-  field(LNK7, "$(SYS){$(DEV)-Keithley}TRAC:FEED CA")
-  field(STR7, "SENS")
-  field(LNK8, "$(SYS){$(DEV)-Keithley}TRAC:FEED:CONT CA")
-  field(STR8, "NEXT")
-  field(LNK9, "$(SYS){$(DEV)-Keithley}ABORT CA")
-  field(LNKA, "$(SYS){$(DEV)-Keithley}TScanB CA")
-  field(WAIT1,"Wait")
-  field(WAIT2,"Wait")
-  field(WAIT3,"Wait")
-  field(WAIT4,"Wait")
-  field(WAIT5,"Wait")
-  field(WAIT6,"Wait")
-  field(WAIT7,"Wait")
-  field(WAIT8,"Wait")
-  field(WAIT9,"Wait")
-  field(WAITA,"Wait")
-}
-
-record(sseq, "$(SYS){$(DEV)-Keithley}TScanB") {
-  field(LNK1, "$(SYS){$(DEV)-Keithley}TRIG:SOURCE CA")
-  field(STR1, "TIMER")
-  field(LNK2, "$(SYS){$(DEV)-Keithley}TRIG:DEL CA")
-  field(DO2,  "0")
-  field(LNK3, "$(SYS){$(DEV)-Keithley}TRIG:DEL:AUTO CA")
-  field(STR3,  "OFF")
-  field(LNK4, "$(SYS){$(DEV)-Keithley}TRIG:TIMER CA")
-  field(DOL4, "$(SYS){$(DEV)-Keithley}TScan-TrigTimer")
-  field(LNK5, "$(SYS){$(DEV)-Keithley}SAMPLE:COUNT CA")
-  field(DO5,  "1")
-  field(LNK6, "$(SYS){$(DEV)-Keithley}TRIG:COUNT CA")
-  field(DOL6, "$(SYS){$(DEV)-Keithley}TScan-N")
-  field(LNK7, "$(SYS){$(DEV)-Keithley}SENS:VOLT:APER CA")
-  field(DOL7, "$(SYS){$(DEV)-Keithley}TScan-Aper")
-  field(LNK8, "$(SYS){$(DEV)-Keithley}INIT:IMM CA")
-  field(LNK9, "$(SYS){$(DEV)-Keithley}TRAC:DATA.PROC CA")
-  field(DO9,  "1")
-  field(LNKA, "$(SYS){$(DEV)-Keithley}TScanC CA")
-  field(WAIT1,"Wait")
-  field(WAIT2,"Wait")
-  field(WAIT3,"Wait")
-  field(WAIT4,"Wait")
-  field(WAIT5,"Wait")
-  field(WAIT6,"Wait")
-  field(WAIT7,"Wait")
-  field(WAIT8,"Wait")
-  field(WAIT9,"Wait")
-  field(WAITA,"Wait")
-}
-
-record(sseq, "$(SYS){$(DEV)-Keithley}TScanC") {
-  field(LNK1, "$(SYS){$(DEV)}WF-T CA")
-  field(LNK2, "$(SYS){$(DEV)}TScanSave.PROC CA")
-  field(DO2,  "1")
-  field(WAIT1,"Wait")
-  field(WAIT2,"Wait")
-}
