@@ -53,7 +53,7 @@ endif
 Q_RotaryNOver   = INT(Q_RotaryDOver / Q_RotaryDelta)
 
 Q_RotaryFirst   = P_RotaryR0 - Q_RotaryDirection * Q_RotaryNOver * Q_RotaryDelta + Q_RotaryOffset/2 - P_OffsetM7
-Q_RotaryBehind  = Q_RotaryFirst + Q_RotaryDirection * (Q_RotaryTrigWidth - Q_RotaryDelta) + Q_RotaryOffset/2
+Q_RotaryBehind  = Q_RotaryFirst + Q_RotaryDirection * (Q_RotaryTrigWidth - Q_RotaryDelta + Q_RotaryTrigWidth/10) + Q_RotaryOffset/2
 P_RotaryNTotalTriggers = P_RotaryNTriggers + 2 * Q_RotaryNOver
 
 ; Calculate actual start and stop positions for motor movement
@@ -83,7 +83,7 @@ M_PosComp7B = Q_RotaryFirst / P_DegPerStep
 M_PosComp7A = Q_RotaryBehind / P_DegPerStep
 gTRIG7HIGH
 
-Dwell 100
+Dwell 1000
 
 ; Move to stopping position
 A(Q_RotaryStop) B(Q_RotaryOffset)
